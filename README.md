@@ -2,7 +2,7 @@
 
 Sitio web profesional para presentar servicios freelance de automatización, bots con IA y desarrollo web.
 
-**🌐 Demo en vivo:** [https://nuhe.github.io/freelance-web](https://nuhe.github.io/freelance-web)
+**🌐 Demo en vivo:** [https://nuhe.github.io/-freelance-web](https://nuhe.github.io/-freelance-web)
 
 ## Stack
 
@@ -136,7 +136,7 @@ Buscar `contacto@foxops.dev` y reemplazar con tu email real.
 El `vite.config.js` ya está configurado con:
 
 ```js
-base: '/freelance-web/'
+base: '/-freelance-web/'
 ```
 
 Si cambiás el nombre del repositorio, actualizá este valor.
