@@ -10,113 +10,109 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const text = `Hola FoxOps! Soy ${form.name}.\n\nServicio: ${form.service || 'Sin especificar'}\nEmail: ${form.email}\n\n${form.message}`
+    const text = `Hola FoxOps!\n\nSoy ${form.name} (${form.email}).\n\nServicio: ${form.service || 'Sin especificar'}\n\nConsulta:\n${form.message}`
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank')
     setSubmitted(true)
   }
 
   const inputClass =
-    'w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2.5 text-white placeholder-zinc-700 focus:outline-none focus:border-orange-500/60 transition-colors text-sm font-mono'
+    'w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2.5 text-white placeholder-zinc-700 focus:outline-none focus:border-orange-600/50 transition-colors text-sm font-mono'
 
   return (
     <section id="contacto" className="py-24 bg-zinc-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-[1fr_440px] gap-16 items-start">
 
+          {/* ── Info de contacto ── */}
           <div>
-            <div className="w-8 h-0.5 bg-orange-500 mb-6" />
-            <h2 className="section-title">Hablemos</h2>
+            <span className="section-label">Empezá acá</span>
+            <h2 className="section-title">Contame tu proceso</h2>
             <p className="text-zinc-500 text-sm mb-10 leading-relaxed max-w-sm">
-              Contame brevemente tu problema. Respondé en menos de 48 horas
-              con una idea concreta de cómo resolverlo.
+              Describí brevemente qué proceso querés mejorar o qué problema te está
+              quitando tiempo. Respondo en menos de 48 horas con una propuesta clara.
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-5">
               {[
-                { label: 'WhatsApp', value: '+54 11 3428-7724', href: `https://wa.me/${WHATSAPP_NUMBER}` },
-                { label: 'Email', value: 'contacto@foxops.dev', href: 'mailto:contacto@foxops.dev' },
-                { label: 'GitHub', value: 'github.com/Nuhe', href: 'https://github.com/Nuhe' },
+                { label: 'WhatsApp', val: '+54 11 3428-7724', href: `https://wa.me/${WHATSAPP_NUMBER}` },
+                { label: 'Email', val: 'contacto@foxops.dev', href: 'mailto:contacto@foxops.dev' },
+                { label: 'GitHub', val: 'github.com/Nuhe', href: 'https://github.com/Nuhe' },
               ].map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-4 group"
-                >
-                  <span className="text-xs font-mono text-zinc-600 group-hover:text-orange-500 transition-colors pt-0.5 w-16 shrink-0">
+                <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
+                  className="flex items-start gap-4 group">
+                  <span className="text-[10px] font-mono text-zinc-700 group-hover:text-orange-600/60 transition-colors pt-0.5 w-14 shrink-0 uppercase tracking-wider">
                     {item.label}
                   </span>
-                  <span className="text-sm text-zinc-400 group-hover:text-white transition-colors">
-                    {item.value}
+                  <span className="text-sm text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                    {item.val}
                   </span>
                 </a>
               ))}
             </div>
+
+            <div className="mt-10 pt-8 border-t border-zinc-900">
+              <p className="text-[11px] text-zinc-700 font-mono leading-relaxed">
+                Respuesta en &lt; 48 horas.<br />
+                Sin compromiso. Sin presupuesto sorpresa.
+              </p>
+            </div>
           </div>
 
+          {/* ── Formulario ── */}
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8">
             {submitted ? (
               <div className="text-center py-10">
-                <div className="text-4xl mb-4 text-orange-500">✓</div>
-                <h3 className="text-lg font-semibold text-white mb-2">Redirigiendo a WhatsApp</h3>
-                <p className="text-zinc-500 text-sm mb-6">Si no se abrió, hacé clic acá:</p>
-                <button onClick={() => setSubmitted(false)} className="btn-secondary text-sm">
-                  Enviar otro mensaje
+                <div className="w-10 h-10 rounded-full bg-orange-600/10 border border-orange-600/30 flex items-center justify-center text-orange-500 text-lg mx-auto mb-4">✓</div>
+                <h3 className="text-base font-semibold text-white mb-2">Redirigiendo a WhatsApp</h3>
+                <p className="text-zinc-500 text-xs mb-6">Tu mensaje ya está pre-cargado.</p>
+                <button onClick={() => setSubmitted(false)} className="btn-secondary text-xs">
+                  Enviar otra consulta
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 <div>
-                  <label htmlFor="name" className="block text-xs font-mono text-zinc-500 mb-1.5">
-                    Nombre <span className="text-orange-500">*</span>
+                  <label htmlFor="name" className="block text-[11px] font-mono text-zinc-600 mb-1.5 uppercase tracking-wider">
+                    Nombre <span className="text-orange-600">*</span>
                   </label>
-                  <input
-                    id="name" type="text" name="name" value={form.name}
+                  <input id="name" type="text" name="name" value={form.name}
                     onChange={handleChange} required placeholder="Tu nombre"
-                    className={inputClass}
-                  />
+                    className={inputClass} />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-xs font-mono text-zinc-500 mb-1.5">
-                    Email <span className="text-orange-500">*</span>
+                  <label htmlFor="email" className="block text-[11px] font-mono text-zinc-600 mb-1.5 uppercase tracking-wider">
+                    Email <span className="text-orange-600">*</span>
                   </label>
-                  <input
-                    id="email" type="email" name="email" value={form.email}
+                  <input id="email" type="email" name="email" value={form.email}
                     onChange={handleChange} required placeholder="tu@email.com"
-                    className={inputClass}
-                  />
+                    className={inputClass} />
                 </div>
 
                 <div>
-                  <label htmlFor="service" className="block text-xs font-mono text-zinc-500 mb-1.5">
-                    Servicio
+                  <label htmlFor="service" className="block text-[11px] font-mono text-zinc-600 mb-1.5 uppercase tracking-wider">
+                    Servicio de interés
                   </label>
-                  <select
-                    id="service" name="service" value={form.service}
+                  <select id="service" name="service" value={form.service}
                     onChange={handleChange}
-                    className={`${inputClass} text-zinc-400`}
-                  >
+                    className={`${inputClass} text-zinc-400`}>
                     <option value="">— Seleccioná</option>
-                    <option value="Automatización de tareas">Automatización de tareas</option>
+                    <option value="Automatización de procesos">Automatización de procesos</option>
                     <option value="Bot o asistente IA">Bot o asistente IA</option>
-                    <option value="Desarrollo web">Desarrollo web</option>
                     <option value="Integración de sistemas">Integración de sistemas</option>
+                    <option value="Web o panel interno">Web o panel interno</option>
                     <option value="No sé, necesito orientación">No sé, necesito orientación</option>
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-xs font-mono text-zinc-500 mb-1.5">
-                    Tu consulta <span className="text-orange-500">*</span>
+                  <label htmlFor="message" className="block text-[11px] font-mono text-zinc-600 mb-1.5 uppercase tracking-wider">
+                    ¿Qué proceso querés mejorar? <span className="text-orange-600">*</span>
                   </label>
-                  <textarea
-                    id="message" name="message" value={form.message}
+                  <textarea id="message" name="message" value={form.message}
                     onChange={handleChange} required rows={4}
-                    placeholder="Describí brevemente el proceso o problema que querés resolver..."
-                    className={`${inputClass} resize-none`}
-                  />
+                    placeholder="Describí brevemente el problema o la tarea que querés automatizar..."
+                    className={`${inputClass} resize-none`} />
                 </div>
 
                 <button type="submit" className="btn-primary w-full justify-center py-3 text-sm">
@@ -126,8 +122,8 @@ export default function ContactForm() {
                   </svg>
                 </button>
 
-                <p className="text-xs text-zinc-700 text-center font-mono">
-                  Se abrirá WhatsApp con tu mensaje pre-cargado
+                <p className="text-[10px] text-zinc-700 text-center font-mono">
+                  Se abre WhatsApp con tu mensaje pre-cargado
                 </p>
               </form>
             )}

@@ -17,6 +17,15 @@ const BotIcon = () => (
   </svg>
 )
 
+const IntIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <circle cx="18" cy="5" r="3" />
+    <circle cx="6" cy="12" r="3" />
+    <circle cx="18" cy="19" r="3" />
+    <path d="M8.59 13.51l6.83 3.98M15.41 6.51L8.59 10.49" />
+  </svg>
+)
+
 const WebIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
     <rect x="2" y="3" width="20" height="17" rx="2" />
@@ -27,105 +36,118 @@ const WebIcon = () => (
   </svg>
 )
 
-const IntIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-    <circle cx="18" cy="5" r="3" />
-    <circle cx="6" cy="12" r="3" />
-    <circle cx="18" cy="19" r="3" />
-    <path d="M8.59 13.51l6.83 3.98M15.41 6.51L8.59 10.49" />
-  </svg>
-)
-
 const services = [
   {
     Icon: AutoIcon,
-    title: 'Automatización de tareas',
-    description: 'Eliminá el trabajo repetitivo de tu operación diaria.',
+    order: '01',
+    title: 'Automatización de procesos',
+    lead: '¿Cuántas horas pierde tu equipo en tareas que una computadora podría hacer sola?',
     features: [
-      'Carga y procesamiento automático de datos',
-      'Reportes automáticos programados',
-      'Lectura y procesamiento de mails',
-      'Scraping y extracción de información',
-      'Conexión entre sistemas, planillas y APIs',
+      'Reportes y cierres de mes automáticos',
+      'Carga y procesamiento de datos sin intervención',
+      'Lectura y clasificación de mails',
+      'Notificaciones y alertas automáticas',
+      'Extracción y consolidación de información',
     ],
+    result: 'Procesos que corren sin que nadie los ejecute',
   },
   {
     Icon: BotIcon,
+    order: '02',
     title: 'Bots y asistentes con IA',
-    description: 'Tu equipo enfocado en lo que importa, el bot resuelve el resto.',
+    lead: '¿Siempre las mismas preguntas respondidas manualmente por tu equipo?',
     features: [
-      'Atención de consultas frecuentes',
-      'Asistentes administrativos internos',
-      'Consulta y búsqueda en documentos',
-      'Agentes conversacionales para clientes',
-      'Integración con WhatsApp, web o sistemas internos',
+      'Bot de atención de consultas frecuentes',
+      'Asistente interno de documentos y procesos',
+      'Respuestas automáticas por WhatsApp o web',
+      'Agente de turnos y derivaciones',
+      'IA aplicada a flujos administrativos',
     ],
-  },
-  {
-    Icon: WebIcon,
-    title: 'Desarrollo web',
-    description: 'Presencia digital profesional y funcional.',
-    features: [
-      'Landing pages de alta conversión',
-      'Webs institucionales',
-      'Formularios y páginas de captación',
-      'Paneles de gestión internos',
-      'Interfaces adaptadas a tu flujo de trabajo',
-    ],
+    result: 'Atención 24/7 sin saturar a tu equipo',
   },
   {
     Icon: IntIcon,
-    title: 'Integraciones a medida',
-    description: 'Tus herramientas hablando entre sí, sin trabajo manual.',
+    order: '03',
+    title: 'Integraciones y conectores',
+    lead: '¿Tus herramientas no se hablan entre sí y todo termina siendo manual igual?',
     features: [
-      'Conexión de APIs y sistemas externos',
-      'Dashboards e informes centralizados',
-      'Herramientas internas de operación',
-      'Automatización de procesos complejos',
-      'Sistemas adaptados a tu equipo',
+      'Conexión entre APIs, sistemas y planillas',
+      'Dashboards con datos en tiempo real',
+      'Sincronización automática entre plataformas',
+      'Conectores entre CRM, ERP, sheets y mails',
+      'Flujos de datos sin intervención humana',
     ],
+    result: 'Un ecosistema que funciona junto',
+  },
+  {
+    Icon: WebIcon,
+    order: '04',
+    title: 'Web y paneles internos',
+    lead: '¿Sin presencia digital profesional o sin visibilidad de tu operación?',
+    features: [
+      'Landing pages orientadas a captación',
+      'Webs institucionales claras y funcionales',
+      'Paneles de seguimiento de operación',
+      'Formularios de contacto y cotización',
+      'Interfaces internas para equipos',
+    ],
+    result: 'Presencia y control desde el browser',
   },
 ]
 
 export default function Services() {
   return (
-    <section id="servicios" className="py-24 bg-[#0d0d0d]">
+    <section id="servicios" className="py-24 bg-zinc-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
+
         <div className="mb-14">
+          <span className="section-label">Lo que hago</span>
           <h2 className="section-title">Servicios</h2>
           <p className="section-subtitle">
-            Cada solución está pensada para un problema real de operación,
-            no para impresionar con tecnología.
+            Cada solución empieza por entender el problema, no por elegir la tecnología.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-5">
-          {services.map(({ Icon, title, description, features }) => (
-            <article key={title} className="card group">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400">
+          {services.map(({ Icon, order, title, lead, features, result }) => (
+            <article key={title} className="card group flex flex-col gap-5">
+
+              {/* Header del servicio */}
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-lg bg-orange-600/10 border border-orange-600/20 flex items-center justify-center text-orange-500 shrink-0">
                   <Icon />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white text-base">{title}</h3>
-                  <p className="text-zinc-600 text-xs mt-0.5">{description}</p>
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-[10px] font-mono text-zinc-700">{order}</span>
+                    <h3 className="font-semibold text-white text-sm">{title}</h3>
+                  </div>
+                  <p className="text-xs text-zinc-500 leading-relaxed italic">{lead}</p>
                 </div>
               </div>
-              <ul className="space-y-2">
+
+              {/* Features */}
+              <ul className="space-y-1.5 flex-1">
                 {features.map((feat) => (
-                  <li key={feat} className="flex items-start gap-2.5 text-sm text-zinc-500">
-                    <span className="text-orange-500/60 mt-0.5 shrink-0 font-mono text-xs">—</span>
+                  <li key={feat} className="flex items-start gap-2.5 text-xs text-zinc-500">
+                    <span className="text-orange-600/50 mt-0.5 shrink-0 font-mono">—</span>
                     {feat}
                   </li>
                 ))}
               </ul>
+
+              {/* Resultado */}
+              <div className="pt-4 border-t border-zinc-800/60 flex items-center gap-2">
+                <span className="w-1 h-3 bg-orange-600/60 rounded-full shrink-0" />
+                <span className="text-xs font-medium text-zinc-400">{result}</span>
+              </div>
             </article>
           ))}
         </div>
 
         <div className="mt-10">
           <a href="#contacto" className="btn-secondary text-sm">
-            Consultá por tu caso
+            Consultá por tu caso específico
           </a>
         </div>
       </div>
