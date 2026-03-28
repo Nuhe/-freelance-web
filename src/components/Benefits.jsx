@@ -1,12 +1,36 @@
 const benefits = [
-  { label: 'Menos tiempo perdido', detail: 'Las tareas repetitivas corren solas. Tu equipo trabaja en lo que genera valor real.' },
-  { label: 'Menos errores operativos', detail: 'Los procesos automatizados no cometen errores humanos. Menos re-trabajo, más confianza.' },
-  { label: 'Más capacidad, mismo equipo', detail: 'Escalás el volumen sin sumar personas para hacer las mismas tareas de siempre.' },
-  { label: 'Atención más rápida', detail: 'Los bots y automatizaciones responden al instante, sin depender de que alguien esté disponible.' },
-  { label: 'Todo conectado y visible', detail: 'Tus sistemas integrados, tus datos centralizados, tu operación con visibilidad real.' },
-  { label: 'Imagen más profesional', detail: 'Una web sólida y herramientas bien implementadas transmiten seriedad antes de que digas una palabra.' },
-  { label: 'Soluciones que se adaptan a vos', detail: 'Nada genérico. Cada herramienta está pensada para tu flujo, tu equipo y tu contexto.' },
-  { label: 'Soporte después de entregar', detail: 'No desaparezco al terminar. Si algo falla o cambia, estoy disponible para ajustar.' },
+  {
+    label: 'Menos tiempo en tareas repetitivas',
+    detail: 'Las tareas que siempre hace una persona de forma manual pueden correr solas con un script.',
+  },
+  {
+    label: 'Menos errores de carga',
+    detail: 'La carga manual tiene errores. Un proceso automatizado aplica siempre las mismas reglas.',
+  },
+  {
+    label: 'Datos más ordenados',
+    detail: 'La información se procesa, organiza y guarda de forma consistente, sin depender de quién lo hace.',
+  },
+  {
+    label: 'Menos pasos intermedios',
+    detail: 'Si algo puede ir directo de un sistema a otro sin intervención, lo automatizamos.',
+  },
+  {
+    label: 'Herramientas que se adaptan a vos',
+    detail: 'No es una plantilla. Se construye para tu proceso, tu flujo y tu equipo.',
+  },
+  {
+    label: 'Mejor imagen profesional',
+    detail: 'Una web clara o un proceso prolijo transmiten seriedad antes de que digas una palabra.',
+  },
+  {
+    label: 'Proceso claro y sin sorpresas',
+    detail: 'Entiendo el problema, te cuento qué propongo, lo construimos y lo ajustamos si hace falta.',
+  },
+  {
+    label: 'Solución que se usa',
+    detail: 'No entrego proyectos que quedan archivados. Si no es útil, no vale la pena construirlo.',
+  },
 ]
 
 export default function Benefits() {
@@ -15,10 +39,10 @@ export default function Benefits() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
         <div className="mb-14">
-          <span className="section-label">Qué ganás</span>
-          <h2 className="section-title">Resultados concretos</h2>
+          <span className="section-label">Qué mejora</span>
+          <h2 className="section-title">Lo que cambia</h2>
           <p className="section-subtitle">
-            No promesas de transformación digital. Mejoras reales y medibles en tu operación.
+            Cambios concretos en el trabajo del día a día, no transformaciones abstractas.
           </p>
         </div>
 

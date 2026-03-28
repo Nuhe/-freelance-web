@@ -1,10 +1,10 @@
 import FoxMark from './FoxMark'
 
 const skills = [
-  { label: 'Automatización de procesos', value: 90 },
-  { label: 'Bots e IA aplicada', value: 85 },
-  { label: 'Integraciones y APIs', value: 82 },
-  { label: 'Desarrollo web y paneles', value: 88 },
+  { label: 'Automatización con Python', detail: 'scripts, Pandas, procesamiento de datos, reportes' },
+  { label: 'Scraping y extracción de datos', detail: 'Selenium, requests, BeautifulSoup' },
+  { label: 'Herramientas internas y bots', detail: 'utilidades para operación, bots simples, flujos' },
+  { label: 'Desarrollo web con React', detail: 'interfaces, landing pages, paneles simples' },
 ]
 
 export default function About() {
@@ -13,40 +13,41 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-[1fr_380px] gap-16 items-start">
 
-          {/* ── Texto ── */}
+          {/* Texto */}
           <div>
             <span className="section-label">Quién hay detrás</span>
             <h2 className="section-title">Sobre FoxOps</h2>
 
             <div className="space-y-4 text-sm text-zinc-500 leading-relaxed max-w-xl">
               <p>
-                Soy desarrollador especializado en automatización de procesos, integración de
-                sistemas y soluciones web para operaciones de negocio.
+                Soy desarrollador con foco en automatización de tareas, scraping,
+                herramientas internas y soluciones web funcionales.
               </p>
               <p>
-                Trabajo con pymes, estudios contables, consultorios y equipos administrativos
-                que necesitan operar con más eficiencia y menos errores. No con más herramientas
-                genéricas que nadie termina de usar.
+                Trabajo principalmente con Python para automatizar procesos operativos:
+                procesamiento de datos, extracción desde sistemas, generación de reportes,
+                integraciones entre herramientas. También con React para construir
+                interfaces útiles y landing pages.
               </p>
               <p>
-                Entiendo el problema primero. Después propongo lo que funciona y construyo lo que
-                se usa de verdad. Mi foco está en automatización, IA aplicada e integraciones que
-                resuelvan operaciones concretas, no en tecnología por la tecnología.
+                Me interesa resolver problemas reales donde hay tareas repetitivas, carga
+                manual o sistemas poco eficientes. No tengo foco en proyectos enterprise
+                ni en arquitecturas complejas a gran escala, sino en soluciones prácticas
+                que funcionen para el contexto del cliente.
               </p>
               <p className="text-zinc-400">
-                No ofrezco transformaciones digitales ni diagnósticos de consultora. Ofrezco
-                soluciones que reducen el trabajo repetitivo, los errores y el desorden
-                operativo de tu equipo.
+                Entiendo el problema primero, propongo lo más simple que resuelve lo que
+                necesitás y construyo eso. Sin tecnología innecesaria, sin capas que nadie
+                va a usar.
               </p>
             </div>
 
-            {/* Valores de trabajo */}
             <div className="grid sm:grid-cols-2 gap-3 mt-8">
               {[
-                { label: 'Claridad antes que tecnología', sub: 'Primero entiendo el problema' },
-                { label: 'Soluciones que se usan', sub: 'No entrego proyectos que se archivan' },
-                { label: 'Adaptado a tu contexto', sub: 'Sin plantillas ni atajos genéricos' },
-                { label: 'Directo al punto', sub: 'Sin procesos de agencia ni capas de aprobación' },
+                { label: 'Entiendo el problema primero', sub: 'antes de proponer cualquier solución' },
+                { label: 'Simple si puede ser simple', sub: 'sin complejidad innecesaria' },
+                { label: 'Adaptado a tu contexto', sub: 'no una plantilla aplicada sin criterio' },
+                { label: 'Sin promesas que no puedo cumplir', sub: 'directo sobre lo que puedo y lo que no' },
               ].map((v) => (
                 <div key={v.label} className="flex gap-3 p-3 rounded-lg border border-zinc-800/60 hover:border-zinc-700/60 transition-colors">
                   <span className="w-0.5 h-full min-h-[24px] bg-orange-600/40 rounded-full shrink-0" />
@@ -58,7 +59,6 @@ export default function About() {
               ))}
             </div>
 
-            {/* Links */}
             <div className="flex gap-3 mt-8">
               <a href="https://github.com/Nuhe" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 text-zinc-600 hover:text-zinc-300 border border-zinc-800 hover:border-zinc-700 rounded-lg px-4 py-2 text-xs transition-colors font-mono">
@@ -77,7 +77,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* ── Card de skills ── */}
+          {/* Card de skills — descriptiva, sin porcentajes */}
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-7">
             <div className="flex items-center gap-3 mb-7">
               <div className="w-11 h-12 rounded-xl bg-orange-600/10 border border-orange-600/20 flex items-center justify-center">
@@ -85,30 +85,25 @@ export default function About() {
               </div>
               <div>
                 <div className="font-bold text-white text-sm tracking-wide">FOXOPS</div>
-                <div className="text-zinc-600 text-[11px] font-mono mt-0.5">Automatización · IA · Web</div>
+                <div className="text-zinc-600 text-[11px] font-mono mt-0.5">Python · React · Automatización</div>
               </div>
             </div>
 
-            <div className="space-y-5">
+            <div className="space-y-4">
               {skills.map((s) => (
-                <div key={s.label}>
-                  <div className="flex justify-between text-xs mb-1.5">
-                    <span className="text-zinc-400">{s.label}</span>
-                    <span className="text-zinc-600 font-mono">{s.value}%</span>
-                  </div>
-                  <div className="h-0.5 bg-zinc-800 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-orange-600 to-amber-500 rounded-full"
-                      style={{ width: `${s.value}%` }}
-                    />
+                <div key={s.label} className="flex gap-3 p-3 rounded-lg bg-zinc-800/40 border border-zinc-800">
+                  <span className="w-0.5 bg-orange-600/50 rounded-full shrink-0" />
+                  <div>
+                    <div className="text-xs font-semibold text-zinc-300">{s.label}</div>
+                    <div className="text-[11px] text-zinc-600 mt-0.5 font-mono">{s.detail}</div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-7 pt-5 border-t border-zinc-800 text-[11px] text-zinc-700 font-mono leading-relaxed">
-              Cada proyecto es diferente. Cada solución se construye para el contexto
-              específico del cliente, no sobre una plantilla.
+            <div className="mt-6 pt-5 border-t border-zinc-800 text-[11px] text-zinc-700 font-mono leading-relaxed">
+              Cada solución se construye para el problema específico.<br />
+              Sin plantillas aplicadas a todo por igual.
             </div>
           </div>
         </div>

@@ -6,14 +6,17 @@ const AutoIcon = () => (
   </svg>
 )
 
-const BotIcon = () => (
+const ScrapingIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-    <rect x="3" y="8" width="18" height="12" rx="2" />
-    <circle cx="9" cy="14" r="1.5" fill="currentColor" stroke="none" />
-    <circle cx="15" cy="14" r="1.5" fill="currentColor" stroke="none" />
-    <path d="M9.5 18h5" />
-    <path d="M12 8V5" />
-    <path d="M9 5h6" />
+    <circle cx="11" cy="11" r="8" />
+    <path d="M21 21l-4.35-4.35" />
+    <path d="M11 8v6M8 11h6" />
+  </svg>
+)
+
+const ToolIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
   </svg>
 )
 
@@ -40,58 +43,77 @@ const services = [
   {
     Icon: AutoIcon,
     order: '01',
-    title: 'Automatización de procesos',
-    lead: '¿Cuántas horas pierde tu equipo en tareas que una computadora podría hacer sola?',
+    title: 'Automatización de tareas',
+    lead: '¿Tu equipo dedica tiempo a tareas que podrían correr solas?',
     features: [
-      'Reportes y cierres de mes automáticos',
-      'Carga y procesamiento de datos sin intervención',
-      'Lectura y clasificación de mails',
-      'Notificaciones y alertas automáticas',
-      'Extracción y consolidación de información',
+      'Scripts para carga y procesamiento de datos',
+      'Generación automática de reportes',
+      'Envío programado de archivos o notificaciones',
+      'Procesamiento de planillas y formularios',
+      'Eliminación de pasos manuales repetitivos',
     ],
-    result: 'Procesos que corren sin que nadie los ejecute',
+    result: 'Menos tiempo perdido en tareas que no necesitan personas',
+    techs: ['Python', 'Pandas', 'openpyxl', 'SMTP'],
   },
   {
-    Icon: BotIcon,
+    Icon: ScrapingIcon,
     order: '02',
-    title: 'Bots y asistentes con IA',
-    lead: '¿Siempre las mismas preguntas respondidas manualmente por tu equipo?',
+    title: 'Scraping y extracción de datos',
+    lead: '¿Necesitás datos de sitios o sistemas que no tienen exportación directa?',
     features: [
-      'Bot de atención de consultas frecuentes',
-      'Asistente interno de documentos y procesos',
-      'Respuestas automáticas por WhatsApp o web',
-      'Agente de turnos y derivaciones',
-      'IA aplicada a flujos administrativos',
+      'Extracción de información desde sitios web',
+      'Automatización de navegación y consultas',
+      'Ordenamiento y procesamiento de datos obtenidos',
+      'Armado de bases de datos o reportes a partir de scraping',
+      'Consultas periódicas automatizadas',
     ],
-    result: 'Atención 24/7 sin saturar a tu equipo',
+    result: 'Datos disponibles sin carga manual',
+    techs: ['Python', 'Selenium', 'requests', 'BeautifulSoup'],
+  },
+  {
+    Icon: ToolIcon,
+    order: '03',
+    title: 'Herramientas internas y bots simples',
+    lead: '¿Hay tareas repetitivas en tu equipo que podrían tener un botón o un bot?',
+    features: [
+      'Bots para respuestas o consultas internas simples',
+      'Utilidades para tareas administrativas frecuentes',
+      'Scripts para procesar o transformar información',
+      'Herramientas para ordenar trabajo operativo',
+      'Automatización de flujos de atención básicos',
+    ],
+    result: 'Menos pasos manuales para el equipo',
+    techs: ['Python', 'Telegram Bot API', 'scripts', 'APIs'],
   },
   {
     Icon: IntIcon,
-    order: '03',
-    title: 'Integraciones y conectores',
-    lead: '¿Tus herramientas no se hablan entre sí y todo termina siendo manual igual?',
+    order: '04',
+    title: 'Integraciones prácticas',
+    lead: '¿Tus herramientas no se comunican y todo termina siendo manual igual?',
     features: [
-      'Conexión entre APIs, sistemas y planillas',
-      'Dashboards con datos en tiempo real',
-      'Sincronización automática entre plataformas',
-      'Conectores entre CRM, ERP, sheets y mails',
-      'Flujos de datos sin intervención humana',
+      'Conexión entre formularios, mails y planillas',
+      'Flujos simples para reducir pasos manuales',
+      'Integración con APIs de servicios existentes',
+      'Automatización entre herramientas que ya usás',
+      'Procesamiento automático de datos entrantes',
     ],
-    result: 'Un ecosistema que funciona junto',
+    result: 'Menos pasos intermedios entre herramientas',
+    techs: ['Python', 'APIs REST', 'Sheets API', 'webhooks'],
   },
   {
     Icon: WebIcon,
-    order: '04',
-    title: 'Web y paneles internos',
-    lead: '¿Sin presencia digital profesional o sin visibilidad de tu operación?',
+    order: '05',
+    title: 'Soluciones web funcionales',
+    lead: '¿Necesitás una web, un formulario o una interfaz simple para trabajar mejor?',
     features: [
-      'Landing pages orientadas a captación',
-      'Webs institucionales claras y funcionales',
-      'Paneles de seguimiento de operación',
-      'Formularios de contacto y cotización',
-      'Interfaces internas para equipos',
+      'Landing pages y webs institucionales',
+      'Formularios de contacto o carga de datos',
+      'Paneles simples para seguimiento interno',
+      'Interfaces para procesos operativos',
+      'Webs que generan consultas reales',
     ],
-    result: 'Presencia y control desde el browser',
+    result: 'Interfaz útil, sin complejidad innecesaria',
+    techs: ['React', 'Tailwind', 'Vite', 'HTML/CSS'],
   },
 ]
 
@@ -101,54 +123,62 @@ export default function Services() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
         <div className="mb-14">
-          <span className="section-label">Lo que hago</span>
+          <span className="section-label">Lo que construyo</span>
           <h2 className="section-title">Servicios</h2>
           <p className="section-subtitle">
-            Cada solución empieza por entender el problema, no por elegir la tecnología.
+            Soluciones prácticas para reducir trabajo manual y mejorar procesos operativos.
+            Sin tecnología innecesaria, sin complejidad que no se use.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-5">
-          {services.map(({ Icon, order, title, lead, features, result }) => (
-            <article key={title} className="card group flex flex-col gap-5">
+        <div className="space-y-px bg-zinc-800/30 rounded-2xl overflow-hidden border border-zinc-800/40">
+          {services.map((s) => {
+            const { Icon } = s
+            return (
+              <div key={s.order} className="bg-zinc-950 hover:bg-zinc-900/60 transition-colors p-6 md:p-8 group">
+                <div className="grid md:grid-cols-[220px_1fr_200px] gap-6 items-start">
 
-              {/* Header del servicio */}
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-lg bg-orange-600/10 border border-orange-600/20 flex items-center justify-center text-orange-500 shrink-0">
-                  <Icon />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="text-[10px] font-mono text-zinc-700">{order}</span>
-                    <h3 className="font-semibold text-white text-sm">{title}</h3>
+                  {/* Número + título */}
+                  <div className="flex items-start gap-3">
+                    <span className="text-[11px] font-mono text-zinc-700 mt-0.5 group-hover:text-orange-600/40 transition-colors">
+                      {s.order}
+                    </span>
+                    <div>
+                      <div className="flex items-center gap-2 text-zinc-500 mb-2 group-hover:text-orange-500/70 transition-colors">
+                        <Icon />
+                      </div>
+                      <h3 className="text-sm font-semibold text-white">{s.title}</h3>
+                      <p className="text-xs text-zinc-600 mt-1 leading-relaxed">{s.lead}</p>
+                    </div>
                   </div>
-                  <p className="text-xs text-zinc-500 leading-relaxed italic">{lead}</p>
+
+                  {/* Features */}
+                  <ul className="space-y-1.5">
+                    {s.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-xs text-zinc-500">
+                        <span className="text-orange-600/50 mt-0.5 shrink-0">›</span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Resultado + techs */}
+                  <div className="space-y-3">
+                    <div className="text-xs text-zinc-400 italic leading-relaxed border-l-2 border-orange-600/30 pl-3">
+                      {s.result}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {s.techs.map((t) => (
+                        <span key={t} className="text-[10px] text-zinc-600 bg-zinc-800/60 px-2 py-0.5 rounded font-mono">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              {/* Features */}
-              <ul className="space-y-1.5 flex-1">
-                {features.map((feat) => (
-                  <li key={feat} className="flex items-start gap-2.5 text-xs text-zinc-500">
-                    <span className="text-orange-600/50 mt-0.5 shrink-0 font-mono">—</span>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Resultado */}
-              <div className="pt-4 border-t border-zinc-800/60 flex items-center gap-2">
-                <span className="w-1 h-3 bg-orange-600/60 rounded-full shrink-0" />
-                <span className="text-xs font-medium text-zinc-400">{result}</span>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-10">
-          <a href="#contacto" className="btn-secondary text-sm">
-            Consultá por tu caso específico
-          </a>
+            )
+          })}
         </div>
       </div>
     </section>
