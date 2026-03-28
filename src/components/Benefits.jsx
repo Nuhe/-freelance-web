@@ -1,66 +1,31 @@
 const benefits = [
-  {
-    icon: '⏱️',
-    title: 'Ahorrás tiempo real',
-    desc: 'Las tareas repetitivas corren solas. Tu equipo trabaja en lo que realmente genera valor.',
-  },
-  {
-    icon: '✅',
-    title: 'Menos errores operativos',
-    desc: 'Los procesos automatizados no se equivocan. Menos re-trabajo, menos correcciones, más confianza.',
-  },
-  {
-    icon: '📈',
-    title: 'Más capacidad sin más personal',
-    desc: 'Escalás el volumen de trabajo sin necesitar contratar más gente para las mismas tareas.',
-  },
-  {
-    icon: '🎯',
-    title: 'Mejor atención a clientes',
-    desc: 'Tu equipo deja de responder lo mismo y se enfoca en los casos que realmente importan.',
-  },
-  {
-    icon: '🗃️',
-    title: 'Orden y visibilidad',
-    desc: 'Tus procesos documentados, integrados y con toda la información centralizada en un lugar.',
-  },
-  {
-    icon: '💼',
-    title: 'Imagen más profesional',
-    desc: 'Una web sólida y herramientas bien implementadas transmiten confianza y seriedad ante clientes.',
-  },
-  {
-    icon: '🔧',
-    title: 'Herramientas que se adaptan a vos',
-    desc: 'Nada genérico. Soluciones construidas específicamente para tu operación y tu equipo.',
-  },
-  {
-    icon: '🤝',
-    title: 'Acompañamiento post-entrega',
-    desc: 'No desaparezco al terminar. Ajusto, mejoro y acompaño según lo que necesite tu negocio.',
-  },
+  { title: 'Ahorrás tiempo real', desc: 'Las tareas repetitivas corren solas. Tu equipo trabaja en lo que genera valor.' },
+  { title: 'Menos errores operativos', desc: 'Los procesos automatizados no se equivocan. Menos re-trabajo, más confianza.' },
+  { title: 'Más capacidad sin más personal', desc: 'Escalás el volumen sin necesitar contratar más gente para las mismas tareas.' },
+  { title: 'Mejor atención al cliente', desc: 'Tu equipo deja de responder lo mismo y se enfoca en los casos que importan.' },
+  { title: 'Orden y visibilidad', desc: 'Tus procesos documentados e integrados, con la información centralizada.' },
+  { title: 'Imagen profesional', desc: 'Una web sólida y herramientas bien implementadas transmiten seriedad y confianza.' },
+  { title: 'Herramientas a medida', desc: 'Nada genérico. Todo construido específicamente para tu operación.' },
+  { title: 'Acompañamiento real', desc: 'No desaparezco al terminar. Ajusto, mejoro y acompaño lo que necesites.' },
 ]
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="py-20 bg-gray-900">
+    <section id="beneficios" className="py-24 bg-[#0d0d0d]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-14">
-          <h2 className="section-title">Qué ganás con cada solución</h2>
-          <p className="section-subtitle mx-auto">
-            Resultados concretos. No promesas de transformación digital, sino mejoras reales en tu
-            operación diaria.
+        <div className="mb-14">
+          <h2 className="section-title">Qué ganás</h2>
+          <p className="section-subtitle">
+            Resultados concretos en tu operación diaria. No promesas de transformación digital.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {benefits.map((b) => (
-            <div key={b.title} className="card">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl mb-4">
-                <span role="img" aria-label={b.title}>{b.icon}</span>
-              </div>
-              <h3 className="font-semibold text-white mb-2">{b.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{b.desc}</p>
+            <div key={b.title} className="group">
+              <div className="w-1 h-4 bg-orange-500 mb-4 rounded-full group-hover:h-6 transition-all duration-300" />
+              <h3 className="font-semibold text-white text-sm mb-2">{b.title}</h3>
+              <p className="text-zinc-600 text-xs leading-relaxed">{b.desc}</p>
             </div>
           ))}
         </div>

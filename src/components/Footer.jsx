@@ -1,103 +1,84 @@
 const WHATSAPP_NUMBER = '541134287724'
 
-const footerLinks = {
-  servicios: [
-    { label: 'Automatización', href: '#servicios' },
-    { label: 'Bots con IA', href: '#servicios' },
-    { label: 'Desarrollo Web', href: '#servicios' },
-    { label: 'Integraciones', href: '#servicios' },
-  ],
-  navegacion: [
-    { label: 'Problemas que resuelvo', href: '#problemas' },
-    { label: 'Cómo trabajo', href: '#proceso' },
-    { label: 'Proyectos', href: '#proyectos' },
-    { label: 'Sobre mí', href: '#nosotros' },
-  ],
-  contacto: [
-    { icon: '💬', label: 'WhatsApp', href: `https://wa.me/${WHATSAPP_NUMBER}`, external: true },
-    { icon: '📧', label: 'contacto@foxops.dev', href: 'mailto:contacto@foxops.dev', external: false },
-    { icon: '🐙', label: 'github.com/Nuhe', href: 'https://github.com/Nuhe', external: true },
-    { icon: '💼', label: 'LinkedIn', href: 'https://linkedin.com/in/Nuhe', external: true },
-  ],
-}
+const FoxMark = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5 text-orange-500" aria-hidden="true">
+    <path d="M3 14 L8 2 L12 9 L16 2 L21 14 Q21 22 12 23 Q3 22 3 14 Z" fill="currentColor" />
+    <ellipse cx="9.5" cy="15.5" rx="1.1" ry="1" fill="#09090b" />
+    <ellipse cx="14.5" cy="15.5" rx="1.1" ry="1" fill="#09090b" />
+  </svg>
+)
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-900 border-t border-gray-800">
+    <footer className="bg-zinc-950 border-t border-zinc-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
 
-          {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-blue-500 text-xl" aria-hidden="true">⚡</span>
-              <span className="text-white font-bold text-lg">
-                Fox<span className="text-blue-500">Ops</span>
-              </span>
+              <FoxMark />
+              <span className="text-white font-bold">Fox<span className="text-orange-500">Ops</span></span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed">
+            <p className="text-zinc-600 text-xs leading-relaxed">
               Automatización, IA y desarrollo web para negocios que quieren trabajar mejor.
             </p>
           </div>
 
-          {/* Servicios */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Servicios</h4>
-            <ul className="space-y-2 text-sm text-gray-500">
-              {footerLinks.servicios.map((item) => (
-                <li key={item.label}>
-                  <a href={item.href} className="hover:text-gray-300 transition-colors">
-                    {item.label}
-                  </a>
+            <h4 className="text-zinc-400 font-semibold text-xs font-mono tracking-wider mb-4 uppercase">Servicios</h4>
+            <ul className="space-y-2 text-xs text-zinc-600">
+              {['Automatización', 'Bots con IA', 'Desarrollo Web', 'Integraciones'].map((s) => (
+                <li key={s}>
+                  <a href="#servicios" className="hover:text-zinc-400 transition-colors">{s}</a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Navegación */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Navegación</h4>
-            <ul className="space-y-2 text-sm text-gray-500">
-              {footerLinks.navegacion.map((item) => (
-                <li key={item.label}>
-                  <a href={item.href} className="hover:text-gray-300 transition-colors">
-                    {item.label}
-                  </a>
+            <h4 className="text-zinc-400 font-semibold text-xs font-mono tracking-wider mb-4 uppercase">Navegación</h4>
+            <ul className="space-y-2 text-xs text-zinc-600">
+              {[
+                { label: 'Problemas', href: '#problemas' },
+                { label: 'Cómo trabajo', href: '#proceso' },
+                { label: 'Proyectos', href: '#proyectos' },
+                { label: 'Sobre mí', href: '#nosotros' },
+              ].map((l) => (
+                <li key={l.label}>
+                  <a href={l.href} className="hover:text-zinc-400 transition-colors">{l.label}</a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contacto */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Contacto</h4>
-            <ul className="space-y-3 text-sm">
-              {footerLinks.contacto.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    target={item.external ? '_blank' : undefined}
-                    rel={item.external ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-2 text-gray-500 hover:text-gray-300 transition-colors"
-                  >
-                    <span aria-hidden="true">{item.icon}</span>
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+            <h4 className="text-zinc-400 font-semibold text-xs font-mono tracking-wider mb-4 uppercase">Contacto</h4>
+            <ul className="space-y-2.5 text-xs text-zinc-600">
+              <li>
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer"
+                  className="hover:text-green-400 transition-colors">WhatsApp</a>
+              </li>
+              <li>
+                <a href="mailto:contacto@foxops.dev"
+                  className="hover:text-zinc-400 transition-colors">contacto@foxops.dev</a>
+              </li>
+              <li>
+                <a href="https://github.com/Nuhe" target="_blank" rel="noopener noreferrer"
+                  className="hover:text-zinc-400 transition-colors">GitHub</a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/Nuhe" target="_blank" rel="noopener noreferrer"
+                  className="hover:text-zinc-400 transition-colors">LinkedIn</a>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-gray-600 text-sm">
-            © {year} FoxOps. Todos los derechos reservados.
-          </p>
-          <p className="text-gray-700 text-xs">
-            Hecho con React + Vite + Tailwind CSS
-          </p>
+        <div className="border-t border-zinc-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-zinc-700 text-xs font-mono">© {year} FoxOps</p>
+          <p className="text-zinc-800 text-xs font-mono">React · Vite · Tailwind</p>
         </div>
       </div>
     </footer>
