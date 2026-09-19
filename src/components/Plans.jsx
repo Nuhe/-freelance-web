@@ -2,12 +2,12 @@ const plans = [
   {
     name: 'Presencia', setup: 'ARS 150.000', monthly: 'ARS 50.000 / mes',
     description: 'Para empezar con una presencia profesional y mantenimiento esencial.',
-    items: ['Hasta 5 secciones', 'Diseño sobre base personalizable', 'WhatsApp y formulario', 'SEO técnico y Analytics básicos', 'Mantenimiento técnico', 'Un cambio pequeño cada dos meses'],
+    items: ['Hasta 5 secciones', 'Diseño sobre base personalizable', 'WhatsApp y formulario', 'SEO técnico y Analytics', 'Mantenimiento técnico', 'Un cambio pequeño cada dos meses'],
   },
   {
     name: 'Gestionado', setup: 'ARS 200.000', monthly: 'ARS 75.000 / mes', featured: true,
     description: 'Para negocios que quieren medir contactos y mantener la página activa.',
-    items: ['Hasta 7 secciones', 'Mayor personalización visual', 'Search Console e indexación', 'Eventos de WhatsApp y formulario', 'Informe mensual sencillo', 'Un cambio pequeño por mes'],
+    items: ['Hasta 7 secciones', 'Mayor personalización visual', 'Search Console e indexación', 'Eventos de WhatsApp y formulario', 'Informe mensual de resultados', 'Un cambio pequeño por mes'],
   },
 ]
 
@@ -18,7 +18,7 @@ export default function Plans() {
         <div className="mb-14 text-center">
           <span className="section-label">Planes claros</span>
           <h2 className="section-title">Elegí el acompañamiento que necesitás</h2>
-          <p className="text-sm text-zinc-500 max-w-2xl mx-auto">Ambos planes tienen una permanencia inicial de 6 meses. Dominio y servicios de terceros se informan por separado.</p>
+          <p className="text-sm text-zinc-500 max-w-2xl mx-auto">El servicio continúa mes a mes y podés solicitar la baja con 30 días de aviso. Dominio y servicios de terceros se informan por separado.</p>
         </div>
         <div className="grid md:grid-cols-2 gap-5">
           {plans.map(plan => (
@@ -27,7 +27,7 @@ export default function Plans() {
               <h3 className="text-2xl font-bold text-white">{plan.name}</h3>
               <p className="text-sm text-zinc-500 mt-2 min-h-12">{plan.description}</p>
               <div className="mt-7 border-y border-zinc-800 py-5">
-                <div className="text-xs text-zinc-600 uppercase tracking-wider">Activación</div>
+                <div className="text-xs text-zinc-600 uppercase tracking-wider">Inicio del plan</div>
                 <div className="text-2xl font-bold text-white mt-1">{plan.setup}</div>
                 <div className="text-sm font-semibold text-orange-500 mt-2">{plan.monthly}</div>
               </div>

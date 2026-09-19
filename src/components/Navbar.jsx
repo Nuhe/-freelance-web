@@ -53,7 +53,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-3">
             <a href="#contacto" className="hidden md:inline-flex btn-primary text-sm py-2 px-5">
-              Quiero mi landing
+              Quiero mi web
             </a>
             <button
               className="md:hidden text-zinc-500 hover:text-white p-2"
@@ -92,7 +92,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className="btn-primary w-full justify-center text-sm"
               >
-                Quiero mi landing
+                Quiero mi web
               </a>
             </div>
           </div>

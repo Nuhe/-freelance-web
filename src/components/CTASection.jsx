@@ -13,7 +13,7 @@ export default function CTASection() {
             </div>
 
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-5 leading-tight tracking-tight max-w-2xl">
-              Una landing clara puede ayudarte a presentar mejor lo que hacés y facilitar el primer contacto.
+              Una web clara puede ayudarte a presentar mejor lo que hacés y facilitar el primer contacto.
             </h2>
 
             <p className="text-zinc-500 text-sm mb-8 max-w-lg leading-relaxed">
@@ -22,7 +22,7 @@ export default function CTASection() {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <a href="#contacto" className="btn-primary">
-                Quiero conversar sobre mi landing
+                Quiero conversar sobre mi web
               </a>
               <a href="#planes" className="btn-secondary">
                 Ver planes

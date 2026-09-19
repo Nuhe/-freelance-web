@@ -39,6 +39,7 @@ export default function ContactForm() {
             <div className="space-y-5">
               {[
                 { label: 'WhatsApp', val: '+54 11 3428-7724', href: `https://wa.me/${WHATSAPP_NUMBER}` },
+                { label: 'Email', val: 'camilo.nestor.rodriguez@gmail.com', href: 'mailto:camilo.nestor.rodriguez@gmail.com' },
                 { label: 'GitHub', val: 'github.com/Nuhe', href: 'https://github.com/Nuhe' },
               ].map((item) => (
                 <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
@@ -102,7 +103,7 @@ export default function ContactForm() {
                     <option value="">— Seleccioná</option>
                     <option value="Plan Presencia">Plan Presencia</option>
                     <option value="Plan Gestionado">Plan Gestionado</option>
-                    <option value="Pago único">Landing con pago único</option>
+                    <option value="Pago único">Web con pago único</option>
                     <option value="No sé, necesito orientación">No sé, necesito orientación</option>
                   </select>
                 </div>

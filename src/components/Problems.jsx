@@ -6,7 +6,7 @@ const problems = [
   { title: 'Tu web se ve mal desde el celular', desc: 'La mayoría de las consultas comienza en una pantalla pequeña. Una experiencia incómoda hace que la persona se vaya.' },
   { title: 'No querés ocuparte de cuestiones técnicas', desc: 'Dominio, publicación, certificados y mantenimiento no deberían convertirse en otra tarea para vos.' },
   { title: 'No aparecés correctamente en Google', desc: 'Una base técnica incompleta puede dificultar que los buscadores comprendan e indexen tu página.' },
-  { title: 'No necesitás una web enorme', desc: 'Una landing enfocada puede explicar tu propuesta y llevar a la acción sin sumar páginas que nadie va a mantener.' },
+  { title: 'Una web enfocada puede ser suficiente', desc: 'Una sola página puede explicar tu propuesta y llevar a la acción sin sumar contenido innecesario.' },
 ]
 
 export default function Problems() {
@@ -18,7 +18,7 @@ export default function Problems() {
           <span className="section-label">¿Te identificás?</span>
           <h2 className="section-title">Una web debería simplificarte el trabajo</h2>
           <p className="section-subtitle">
-            Una landing bien construida resuelve problemas concretos de presentación,
+            Una web bien construida resuelve problemas concretos de presentación,
             confianza, contacto y seguimiento.
           </p>
         </div>

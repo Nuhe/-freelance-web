@@ -1,6 +1,6 @@
-# FoxOps — Landing pages gestionadas
+# FoxOps — Páginas web gestionadas
 
-Sitio comercial de FoxOps para presentar el servicio de diseño, publicación y mantenimiento de landing pages.
+Sitio comercial de FoxOps para presentar el servicio de diseño, publicación y mantenimiento de páginas web.
 
 **Demo en vivo:** https://nuhe.github.io/-freelance-web/
 
@@ -9,7 +9,7 @@ Sitio comercial de FoxOps para presentar el servicio de diseño, publicación y 
 - Diseño y desarrollo responsive.
 - Configuración de dominio y publicación.
 - Formularios y contacto por WhatsApp.
-- SEO técnico básico.
+- SEO técnico.
 - Analytics y medición de eventos.
 - Mantenimiento y acompañamiento mensual.
 

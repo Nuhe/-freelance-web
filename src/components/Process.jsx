@@ -12,7 +12,7 @@ const steps = [
   {
     number: '03',
     title: 'Desarrollo e implemento',
-    desc: 'Construyo la landing, adapto el contenido, pruebo en distintos tamaños de pantalla y aplico las correcciones acordadas.',
+    desc: 'Construyo la web, adapto el contenido, pruebo en distintos tamaños de pantalla y aplico las correcciones acordadas.',
   },
   {
     number: '04',

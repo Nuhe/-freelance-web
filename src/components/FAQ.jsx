@@ -2,9 +2,8 @@ const questions = [
   ['¿Qué necesito entregar para empezar?', 'Información del negocio, servicios, datos de contacto, logotipo si tenés e imágenes propias. Si falta algo, definimos qué material es imprescindible antes de comenzar.'],
   ['¿El dominio queda a mi nombre?', 'Sí. El dominio pertenece al cliente. Puedo ayudarte con la configuración técnica, pero no retengo tu identidad digital.'],
   ['¿Qué significa una modificación pequeña?', 'Cambiar un texto, enlace, teléfono, horario o reemplazar hasta tres imágenes. Nuevas secciones y rediseños se cotizan por separado.'],
-  ['¿Garantizás ventas o aparecer primero en Google?', 'No. Garantizo una implementación profesional, medible y técnicamente preparada. Las ventas y posiciones dependen de muchos factores externos.'],
-  ['¿Qué no está incluido?', 'Publicidad, fotografía, identidad visual, redes sociales, CRM y redacción profesional. Si necesitás algo adicional, lo definimos antes de cotizar.'],
-  ['¿Puedo contratar sin mensualidad?', 'Sí. Existe una modalidad de pago único con mantenimiento opcional. La cotización depende del alcance de la landing.'],
+  ['¿Cómo puedo conocer los resultados?', 'Configuramos la medición de visitas y contactos importantes para que recibas un resumen mensual claro sobre el funcionamiento de tu web.'],
+  ['¿Puedo contratar sin mensualidad?', 'Sí. Existe una modalidad de pago único con mantenimiento opcional. La cotización depende del alcance de la web.'],
 ]
 
 export default function FAQ() {

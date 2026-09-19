@@ -40,7 +40,7 @@ export default function Footer() {
               <span className="text-white font-bold text-sm tracking-widest">FOXOPS</span>
             </div>
             <p className="text-zinc-700 text-xs font-mono max-w-xs leading-relaxed">
-              Landing pages profesionales, medibles y acompañadas<br />
+              Páginas web profesionales, medibles y acompañadas<br />
               para pequeños negocios y profesionales.
             </p>
           </div>

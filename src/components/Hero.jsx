@@ -27,11 +27,11 @@ export default function Hero() {
               Tu negocio merece{' '}
               <span className="text-orange-600">una web profesional.</span>
               <br />
-              <span className="text-zinc-400">Y que no quede abandonada.</span>
+              <span className="text-zinc-400">Con acompañamiento continuo.</span>
             </h1>
 
             <p className="text-base text-zinc-400 mb-4 leading-relaxed max-w-[480px]">
-              Diseño, publico y mantengo la landing de tu negocio. Con SEO técnico,
+              Diseño, publico y mantengo la web de tu negocio. Con SEO técnico,
               medición de contactos y acompañamiento mensual.
             </p>
 
@@ -45,7 +45,7 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <a href="#contacto" className="btn-primary">
-                Quiero mi landing
+                Quiero mi web
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -56,7 +56,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Vista simplificada de una landing */}
+          {/* Vista simplificada de una web */}
           <div className="hidden lg:block">
             <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden shadow-2xl shadow-black/50">
               <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-zinc-950">

@@ -6,7 +6,7 @@ const demos = [
   },
   {
     sector: 'Salud y bienestar', title: 'Asesoramiento en planes de salud',
-    description: 'Una landing orientada a presentar alternativas, resolver preguntas frecuentes y recibir solicitudes de cotización.',
+    description: 'Una web orientada a presentar alternativas, resolver preguntas frecuentes y recibir solicitudes de cotización.',
     href: 'https://nuhe.github.io/karina-landing-page/#inicio', accent: 'from-sky-700 to-blue-500',
   },
 ]
@@ -17,7 +17,7 @@ export default function Portfolio() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="mb-14">
           <span className="section-label">Portfolio</span>
-          <h2 className="section-title">Landings demostrativas</h2>
+          <h2 className="section-title">Webs demostrativas</h2>
           <p className="section-subtitle max-w-xl">Proyectos conceptuales creados para mostrar cómo una misma base se adapta al mensaje y la identidad de cada rubro.</p>
         </div>
         <div className="grid md:grid-cols-2 gap-6">
