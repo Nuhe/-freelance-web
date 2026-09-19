@@ -2,22 +2,22 @@ const steps = [
   {
     number: '01',
     title: 'Entiendo el problema',
-    desc: 'Conversamos sobre qué te quita tiempo, qué falla y qué necesitás mejorar. Sin formularios ni demos genéricos: una charla directa sobre tu operación.',
+    desc: 'Conversamos sobre tu negocio, el público, el contenido disponible y la acción principal que querés generar.',
   },
   {
     number: '02',
     title: 'Propongo una solución concreta',
-    desc: 'Te presento qué se hace, cómo, en qué tiempo y a qué costo. Sin humo. Sin sorpresas. Con alcance claro desde el principio.',
+    desc: 'Definimos secciones, alcance, tiempos y costos antes de empezar. Sin sorpresas ni funcionalidades ambiguas.',
   },
   {
     number: '03',
     title: 'Desarrollo e implemento',
-    desc: 'Construyo la solución, la pruebo y la entrego funcionando. Te muestro cómo usarla antes de considerar terminado.',
+    desc: 'Construyo la landing, adapto el contenido, pruebo en distintos tamaños de pantalla y aplico las correcciones acordadas.',
   },
   {
     number: '04',
     title: 'Ajusto y acompaño',
-    desc: 'Después de implementar, me quedo disponible. Si algo cambia o falla, lo resolvemos. El objetivo es que funcione de verdad.',
+    desc: 'Publico la página y comienza el acompañamiento: mantenimiento, medición, cambios incluidos y soporte técnico.',
   },
 ]
 
@@ -30,8 +30,7 @@ export default function Process() {
           <span className="section-label">El proceso</span>
           <h2 className="section-title">Cómo trabajo</h2>
           <p className="section-subtitle">
-            Simple, claro y sin burocracia. Resolver un problema no debería ser
-            otra fuente de fricción.
+            Un proceso breve y claro para pasar de la idea a una página publicada.
           </p>
         </div>
 
@@ -51,7 +50,7 @@ export default function Process() {
 
         <div className="mt-14 pt-10 border-t border-zinc-900">
           <p className="text-xs text-zinc-700 font-mono">
-            Sin procesos de agencia. Sin capas de aprobación. Directo al problema.
+            El plazo habitual es de 7 a 14 días hábiles desde la recepción del material.
           </p>
         </div>
       </div>

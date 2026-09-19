@@ -6,6 +6,8 @@ import Benefits from './components/Benefits'
 import Process from './components/Process'
 import Portfolio from './components/Portfolio'
 import About from './components/About'
+import Plans from './components/Plans'
+import FAQ from './components/FAQ'
 import CTASection from './components/CTASection'
 import ContactForm from './components/ContactForm'
 import Footer from './components/Footer'
@@ -20,9 +22,11 @@ function App() {
         <Problems />
         <Services />
         <Benefits />
+        <Plans />
         <Process />
         <Portfolio />
         <About />
+        <FAQ />
         <CTASection />
         <ContactForm />
       </main>

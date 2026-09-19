@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import FoxMark from './FoxMark'
 
 const navLinks = [
-  { label: 'Problemas', href: '#problemas' },
-  { label: 'Servicios', href: '#servicios' },
+  { label: 'Qué incluye', href: '#servicios' },
+  { label: 'Planes', href: '#planes' },
   { label: 'Cómo trabajo', href: '#proceso' },
-  { label: 'Proyectos', href: '#proyectos' },
-  { label: 'Nosotros', href: '#nosotros' },
+  { label: 'Demos', href: '#proyectos' },
+  { label: 'Sobre mí', href: '#nosotros' },
 ]
 
 export default function Navbar() {
@@ -53,7 +53,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-3">
             <a href="#contacto" className="hidden md:inline-flex btn-primary text-sm py-2 px-5">
-              Hablemos
+              Quiero mi landing
             </a>
             <button
               className="md:hidden text-zinc-500 hover:text-white p-2"
@@ -92,7 +92,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className="btn-primary w-full justify-center text-sm"
               >
-                Hablemos
+                Quiero mi landing
               </a>
             </div>
           </div>

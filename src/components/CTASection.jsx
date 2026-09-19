@@ -9,25 +9,23 @@ export default function CTASection() {
           <div className="relative">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-6 h-0.5 bg-orange-600" />
-              <span className="text-xs font-mono text-orange-600/60 tracking-widest uppercase">¿Tiene sentido hablar?</span>
+              <span className="text-xs font-mono text-orange-600/60 tracking-widest uppercase">¿Tu negocio necesita una web?</span>
             </div>
 
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-5 leading-tight tracking-tight max-w-2xl">
-              Si tenés una tarea repetitiva o un proceso manual que te gustaría mejorar,
-              puedo ayudarte a ver qué se puede hacer.
+              Una landing clara puede ayudarte a presentar mejor lo que hacés y facilitar el primer contacto.
             </h2>
 
             <p className="text-zinc-500 text-sm mb-8 max-w-lg leading-relaxed">
-              Contame cómo funciona el proceso. Sin compromiso ni presupuestos imaginarios.
-              Si puedo ayudarte, te digo cómo. Si no, también.
+              Contame sobre tu negocio. Te respondo con preguntas concretas para definir si este servicio encaja con lo que necesitás.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <a href="#contacto" className="btn-primary">
-                Contame qué proceso querés mejorar
+                Quiero conversar sobre mi landing
               </a>
-              <a href="#servicios" className="btn-secondary">
-                Ver servicios
+              <a href="#planes" className="btn-secondary">
+                Ver planes
               </a>
             </div>
           </div>

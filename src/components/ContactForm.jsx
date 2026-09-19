@@ -10,6 +10,10 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!e.currentTarget.checkValidity()) {
+      e.currentTarget.reportValidity()
+      return
+    }
     const text = `Hola FoxOps!\n\nSoy ${form.name} (${form.email}).\n\nServicio: ${form.service || 'Sin especificar'}\n\nConsulta:\n${form.message}`
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank')
     setSubmitted(true)
@@ -26,16 +30,15 @@ export default function ContactForm() {
           {/* ── Info de contacto ── */}
           <div>
             <span className="section-label">Empezá acá</span>
-            <h2 className="section-title">Contame tu proceso</h2>
+            <h2 className="section-title">Contame sobre tu negocio</h2>
             <p className="text-zinc-500 text-sm mb-10 leading-relaxed max-w-sm">
-              Describí brevemente qué proceso querés mejorar o qué problema te está
-              quitando tiempo. Respondo en menos de 48 horas con una propuesta clara.
+              Contame qué hacés y qué esperás conseguir con la página.
+              Respondo en menos de 48 horas.
             </p>
 
             <div className="space-y-5">
               {[
                 { label: 'WhatsApp', val: '+54 11 3428-7724', href: `https://wa.me/${WHATSAPP_NUMBER}` },
-                { label: 'Email', val: 'contacto@foxops.dev', href: 'mailto:contacto@foxops.dev' },
                 { label: 'GitHub', val: 'github.com/Nuhe', href: 'https://github.com/Nuhe' },
               ].map((item) => (
                 <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
@@ -97,21 +100,20 @@ export default function ContactForm() {
                     onChange={handleChange}
                     className={`${inputClass} text-zinc-400`}>
                     <option value="">— Seleccioná</option>
-                    <option value="Automatización de procesos">Automatización de procesos</option>
-                    <option value="Bot o asistente IA">Bot o asistente IA</option>
-                    <option value="Integración de sistemas">Integración de sistemas</option>
-                    <option value="Web o panel interno">Web o panel interno</option>
+                    <option value="Plan Presencia">Plan Presencia</option>
+                    <option value="Plan Gestionado">Plan Gestionado</option>
+                    <option value="Pago único">Landing con pago único</option>
                     <option value="No sé, necesito orientación">No sé, necesito orientación</option>
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-[11px] font-mono text-zinc-600 mb-1.5 uppercase tracking-wider">
-                    ¿Qué proceso querés mejorar? <span className="text-orange-600">*</span>
+                    Contame sobre tu negocio <span className="text-orange-600">*</span>
                   </label>
                   <textarea id="message" name="message" value={form.message}
                     onChange={handleChange} required rows={4}
-                    placeholder="Describí brevemente el problema o la tarea que querés automatizar..."
+                    placeholder="Qué ofrecés, a quién y qué debería hacer una persona al visitar tu página..."
                     className={`${inputClass} resize-none`} />
                 </div>
 
