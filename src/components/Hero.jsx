@@ -26,8 +26,6 @@ export default function Hero() {
             <h1 className="text-5xl md:text-6xl lg:text-[4.25rem] font-bold text-white leading-[1.05] tracking-tight mb-5">
               Tu negocio merece{' '}
               <span className="text-orange-600">una web profesional.</span>
-              <br />
-              <span className="text-zinc-400">Con acompañamiento continuo.</span>
             </h1>
 
             <p className="text-base text-zinc-400 mb-4 leading-relaxed max-w-[480px]">
