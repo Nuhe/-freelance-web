@@ -1,10 +1,6 @@
 pipeline {
   agent any
 
-  tools {
-    nodejs 'Node 22'
-  }
-
   options {
     disableConcurrentBuilds()
     buildDiscarder(logRotator(numToKeepStr: '10'))
@@ -15,18 +11,14 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
-    }
-
     stage('Build') {
       steps {
         sh '''#!/usr/bin/env bash
 set -euo pipefail
 
-npm ci
+node --version
+npm --version
+npm ci --include=optional
 npm run lint
 npm run build -- --base=/
 
