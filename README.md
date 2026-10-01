@@ -8,7 +8,7 @@ Sitio comercial de FoxOps para presentar el servicio de diseño, publicación y 
 
 - Diseño y desarrollo responsive.
 - Configuración de dominio y publicación.
-- Formularios y contacto por WhatsApp.
+- Formulario de contacto por email.
 - SEO técnico.
 - Analytics y medición de eventos.
 - Mantenimiento y acompañamiento mensual.
@@ -44,4 +44,4 @@ El despliegue se publica desde la rama `gh-pages`. El `base` configurado en Vite
 
 ## Datos a revisar
 
-El número de WhatsApp se encuentra en `ContactForm.jsx` y `WhatsAppButton.jsx`. Los precios son valores de referencia y deben revisarse antes de cada actualización comercial.
+Los precios son valores de referencia y deben revisarse antes de cada actualización comercial.

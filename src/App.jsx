@@ -11,7 +11,6 @@ import FAQ from './components/FAQ'
 import CTASection from './components/CTASection'
 import ContactForm from './components/ContactForm'
 import Footer from './components/Footer'
-import WhatsAppButton from './components/WhatsAppButton'
 
 function App() {
   return (
@@ -31,7 +30,6 @@ function App() {
         <ContactForm />
       </main>
       <Footer />
-      <WhatsAppButton />
     </>
   )
 }
