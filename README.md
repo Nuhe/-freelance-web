@@ -1,6 +1,6 @@
 # FoxOps
 
-Sitio comercial de FoxOps: soluciones digitales con instinto para landing pages, e-commerce y automatizaciones.
+Sitio comercial de FoxOps para presentar sus servicios de landing pages, e-commerce y automatizaciones.
 
 **Sitio principal:** https://foxops.digital/
 **Contacto:** contacto@foxops.digital

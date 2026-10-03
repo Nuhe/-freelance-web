@@ -47,12 +47,12 @@ function Hero() {
     <div className="container hero-layout">
       <div className="hero-copy">
         <div className="eyebrow"><span className="eyebrow-line" /> DISEÑO · DESARROLLO · OPERACIÓN</div>
-        <h1>Ideas astutas.<br /><span>Soluciones</span><br />que funcionan<span className="orange-dot">.</span></h1>
-        <p>Diseñamos y desarrollamos experiencias digitales que ayudan a tu negocio a avanzar: landing pages, e-commerce y automatizaciones.</p>
+        <h1>Soluciones<br /><span>digitales</span><br />para avanzar<span className="orange-dot">.</span></h1>
+        <p>Creamos landing pages, tiendas online y automatizaciones que ayudan a vender, conectar y trabajar mejor.</p>
         <div className="hero-actions"><a className="button button-primary" href={`mailto:${email}?subject=Hablemos%20de%20mi%20proyecto`}>Hablemos de tu proyecto <ArrowIcon diagonal /></a><a className="text-link" href="#soluciones">Explorar soluciones <ArrowIcon /></a></div>
         <div className="hero-caption"><span className="caption-cross">✳</span> Estrategia para pensar mejor. Tecnología para hacer que pase.</div>
       </div>
-      <div className="hero-art"><div className="art-orbit art-orbit-one" aria-hidden="true" /><div className="art-orbit art-orbit-two" aria-hidden="true" /><div className="art-label art-label-top">FOX / 01 <span>INSTINTO DIGITAL</span></div><FoxNetwork /><div className="art-label art-label-bottom"><span>ESTRATEGIA</span><span className="art-label-line" /><span>EJECUCIÓN</span></div></div>
+      <div className="hero-art"><div className="art-orbit art-orbit-one" aria-hidden="true" /><div className="art-orbit art-orbit-two" aria-hidden="true" /><div className="art-label art-label-top">FOX / 01 <span>DISEÑO DIGITAL</span></div><FoxNetwork /><div className="art-label art-label-bottom"><span>ESTRATEGIA</span><span className="art-label-line" /><span>EJECUCIÓN</span></div></div>
     </div>
     <div className="container hero-bottom"><span>FOXOPS / OPERACIONES DIGITALES</span><span>DESLIZÁ PARA EXPLORAR <span aria-hidden="true">↓</span></span></div>
   </section>
@@ -71,7 +71,7 @@ function Solutions() {
 
 function Approach() {
   return <section id="enfoque" className="approach section-pad"><div className="container approach-layout">
-    <div className="approach-intro"><div className="section-kicker"><span>02 / NUESTRO ENFOQUE</span></div><h2>Instinto para detectar.<br /><em>Método para resolver.</em></h2><p>El zorro observa, encuentra el camino y actúa en el momento preciso. En FoxOps llevamos esa lógica al diseño y desarrollo de soluciones digitales.</p><div className="approach-statement"><FoxMark /><span>Mitad instinto.<br />Mitad sistema.</span></div></div>
+    <div className="approach-intro"><div className="section-kicker"><span>02 / NUESTRO ENFOQUE</span></div><h2>Un proceso claro.<br /><em>Una solución útil.</em></h2><p>Definimos qué necesita tu negocio antes de elegir tecnología. Así cada decisión tiene un objetivo y cada entrega, un resultado concreto.</p></div>
     <div className="steps">{steps.map((step) => <div className="step" key={step.number}><span className="step-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.description}</p></div><span className="step-plus" aria-hidden="true">+</span></div>)}</div>
   </div></section>
 }
@@ -85,7 +85,7 @@ function Contact() {
 }
 
 function Footer() {
-  return <footer className="footer"><div className="container footer-inner"><a className="brand" href="#inicio" aria-label="FoxOps, ir al inicio"><FoxMark /><span>FOX<span>OPS</span></span></a><p>Soluciones digitales con instinto.</p><span>© {new Date().getFullYear()} FoxOps</span></div></footer>
+  return <footer className="footer"><div className="container footer-inner"><a className="brand" href="#inicio" aria-label="FoxOps, ir al inicio"><FoxMark /><span>FOX<span>OPS</span></span></a><p>Landing pages · E-commerce · Automatizaciones</p><span>© {new Date().getFullYear()} FoxOps</span></div></footer>
 }
 
 export default function App() {
