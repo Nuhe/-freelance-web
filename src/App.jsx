@@ -3,6 +3,7 @@ import FoxMark from './components/FoxMark'
 import FoxNetwork from './components/FoxNetwork'
 
 const email = 'contacto@foxops.digital'
+const contactWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL?.trim()
 
 const solutions = [
   { number: '01', title: 'Landing pages', description: 'Una primera impresión que explica tu propuesta y convierte interés en conversaciones.', detail: 'Diseño · Desarrollo · Lanzamiento', icon: 'landing' },
@@ -36,7 +37,7 @@ function Header() {
     <button className="menu-toggle" type="button" aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menuOpen} aria-controls="site-nav" onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
     <nav id="site-nav" className={`site-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Navegación principal">
       <a href="#soluciones" onClick={closeMenu}>Soluciones</a><a href="#enfoque" onClick={closeMenu}>Enfoque</a><a href="#contacto" onClick={closeMenu}>Contacto</a>
-      <a className="nav-cta" href={`mailto:${email}?subject=Hablemos%20de%20mi%20proyecto`} onClick={closeMenu}>Hablemos <ArrowIcon diagonal /></a>
+      <a className="nav-cta" href="#contacto" onClick={closeMenu}>Hablemos <ArrowIcon diagonal /></a>
     </nav>
   </div></header>
 }
@@ -49,7 +50,7 @@ function Hero() {
         <div className="eyebrow"><span className="eyebrow-line" /> DISEÑO · DESARROLLO · OPERACIÓN</div>
         <h1>Soluciones<br /><span>digitales</span><br />para avanzar<span className="orange-dot">.</span></h1>
         <p>Creamos landing pages, tiendas online y automatizaciones que ayudan a vender, conectar y trabajar mejor.</p>
-        <div className="hero-actions"><a className="button button-primary" href={`mailto:${email}?subject=Hablemos%20de%20mi%20proyecto`}>Hablemos de tu proyecto <ArrowIcon diagonal /></a><a className="text-link" href="#soluciones">Explorar soluciones <ArrowIcon /></a></div>
+        <div className="hero-actions"><a className="button button-primary" href="#contacto">Hablemos de tu proyecto <ArrowIcon diagonal /></a><a className="text-link" href="#soluciones">Explorar soluciones <ArrowIcon /></a></div>
         <div className="hero-caption"><span className="caption-cross">✳</span> Estrategia para pensar mejor. Tecnología para hacer que pase.</div>
       </div>
       <div className="hero-art"><div className="art-orbit art-orbit-one" aria-hidden="true" /><div className="art-orbit art-orbit-two" aria-hidden="true" /><div className="art-label art-label-top">FOX / 01 <span>DISEÑO DIGITAL</span></div><FoxNetwork /><div className="art-label art-label-bottom"><span>ESTRATEGIA</span><span className="art-label-line" /><span>EJECUCIÓN</span></div></div>
@@ -77,8 +78,57 @@ function Approach() {
 }
 
 function Contact() {
+  const [status, setStatus] = useState('idle')
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    const form = event.currentTarget
+    const fields = new FormData(form)
+    if (fields.get('website')) return
+
+    const payload = new URLSearchParams()
+    for (const key of ['nombre', 'correo', 'telefono', 'servicio', 'mensaje', 'website']) {
+      payload.set(key, String(fields.get(key) || '').trim())
+    }
+
+    if (!contactWebhookUrl) {
+      const subject = `Consulta FoxOps: ${payload.get('servicio')}`
+      const body = `Nombre: ${payload.get('nombre')}\nCorreo: ${payload.get('correo')}\nTeléfono: ${payload.get('telefono') || 'No indicado'}\nServicio: ${payload.get('servicio')}\n\nProyecto:\n${payload.get('mensaje')}`
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      setStatus('email')
+      return
+    }
+
+    setStatus('sending')
+    try {
+      const response = await fetch(contactWebhookUrl, { method: 'POST', body: payload })
+      if (!response.ok) throw new Error('No se pudo enviar la solicitud')
+      const result = await response.json()
+      if (result.ok !== true) throw new Error('La solicitud no fue confirmada')
+      form.reset()
+      setStatus('success')
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return <section id="contacto" className="contact section-pad"><div className="container contact-box">
-    <div className="contact-content"><div className="section-kicker light"><span>03 / EL PRÓXIMO MOVIMIENTO</span></div><h2>Tu próximo paso<br />empieza acá<span>.</span></h2><p>Contanos qué querés construir o qué proceso necesitás mejorar. Pensemos juntos la forma más inteligente de hacerlo.</p><a className="button button-dark" href={`mailto:${email}?subject=Quiero%20hablar%20de%20mi%20proyecto`}>Contanos tu idea <ArrowIcon diagonal /></a></div>
+    <div className="contact-layout">
+      <div className="contact-content"><div className="section-kicker light"><span>03 / EL PRÓXIMO MOVIMIENTO</span></div><h2>Tu próximo paso<br />empieza acá<span>.</span></h2><p>Contanos qué querés construir o qué proceso necesitás mejorar. Pensemos juntos la forma más inteligente de hacerlo.</p></div>
+      <form className="contact-form" onSubmit={handleSubmit}>
+        <div className="contact-form-heading"><span>CONTANOS TU IDEA</span><span>01 / 01</span></div>
+        <div className="contact-fields">
+          <label><span className="field-label">Tu nombre <b>*</b></span><input name="nombre" type="text" autoComplete="name" maxLength="100" placeholder="¿Cómo te llamás?" required /></label>
+          <label><span className="field-label">Tu correo <b>*</b></span><input name="correo" type="email" autoComplete="email" maxLength="254" placeholder="nombre@empresa.com" required /></label>
+          <label><span className="field-label">Teléfono <small>Opcional</small></span><input name="telefono" type="tel" autoComplete="tel" maxLength="40" placeholder="Tu número de contacto" /></label>
+          <label><span className="field-label">¿Qué necesitás? <b>*</b></span><select name="servicio" defaultValue="" required><option value="" disabled>Seleccioná una opción</option><option value="Landing page">Landing page</option><option value="E-commerce">E-commerce</option><option value="Automatización">Automatización</option><option value="Otros">Otros</option></select></label>
+          <label className="contact-message"><span className="field-label">Contanos sobre tu proyecto <b>*</b></span><textarea name="mensaje" rows="4" minLength="10" maxLength="3000" placeholder="¿Qué te gustaría crear o mejorar?" required /></label>
+        </div>
+        <div className="contact-honeypot" aria-hidden="true"><label>Dejá este campo vacío<input name="website" type="text" tabIndex="-1" autoComplete="off" /></label></div>
+        <button className="button button-dark contact-submit" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Enviando…' : 'Enviar consulta'} <ArrowIcon diagonal /></button>
+        <p className="contact-feedback" role="status" aria-live="polite">{status === 'success' && '¡Gracias! Recibimos tu consulta y te responderemos pronto.'}{status === 'error' && <>No pudimos enviar tu consulta. Probá otra vez o escribinos a <a href={`mailto:${email}`}>{email}</a>.</>}{status === 'email' && 'Se abrió tu aplicación de correo con la consulta preparada. Enviá el mensaje desde allí.'}</p>
+      </form>
+    </div>
     <div className="contact-mark" aria-hidden="true"><FoxMark /></div>
     <div className="contact-footer"><span>UNA BUENA IDEA MERECE UNA GRAN EJECUCIÓN.</span><a href={`mailto:${email}`}>{email}</a></div>
   </div></section>

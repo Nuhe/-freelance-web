@@ -1,0 +1,187 @@
+{
+  "name": "FoxOps | Formulario de contacto a Gmail",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "foxops-contacto",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "https://foxops.digital,https://www.foxops.digital"
+        }
+      },
+      "id": "a2d73ce9-6d44-44da-90de-df64da9ca2cd",
+      "name": "Formulario FoxOps",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        240,
+        300
+      ],
+      "webhookId": "foxops-contacto"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const body = $input.first().json.body || {};\nconst field = (key, max) => typeof body[key] === 'string' ? body[key].trim().slice(0, max + 1) : '';\nconst nombre = field('nombre', 100);\nconst correo = field('correo', 254).toLowerCase();\nconst telefono = field('telefono', 40);\nconst servicio = field('servicio', 40);\nconst mensaje = field('mensaje', 3000);\nconst website = field('website', 200);\nconst servicios = ['Landing page', 'E-commerce', 'Automatización', 'Otros'];\nconst valid = !website && nombre.length >= 2 && nombre.length <= 100 && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(correo) && correo.length <= 254 && telefono.length <= 40 && servicios.includes(servicio) && mensaje.length >= 10 && mensaje.length <= 3000;\nreturn [{ json: { valid, nombre, correo, telefono, servicio, mensaje } }];"
+      },
+      "id": "66a9841d-1234-4c51-a2c7-64e72da1c019",
+      "name": "Validar datos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "10bca910-f5df-4bfd-91b0-a0d5e341f4ad",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "5ba11ba8-c4f8-488c-b182-a44433e4fd2b",
+      "name": "¿Datos válidos?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "contacto@foxops.digital",
+        "subject": "={{ \"Nueva consulta FoxOps: \" + $json.servicio }}",
+        "emailType": "text",
+        "message": "={{ \"Nueva consulta desde foxops.digital\\n\\nNombre: \" + $json.nombre + \"\\nCorreo: \" + $json.correo + \"\\nTeléfono: \" + ($json.telefono || \"No indicado\") + \"\\nServicio: \" + $json.servicio + \"\\n\\nProyecto:\\n\" + $json.mensaje }}",
+        "options": {
+          "replyTo": "={{ $json.correo }}",
+          "appendAttribution": false
+        }
+      },
+      "id": "98310d61-2dd7-437e-b99c-b22e15395c69",
+      "name": "Enviar correo a FoxOps",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"ok\":true}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "c990fdc9-84c5-4589-8dcb-6f6ea10a0b13",
+      "name": "Confirmar envío",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1120,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"ok\":false,\"message\":\"Datos inválidos\"}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "14b429fa-45de-4b9e-b0c3-943077368f8a",
+      "name": "Rechazar datos",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        900,
+        420
+      ]
+    }
+  ],
+  "connections": {
+    "Formulario FoxOps": {
+      "main": [
+        [
+          {
+            "node": "Validar datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar datos": {
+      "main": [
+        [
+          {
+            "node": "¿Datos válidos?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Datos válidos?": {
+      "main": [
+        [
+          {
+            "node": "Enviar correo a FoxOps",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Rechazar datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar correo a FoxOps": {
+      "main": [
+        [
+          {
+            "node": "Confirmar envío",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "pinData": {},
+  "tags": []
+}
