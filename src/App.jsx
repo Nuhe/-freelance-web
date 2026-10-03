@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react'
-import { motion as Motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { useState } from 'react'
 import FoxMark from './components/FoxMark'
 import FoxNetwork from './components/FoxNetwork'
 
@@ -43,31 +42,20 @@ function Header() {
 }
 
 function Hero() {
-  const heroRef = useRef(null)
-  const reduceMotion = useReducedMotion()
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end end'] })
-  const foxScale = useTransform(scrollYProgress, [0, 0.35, 1], [1, 1.16, 1.85])
-  const foxBlur = useTransform(scrollYProgress, [0, 0.35, 1], ['blur(0px)', 'blur(0px)', 'blur(14px)'])
-  const foxOpacity = useTransform(scrollYProgress, [0, 0.65, 1], [1, 0.9, 0])
-  const copyOpacity = useTransform(scrollYProgress, [0, 0.4, 1], [1, 1, 0])
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, -65])
-  const backdropOpacity = useTransform(scrollYProgress, [0, 0.35, 1], [0, 0, 0.78])
-
-  return <section id="inicio" ref={heroRef} className="hero-scroll"><div className="hero">
+  return <section id="inicio" className="hero">
     <div className="hero-glow" aria-hidden="true" />
-    <Motion.div className="hero-veil" style={reduceMotion ? undefined : { opacity: backdropOpacity }} aria-hidden="true" />
     <div className="container hero-layout">
-      <Motion.div className="hero-copy" style={reduceMotion ? undefined : { opacity: copyOpacity, y: copyY }}>
+      <div className="hero-copy">
         <div className="eyebrow"><span className="eyebrow-line" /> DISEÑO · DESARROLLO · OPERACIÓN</div>
         <h1>Soluciones<br /><span>digitales</span><br />para avanzar<span className="orange-dot">.</span></h1>
         <p>Creamos landing pages, tiendas online y automatizaciones que ayudan a vender, conectar y trabajar mejor.</p>
         <div className="hero-actions"><a className="button button-primary" href={`mailto:${email}?subject=Hablemos%20de%20mi%20proyecto`}>Hablemos de tu proyecto <ArrowIcon diagonal /></a><a className="text-link" href="#soluciones">Explorar soluciones <ArrowIcon /></a></div>
         <div className="hero-caption"><span className="caption-cross">✳</span> Estrategia para pensar mejor. Tecnología para hacer que pase.</div>
-      </Motion.div>
-      <Motion.div className="hero-art" style={reduceMotion ? undefined : { scale: foxScale, filter: foxBlur, opacity: foxOpacity }}><div className="art-orbit art-orbit-one" aria-hidden="true" /><div className="art-orbit art-orbit-two" aria-hidden="true" /><div className="art-label art-label-top">FOX / 01 <span>DISEÑO DIGITAL</span></div><FoxNetwork /><div className="art-label art-label-bottom"><span>ESTRATEGIA</span><span className="art-label-line" /><span>EJECUCIÓN</span></div></Motion.div>
+      </div>
+      <div className="hero-art"><div className="art-orbit art-orbit-one" aria-hidden="true" /><div className="art-orbit art-orbit-two" aria-hidden="true" /><div className="art-label art-label-top">FOX / 01 <span>DISEÑO DIGITAL</span></div><FoxNetwork /><div className="art-label art-label-bottom"><span>ESTRATEGIA</span><span className="art-label-line" /><span>EJECUCIÓN</span></div></div>
     </div>
-    <Motion.div className="container hero-bottom" style={reduceMotion ? undefined : { opacity: copyOpacity }}><span>FOXOPS / OPERACIONES DIGITALES</span><span>DESLIZÁ PARA EXPLORAR <span aria-hidden="true">↓</span></span></Motion.div>
-  </div></section>
+    <div className="container hero-bottom"><span>FOXOPS / OPERACIONES DIGITALES</span><span>DESLIZÁ PARA EXPLORAR <span aria-hidden="true">↓</span></span></div>
+  </section>
 }
 
 function Solutions() {
