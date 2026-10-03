@@ -3,7 +3,7 @@ import FoxMark from './components/FoxMark'
 import FoxNetwork from './components/FoxNetwork'
 
 const email = 'contacto@foxops.digital'
-const contactWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL?.trim()
+const contactWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL?.trim() || '/webhook/foxops-contacto'
 
 const solutions = [
   { number: '01', title: 'Landing pages', description: 'Una primera impresión que explica tu propuesta y convierte interés en conversaciones.', detail: 'Diseño · Desarrollo · Lanzamiento', icon: 'landing' },
@@ -91,17 +91,20 @@ function Contact() {
       payload.set(key, String(fields.get(key) || '').trim())
     }
 
-    if (!contactWebhookUrl) {
+    function openEmailDraft() {
       const subject = `Consulta FoxOps: ${payload.get('servicio')}`
       const body = `Nombre: ${payload.get('nombre')}\nCorreo: ${payload.get('correo')}\nTeléfono: ${payload.get('telefono') || 'No indicado'}\nServicio: ${payload.get('servicio')}\n\nProyecto:\n${payload.get('mensaje')}`
       window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
       setStatus('email')
-      return
     }
 
     setStatus('sending')
     try {
       const response = await fetch(contactWebhookUrl, { method: 'POST', body: payload })
+      if (response.status === 404) {
+        openEmailDraft()
+        return
+      }
       if (!response.ok) throw new Error('No se pudo enviar la solicitud')
       const result = await response.json()
       if (result.ok !== true) throw new Error('La solicitud no fue confirmada')
