@@ -49,6 +49,7 @@ export default function FoxNetwork() {
     }
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting
+      svgRef.current.classList.toggle('is-visible', visible)
       if (visible) start()
       else stop()
     })
@@ -71,12 +72,24 @@ export default function FoxNetwork() {
       <linearGradient id="fox-fill" x1="115" y1="50" x2="440" y2="500" gradientUnits="userSpaceOnUse"><stop stopColor="#F27427" stopOpacity=".3" /><stop offset=".5" stopColor="#C34212" stopOpacity=".12" /><stop offset="1" stopColor="#F27427" stopOpacity=".03" /></linearGradient>
       <linearGradient id="fox-stroke" x1="140" y1="40" x2="440" y2="500" gradientUnits="userSpaceOnUse"><stop stopColor="#FFAE75" /><stop offset=".48" stopColor="#F56A22" /><stop offset="1" stopColor="#8F3716" /></linearGradient>
       <radialGradient id="fox-aura"><stop stopColor="#F56A22" stopOpacity=".22" /><stop offset="1" stopColor="#F56A22" stopOpacity="0" /></radialGradient>
+      <linearGradient id="scan-haze" x1="0" y1="0" x2="0" y2="130" gradientUnits="userSpaceOnUse"><stop stopColor="#FF8D42" stopOpacity="0" /><stop offset=".6" stopColor="#FF8D42" stopOpacity=".04" /><stop offset="1" stopColor="#FFB978" stopOpacity=".24" /></linearGradient>
+      <linearGradient id="scan-line" x1="90" y1="0" x2="470" y2="0" gradientUnits="userSpaceOnUse"><stop stopColor="#FFAA6D" stopOpacity="0" /><stop offset=".2" stopColor="#FFAA6D" stopOpacity=".8" /><stop offset=".5" stopColor="#FFE0AD" /><stop offset=".8" stopColor="#FFAA6D" stopOpacity=".8" /><stop offset="1" stopColor="#FFAA6D" stopOpacity="0" /></linearGradient>
+      <pattern id="scan-dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#FFC48B" opacity=".75" /></pattern>
+      <clipPath id="fox-silhouette"><path d="M123 155 178 44 231 137 280 111 329 137 382 44 437 155 453 275 389 379 280 506 171 379 107 275 123 155Z" /></clipPath>
     </defs>
     <ellipse cx="280" cy="280" rx="275" ry="260" fill="url(#fox-aura)" />
     <path d="M123 155 178 44 231 137 280 111 329 137 382 44 437 155 453 275 389 379 280 506 171 379 107 275 123 155Z" fill="url(#fox-fill)" stroke="url(#fox-stroke)" strokeWidth="2.2" />
     <path d="m123 155 55-111 53 93-108 18Zm314 0L382 44l-53 93 108 18Z" fill="#F56A22" fillOpacity=".16" />
     {edges.map(([a, b]) => <line key={`${a}-${b}`} x1={points[a][0]} y1={points[a][1]} x2={points[b][0]} y2={points[b][1]} stroke="#F58845" strokeOpacity={a < 12 && b < 12 ? '.35' : '.24'} strokeWidth="1" />)}
     <path className="fox-signal" d={`M${points[1][0]} ${points[1][1]} L${points[2][0]} ${points[2][1]} L${points[12][0]} ${points[12][1]} L${points[14][0]} ${points[14][1]} L${points[8][0]} ${points[8][1]} L${points[9][0]} ${points[9][1]}`} stroke="#FFAF73" strokeWidth="2" strokeLinecap="round" />
+    <g clipPath="url(#fox-silhouette)">
+      <g className="fox-scan">
+        <rect x="90" y="0" width="380" height="130" fill="url(#scan-haze)" />
+        <rect x="90" y="45" width="380" height="85" fill="url(#scan-dots)" />
+        <rect x="90" y="124" width="380" height="12" fill="url(#scan-line)" opacity=".22" />
+        <rect x="90" y="129" width="380" height="2" fill="url(#scan-line)" />
+      </g>
+    </g>
     <path d="m190 279 38 15-32 9-6-24Zm180 0-38 15 32 9 6-24Z" fill="#FF9B55" fillOpacity=".78" />
     <path d="m261 394 19 17 19-17h-38Z" fill="#FFB073" />
     {points.map(([x, y], index) => <g key={index}><circle cx={x} cy={y} r={index === 9 || index === 12 ? 7 : 4.5} fill="#F56A22" fillOpacity=".15" /><circle cx={x} cy={y} r={index === 9 || index === 12 ? 3 : 2} fill="#FFAD70" /></g>)}

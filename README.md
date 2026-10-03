@@ -9,7 +9,10 @@ Sitio comercial de FoxOps para presentar sus servicios de landing pages, e-comme
 
 - React 19
 - Vite 8
+- Motion para el zoom del hero ligado al scroll
 - CSS
+
+El zorro del hero tiene una franja de escaneo SVG con puntos y luz. Ambos efectos respetan la preferencia de movimiento reducido.
 
 ## Desarrollo
 
