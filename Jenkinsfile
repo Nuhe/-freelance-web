@@ -16,14 +16,9 @@ pipeline {
         sh '''#!/usr/bin/env bash
 set -euo pipefail
 
-node --version
-npm --version
-npm ci --include=optional
-npm run lint
-npm run build -- --base=/
-
-sed -i 's#https://nuhe.github.io/-freelance-web/#https://foxops.digital/#g' \
-  dist/index.html dist/robots.txt dist/sitemap.xml
+npx --yes -p node@22.12.0 -c 'npm ci --include=optional'
+npx --yes -p node@22.12.0 -c 'npm run lint'
+npx --yes -p node@22.12.0 -c 'npm run build'
 test -s dist/index.html
 '''
       }

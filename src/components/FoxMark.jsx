@@ -1,27 +1,10 @@
-/**
- * FoxMark — isotipo geométrico de FoxOps
- * Cabeza de zorro: dos orejas puntiagudas, orejas internas en ámbar, ojos oscuros.
- * Usar className para controlar tamaño (w-* h-*).
- */
-export default function FoxMark({ className = 'w-7 h-8' }) {
-  return (
-    <svg
-      viewBox="0 0 24 28"
-      className={className}
-      aria-hidden="true"
-      focusable="false"
-    >
-      {/* Cabeza principal — naranja quemado */}
-      <path
-        d="M3 16 L7 2 L12 8 L17 2 L21 16 Q21 26 12 27 Q3 26 3 16 Z"
-        fill="#ea580c"
-      />
-      {/* Orejas internas — ámbar para dar profundidad */}
-      <path d="M7 13 L8.8 4 L11 10 Z" fill="#d97706" />
-      <path d="M17 13 L15.2 4 L13 10 Z" fill="#d97706" />
-      {/* Ojos — espacio negativo oscuro */}
-      <ellipse cx="9.5" cy="17.5" rx="1.2" ry="1" fill="#09090b" />
-      <ellipse cx="14.5" cy="17.5" rx="1.2" ry="1" fill="#09090b" />
-    </svg>
-  )
+export default function FoxMark({ className = '' }) {
+  return <svg className={className} viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
+    <path d="M4 8 17 14 24 11l7 3L44 8l-4 19-16 16L8 27 4 8Z" fill="#F56A22" />
+    <path d="m4 8 13 6L9 25 4 8Zm40 0-13 6 8 11 5-17Z" fill="#FF9A4A" />
+    <path d="m17 14 7 9 7-9 8 11-15 18L9 25l8-11Z" fill="#D84A12" />
+    <path d="m9 25 15 18 15-18-15 8L9 25Z" fill="#FFB069" />
+    <path d="m17 26 5 2-5 2v-4Zm14 0-5 2 5 2v-4Z" fill="#140D0A" />
+    <path d="m20 35 4 5 4-5h-8Z" fill="#140D0A" />
+  </svg>
 }

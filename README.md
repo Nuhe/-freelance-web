@@ -1,29 +1,20 @@
-# FoxOps — Páginas web gestionadas
+# FoxOps
 
-Sitio comercial de FoxOps para presentar el servicio de diseño, publicación y mantenimiento de páginas web.
+Sitio comercial de FoxOps: soluciones digitales con instinto para landing pages, e-commerce y automatizaciones.
 
-**Demo en vivo:** https://nuhe.github.io/-freelance-web/
-
-## Propuesta
-
-- Diseño y desarrollo responsive.
-- Configuración de dominio y publicación.
-- Formulario de contacto por email.
-- SEO técnico.
-- Analytics y medición de eventos.
-- Mantenimiento y acompañamiento mensual.
+**Sitio principal:** https://foxops.digital/
+**Contacto:** contacto@foxops.digital
 
 ## Stack
 
 - React 19
 - Vite 8
-- Tailwind CSS 3
-- GitHub Pages
+- CSS
 
 ## Desarrollo
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -34,14 +25,10 @@ npm run lint
 npm run build
 ```
 
+Vite 8 requiere Node.js 20.19+ o 22.12+. Jenkins usa Node 22.12.0 para la instalación y compilación.
+
 ## Publicación
 
-```bash
-npm run deploy
-```
+`Jenkinsfile` ejecuta lint y build, y publica `dist/` en el servidor que sirve foxops.digital. El sitio usa `/` como base.
 
-El despliegue se publica desde la rama `gh-pages`. El `base` configurado en Vite corresponde a `/-freelance-web/`.
-
-## Datos a revisar
-
-Los precios son valores de referencia y deben revisarse antes de cada actualización comercial.
+La URL canónica, el sitemap y el contacto están configurados para foxops.digital.
