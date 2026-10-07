@@ -1,5 +1,5 @@
 {
-  "id": "oQ6xFaRSbOFEEmIZ",
+  "id": "poGPlOKp4m3gmXPU",
   "name": "FoxOps | Formulario de contacto a Gmail",
   "nodes": [
     {
@@ -89,7 +89,13 @@
       "position": [
         900,
         180
-      ]
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NMmYRvu8mymZxPnC",
+          "name": "Gmail account"
+        }
+      }
     },
     {
       "parameters": {
