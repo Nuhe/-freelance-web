@@ -41,7 +41,7 @@ El formulario solicita nombre, correo, teléfono opcional, tipo de solución y u
 
 1. Importá el JSON en n8n y conectá la credencial **Gmail OAuth2** de `contacto@foxops.digital` al nodo **Enviar correo a FoxOps**. Las credenciales no van en el JSON.
 2. Publicá/activá el workflow y copiá la **Production URL** del nodo **Formulario FoxOps**. La URL de prueba solo funciona mientras n8n escucha un evento de prueba.
-3. Si n8n corre en el mismo servidor que FoxOps, incluí [`deploy/nginx-foxops-webhook.conf`](deploy/nginx-foxops-webhook.conf) dentro del bloque HTTPS de Nginx para `foxops.digital`. Probá la configuración con `nginx -t` antes de recargar Nginx. La URL pública será `https://foxops.digital/webhook/foxops-contacto`, y el sitio la usa por defecto sin variables de entorno.
+3. En el VPS actual, Traefik recibe HTTPS y envía FoxOps al contenedor `foxops-web`. Este contenedor usa [`deploy/nginx-foxops-webhook.conf`](deploy/nginx-foxops-webhook.conf) como `/etc/nginx/conf.d/default.conf` y reenvía el POST a n8n por la red Docker `foxops_default`. El contenedor `n8n` debe estar unido a esa red con el alias `n8n`. La URL pública es `https://foxops.digital/webhook/foxops-contacto`, y el sitio la usa por defecto sin variables de entorno.
 4. Si n8n está en otro dominio, definí `VITE_N8N_WEBHOOK_URL` con su Production URL HTTPS antes del build. `.env.example` muestra el formato. En el sitio público, configurá la variable en el entorno del job de Jenkins y ejecutá un nuevo build.
 5. Enviá una consulta de prueba desde foxops.digital y comprobá que llegue a `contacto@foxops.digital`. El correo configura `Reply-To` con la dirección del cliente.
 
