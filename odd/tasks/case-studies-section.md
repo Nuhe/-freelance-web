@@ -46,6 +46,8 @@ The site lists services but shows no proof of work. Prospects need concrete exam
   - Screenshots inspected: cards render correctly at 1440, 1024 and 375. Issue found and fixed: the badge covered the INFOLAPLATA logo, so it now sits bottom-left.
   - Preview server stopped after the checks.
 - Delivery: 2 work-unit commits, about 134 authored changed lines (under budget). Not pushed.
+- Parent spot check: `npm run lint` and `npm run build` re-run and passed; 1440 screenshot inspected.
+- RDD assessment (`gentle-ai review assess --base-ref main --committed-only --untracked-scope=exclude`): risk `medium` (binary webp flagged as executable_change), `review_due: false`, reason `under_budget` (185 changed lines). Review stays pending in the slice.
 
 ## Next step
 User review; push/PR remain the user's decision.
