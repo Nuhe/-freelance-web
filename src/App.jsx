@@ -27,6 +27,12 @@ const cases = [
     url: 'https://www.majo-planparacaidas.com/',
     image: '/cases/plan-paracaidas.webp',
     alt: 'Portada de Plan Paracaídas: el titular “¿Qué pasaría si mañana algo cambia?” junto a la foto de la asesora María José Berdaguer.',
+    detail: {
+      challenge: 'Una asesora en planificación financiera necesitaba un sitio de marca personal que convirtiera visitas en reuniones.',
+      solution: 'Una landing estática con secciones de áreas, método, conóceme y contacto.',
+      result: 'Reserva de reuniones desde el modal “Solicitar una reunión” y botones de contacto directo por WhatsApp.',
+      stack: ['HTML', 'CSS', 'JavaScript'],
+    },
   },
   {
     slug: 'rossi-almacen',
@@ -36,6 +42,12 @@ const cases = [
     url: 'https://almacen-rossi.vercel.app/',
     image: '/cases/rossi-almacen.webp',
     alt: 'Portada de Rossi Almacén: el titular “Las cosas ricas se comparten” junto a una tabla de picada con quesos, fiambres y aceitunas.',
+    detail: {
+      challenge: 'Un almacén de barrio quería empezar a tomar pedidos online.',
+      solution: 'Una tienda demo con catálogo de picadas, chipá y sándwiches de miga, y secciones de productos, servicios y nosotros.',
+      result: 'Un catálogo navegable con carrito de pedidos que muestra cómo funciona la compra online.',
+      stack: ['Next.js', 'Vercel'],
+    },
   },
   {
     slug: 'infolaplata',
@@ -47,6 +59,12 @@ const cases = [
     alt: 'Portada de la propuesta de rediseño de INFOLAPLATA, con noticias destacadas de La Plata y una agenda lateral.',
     badge: 'Propuesta de rediseño',
     note: 'Concepto de diseño. No es el sitio oficial del medio.',
+    detail: {
+      challenge: 'Imaginar un rediseño para un medio de noticias local.',
+      solution: 'Una portada editorial con “Noticias cercanas”, agenda, buscador y newsletter, con animaciones de entrada.',
+      result: 'Un concepto navegable y publicado que muestra la propuesta completa. No es el sitio oficial del medio.',
+      stack: ['HTML', 'CSS', 'JavaScript (ES modules)', 'GitHub Pages'],
+    },
   },
 ]
 
@@ -119,6 +137,18 @@ function Approach() {
   </div></section>
 }
 
+function CaseDetail({ detail }) {
+  return <details className="case-detail">
+    <summary>Ver detalle <span className="case-detail-icon" aria-hidden="true" /></summary>
+    <dl className="case-detail-body">
+      <div><dt>Desafío</dt><dd>{detail.challenge}</dd></div>
+      <div><dt>Solución</dt><dd>{detail.solution}</dd></div>
+      <div><dt>Resultado</dt><dd>{detail.result}</dd></div>
+      <div><dt>Stack</dt><dd><ul className="case-stack">{detail.stack.map((tool) => <li key={tool}>{tool}</li>)}</ul></dd></div>
+    </dl>
+  </details>
+}
+
 function Cases() {
   const headRef = useInView()
   const gridRef = useInView({ threshold: 0.08 })
@@ -138,6 +168,7 @@ function Cases() {
           <h3>{item.title}</h3>
           <p>{item.description}</p>
           {item.note && <p className="case-note">{item.note}</p>}
+          <CaseDetail detail={item.detail} />
           <a className="case-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Ver sitio de ${item.title} (se abre en una pestaña nueva)`}>Ver sitio <ArrowIcon diagonal /></a>
         </div>
       </article>
