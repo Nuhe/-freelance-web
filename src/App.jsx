@@ -93,20 +93,29 @@ function Hero() {
 }
 
 function Solutions() {
+  const headRef = useInView()
+  const gridRef = useInView({ threshold: 0.08 })
   return <section id="soluciones" className="solutions section-pad"><div className="container">
-    <div className="section-head"><div><div className="section-kicker"><span>01 / LO QUE HACEMOS</span></div><h2>La solución justa<br /><em>para cada desafío.</em></h2></div><p>No todos los negocios necesitan lo mismo. Elegimos la herramienta adecuada y la hacemos trabajar con un propósito claro.</p></div>
-    <div className="solution-grid">{solutions.map((solution) => <article className="solution-card" key={solution.number}>
-      <div className="solution-card-top"><span>{solution.number} / 03</span><SolutionIcon type={solution.icon} /></div>
-      <div><h3>{solution.title}</h3><p>{solution.description}</p></div>
-      <div className="solution-card-bottom"><span>{solution.detail}</span><ArrowIcon diagonal /></div>
-    </article>)}</div>
+    <div className="section-head" ref={headRef}>
+      <div><div className="section-kicker reveal-item"><span>01 / LO QUE HACEMOS</span></div><h2><span className="reveal-mask"><span>La solución justa</span></span><span className="reveal-mask" style={{ '--i': 1 }}><span><em>para cada desafío.</em></span></span></h2></div>
+      <p className="reveal-item" style={{ '--i': 2 }}>No todos los negocios necesitan lo mismo. Elegimos la herramienta adecuada y la hacemos trabajar con un propósito claro.</p>
+    </div>
+    <ul className="solution-grid" ref={gridRef}>{solutions.map((solution, index) => <li className="reveal-item" style={{ '--i': index }} key={solution.number}>
+      <article className="solution-card">
+        <div className="solution-card-top"><span>{solution.number} / 03</span><SolutionIcon type={solution.icon} /></div>
+        <div><h3>{solution.title}</h3><p>{solution.description}</p></div>
+        <div className="solution-card-bottom"><span>{solution.detail}</span><ArrowIcon diagonal /></div>
+      </article>
+    </li>)}</ul>
   </div></section>
 }
 
 function Approach() {
+  const introRef = useInView()
+  const stepsRef = useInView({ threshold: 0.1 })
   return <section id="enfoque" className="approach section-pad"><div className="container approach-layout">
-    <div className="approach-intro"><div className="section-kicker"><span>02 / NUESTRO ENFOQUE</span></div><h2>Un proceso claro.<br /><em>Una solución útil.</em></h2><p>Definimos qué necesita tu negocio antes de elegir tecnología. Así cada decisión tiene un objetivo y cada entrega, un resultado concreto.</p></div>
-    <div className="steps">{steps.map((step) => <div className="step" key={step.number}><span className="step-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.description}</p></div><span className="step-plus" aria-hidden="true">+</span></div>)}</div>
+    <div className="approach-intro" ref={introRef}><div className="section-kicker reveal-item"><span>02 / NUESTRO ENFOQUE</span></div><h2><span className="reveal-mask"><span>Un proceso claro.</span></span><span className="reveal-mask" style={{ '--i': 1 }}><span><em>Una solución útil.</em></span></span></h2><p className="reveal-item" style={{ '--i': 2 }}>Definimos qué necesita tu negocio antes de elegir tecnología. Así cada decisión tiene un objetivo y cada entrega, un resultado concreto.</p></div>
+    <div className="steps" ref={stepsRef}>{steps.map((step, index) => <div className="step reveal-item" style={{ '--i': index }} key={step.number}><span className="step-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.description}</p></div><span className="step-plus" aria-hidden="true">+</span></div>)}</div>
   </div></section>
 }
 
@@ -138,6 +147,7 @@ function Cases() {
 
 function Contact() {
   const [status, setStatus] = useState('idle')
+  const layoutRef = useInView({ threshold: 0.1 })
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -175,9 +185,9 @@ function Contact() {
   }
 
   return <section id="contacto" className="contact section-pad"><div className="container contact-box">
-    <div className="contact-layout">
-      <div className="contact-content"><div className="section-kicker light"><span>04 / EL PRÓXIMO MOVIMIENTO</span></div><h2>Tu próximo paso<br />empieza acá<span>.</span></h2><p>Contanos qué querés construir o qué proceso necesitás mejorar. Pensemos juntos la forma más inteligente de hacerlo.</p></div>
-      <form className="contact-form" onSubmit={handleSubmit}>
+    <div className="contact-layout" ref={layoutRef}>
+      <div className="contact-content"><div className="section-kicker light reveal-item"><span>04 / EL PRÓXIMO MOVIMIENTO</span></div><h2 className="reveal-item" style={{ '--i': 1 }}>Tu próximo paso<br />empieza acá<span>.</span></h2><p className="reveal-item" style={{ '--i': 2 }}>Contanos qué querés construir o qué proceso necesitás mejorar. Pensemos juntos la forma más inteligente de hacerlo.</p></div>
+      <form className="contact-form reveal-item" style={{ '--i': 3 }} onSubmit={handleSubmit}>
         <div className="contact-form-heading"><span>CONTANOS TU IDEA</span><span>01 / 01</span></div>
         <div className="contact-fields">
           <label><span className="field-label">Tu nombre <b>*</b></span><input name="nombre" type="text" autoComplete="name" maxLength="100" placeholder="¿Cómo te llamás?" required /></label>

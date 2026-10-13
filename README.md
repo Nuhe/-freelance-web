@@ -13,9 +13,11 @@ Sitio comercial de FoxOps para presentar sus servicios de landing pages, e-comme
 
 El zorro del hero tiene una franja de escaneo SVG con puntos y luz, y nodos que se mueven suavemente. Estas animaciones respetan la preferencia de movimiento reducido.
 
+Soluciones, Enfoque, Casos y Contacto usan la misma animación de entrada al hacer scroll (`src/hooks/useInView.js` más las clases `reveal-item` y `reveal-mask`, sin dependencias). El hero no se anima para que el primer render sea inmediato. Sin JavaScript o con movimiento reducido, el contenido se muestra sin animación.
+
 ## Sección Casos
 
-La sección `#casos` (03 / Casos) muestra proyectos reales con captura, etiquetas, descripción y enlace externo. Las tarjetas aparecen con una animación de entrada al hacer scroll (`src/hooks/useInView.js`, sin dependencias). Sin JavaScript o con movimiento reducido, el contenido se muestra sin animación.
+La sección `#casos` (03 / Casos) muestra proyectos reales con captura, etiquetas, descripción y enlace externo.
 
 Para sumar un caso:
 

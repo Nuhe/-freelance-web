@@ -94,8 +94,9 @@ h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
 h2 em { font-style: normal; color: #ef7a37; }
 .section-head > p { max-width: 360px; color: #a99d94; font-size: 15px; line-height: 1.75; margin: 0 0 4px; }
 .solutions { background: #100e0d; }
-.solution-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-.solution-card { min-height: 390px; display: flex; flex-direction: column; justify-content: space-between; padding: 30px; border: 1px solid #332720; background: linear-gradient(155deg, #211813, #15110f 58%, #1c120e); transition: border-color .25s, transform .25s, background .25s; }
+.solution-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 0; padding: 0; list-style: none; }
+.solution-grid > li { display: flex; min-width: 0; }
+.solution-card { flex: 1; min-width: 0; min-height: 390px; display: flex; flex-direction: column; justify-content: space-between; padding: 30px; border: 1px solid #332720; background: linear-gradient(155deg, #211813, #15110f 58%, #1c120e); transition: border-color .25s, transform .25s, background .25s; }
 .solution-card:hover { transform: translateY(-5px); border-color: #a74b24; background: linear-gradient(155deg, #2c1b13, #17110e 58%, #24130c); }
 .solution-card-top { display: flex; justify-content: space-between; align-items: flex-start; color: #b1846b; font-size: 11px; }
 .solution-card-top svg { width: 74px; height: 74px; color: #ed7940; }
@@ -137,7 +138,8 @@ h2 em { font-style: normal; color: #ef7a37; }
 .reveal-mask { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
 .reveal-mask > span { display: block; }
 
-/* Scroll reveal: the hidden state needs the JS-ready class and motion permission. */
+/* Scroll reveal (useInView): shared by every section. The hidden state needs the JS-ready class and motion permission.
+   Put .reveal-item on a wrapper when the element animates `transform` on hover, so both transitions coexist. */
 @media (prefers-reduced-motion: no-preference) {
   .reveal-ready .reveal-item { opacity: 0; translate: 0 28px; transition: opacity .7s cubic-bezier(.2,.7,.2,1), translate .7s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 120ms); }
   .reveal-ready .reveal-mask > span { translate: 0 105%; transition: translate .9s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 110ms); }
