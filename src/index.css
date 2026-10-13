@@ -135,7 +135,7 @@ h2 em { font-style: normal; color: #ef7a37; }
 .step-plus { color: #956346; font: 300 23px/1 'Space Grotesk', sans-serif; }
 
 .cases { background: #100e0d; }
-.case-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; margin: 0; padding: 0; list-style: none; }
+.case-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; align-items: start; margin: 0; padding: 0; list-style: none; }
 .case-grid > li { display: flex; min-width: 0; }
 .case-card { position: relative; flex: 1; display: flex; flex-direction: column; min-width: 0; border: 1px solid #332720; background: linear-gradient(155deg, #211813, #15110f 58%, #1c120e); transition: border-color .25s, transform .25s, background .25s; }
 .case-card:hover, .case-card:focus-within { transform: translateY(-5px); border-color: #a74b24; background: linear-gradient(155deg, #2c1b13, #17110e 58%, #24130c); }

@@ -49,3 +49,6 @@ Only the Casos section has reveal motion, and the case cards carry a one-line de
 
 ## Next step
 The parent reviews and pushes (push: pending parent).
+
+## Follow-up
+- [x] F1 — Opening one case detail stretched sibling cards in the same grid row. Fixed with `align-items: start` on `.case-grid` (route: inline, one mechanical CSS line). Lint passes, build passes, headless check 52/52, and the 1440 details-open screenshot shows each card keeping its own height.
