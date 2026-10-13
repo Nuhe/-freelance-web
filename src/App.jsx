@@ -18,6 +18,8 @@ const steps = [
   { number: '03', title: 'Ejecutamos', description: 'Diseñamos, desarrollamos y ponemos la solución a trabajar.' },
 ]
 
+const tools = ['React', 'Vite', 'Next.js', 'Vercel', 'n8n', 'JavaScript', 'HTML', 'CSS', 'GitHub Pages', 'Jenkins']
+
 const cases = [
   {
     slug: 'plan-paracaidas',
@@ -126,6 +128,17 @@ function Solutions() {
       </article>
     </li>)}</ul>
   </div></section>
+}
+
+function TechStrip() {
+  const list = (hidden) => <ul className="tech-list" aria-hidden={hidden || undefined}>{tools.map((tool) => <li key={tool}>{tool}</li>)}</ul>
+  return <section className="tech-strip" aria-labelledby="tech-strip-label">
+    <div className="container"><p className="tech-strip-label" id="tech-strip-label">Herramientas con las que trabajamos</p></div>
+    {/* Focusable so keyboard users can pause the motion; the duplicate list only exists for the seamless loop. */}
+    <div className="tech-marquee" tabIndex="0" role="region" aria-labelledby="tech-strip-label">
+      <div className="tech-track">{list(false)}{list(true)}</div>
+    </div>
+  </section>
 }
 
 function Approach() {
@@ -242,5 +255,5 @@ function Footer() {
 }
 
 export default function App() {
-  return <><Header /><main><Hero /><Solutions /><Approach /><Cases /><Contact /></main><Footer /></>
+  return <><Header /><main><Hero /><Solutions /><TechStrip /><Approach /><Cases /><Contact /></main><Footer /></>
 }

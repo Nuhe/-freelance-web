@@ -105,6 +105,26 @@ h2 em { font-style: normal; color: #ef7a37; }
 .solution-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; border-top: 1px solid #433028; padding-top: 20px; color: #ca9a7c; font-size: 9px; font-weight: 600; letter-spacing: .06em; }
 .solution-card-bottom svg { color: #f58a4a; flex: none; }
 
+.tech-strip { padding: 44px 0 48px; border-block: 1px solid #241a15; background: #0b0a09; }
+.tech-strip-label { margin: 0 0 22px; color: #8e8078; font: 600 10px/1.4 'Space Grotesk', sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+.tech-marquee { overflow: hidden; }
+.tech-marquee:focus-visible { outline-offset: -2px; }
+.tech-track { display: flex; flex-wrap: wrap; justify-content: center; padding-inline: 16px; }
+.tech-list { display: flex; flex-wrap: wrap; justify-content: center; row-gap: 12px; margin: 0; padding: 0; list-style: none; }
+.tech-list[aria-hidden] { display: none; }
+.tech-list li { display: flex; align-items: center; color: #d0c5be; font: 600 clamp(18px, 2vw, 26px)/1.2 'Space Grotesk', sans-serif; letter-spacing: -.02em; text-transform: uppercase; white-space: nowrap; }
+.tech-list li::after { content: '/'; margin-inline: clamp(16px, 2.4vw, 34px); color: #f3732d; font-weight: 400; }
+.tech-list li:last-child::after { content: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .tech-marquee { mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .tech-track { flex-wrap: nowrap; width: max-content; padding: 0; animation: tech-marquee 38s linear infinite; }
+  .tech-list { flex-wrap: nowrap; }
+  .tech-list[aria-hidden] { display: flex; }
+  .tech-list li:last-child::after { content: '/'; }
+  .tech-marquee:hover .tech-track, .tech-marquee:focus-within .tech-track { animation-play-state: paused; }
+}
+@keyframes tech-marquee { to { transform: translateX(-50%); } }
+
 .approach { background: radial-gradient(ellipse 42% 70% at 7% 60%, rgba(129,48,16,.12), transparent 75%), #0b0a09; }
 .approach-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(55px, 9vw, 150px); }
 .approach-intro > p { color: #aa9c93; line-height: 1.8; font-size: 15px; max-width: 510px; margin-top: 29px; }

@@ -25,6 +25,10 @@ Para sumar un caso:
 2. Agregá un objeto al arreglo `cases` en `src/App.jsx` con `slug`, `title`, `description`, `tags`, `url`, `image` y `alt`. Usá `badge` y `note` para aclarar cuando el proyecto es un concepto y no el sitio oficial.
 3. Completá `detail` con `challenge` (Desafío), `solution` (Solución), `result` (Resultado) y `stack` (arreglo de tecnologías). Se muestra en un `<details>` nativo “Ver detalle” que funciona con teclado y sin JavaScript. Escribí solo lo que se ve en el sitio: sin métricas, testimonios ni resultados inventados.
 
+## Franja de herramientas
+
+Entre Soluciones y Enfoque, una franja en CSS puro muestra las herramientas con las que trabaja FoxOps (arreglo `tools` en `src/App.jsx`). La lista se duplica con `aria-hidden="true"` para que el loop sea continuo, se pausa con hover o foco y, con movimiento reducido, se muestra como una lista estática.
+
 ## Desarrollo
 
 ```bash
