@@ -20,6 +20,7 @@ El hero usa tres voces tipográficas: una línea de datos en Space Mono, el titu
 - Entrada: el zorro asoma detrás de una ola naranja (`src/components/FoxWave.jsx`), primero las orejas y después la cabeza, en 1,1 s y solo con CSS. El titular se ve desde el primer render.
 - Reposo: el zorro parpadea, mueve una oreja y balancea la cola. Las pupilas siguen el puntero (`src/hooks/useFoxLife.js`) solo con mouse y sin movimiento reducido. Las animaciones se pausan cuando el hero sale de pantalla.
 - Reacciones: al pasar el puntero o el foco por “Hablemos de tu proyecto” o por el zorro, aparece el globo “¿Hablamos?” y el zorro levanta las orejas. El zorro es un botón (“Saludar al zorro”) y salta al hacer clic.
+- Cameos: el zorro asoma sobre el título de Casos y duerme sobre el borde del footer (`src/components/FoxSleeping.jsx`).
 - Con movimiento reducido el zorro queda quieto y visible, sin entrada, sin bucle y sin seguimiento. El globo aparece sin animación.
 
 ## Sección Casos
