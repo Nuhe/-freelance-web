@@ -11,9 +11,14 @@ Sitio comercial de FoxOps para presentar sus servicios de landing pages, e-comme
 - Vite 8
 - CSS
 
-El zorro del hero tiene una franja de escaneo SVG con puntos y luz, y nodos que se mueven suavemente. Estas animaciones respetan la preferencia de movimiento reducido.
+Soluciones, Enfoque, Casos y Contacto usan la misma animación de entrada al hacer scroll (`src/hooks/useInView.js` más las clases `reveal-item` y `reveal-mask`, sin dependencias). El hero tiene su propia entrada en CSS, descrita abajo. Con movimiento reducido, o si el navegador no soporta `IntersectionObserver`, el contenido se muestra sin animación. El sitio se renderiza con React, así que necesita JavaScript para mostrarse.
 
-Soluciones, Enfoque, Casos y Contacto usan la misma animación de entrada al hacer scroll (`src/hooks/useInView.js` más las clases `reveal-item` y `reveal-mask`, sin dependencias). El hero no se anima para que el primer render sea inmediato. Con movimiento reducido, o si el navegador no soporta `IntersectionObserver`, el contenido se muestra sin animación. El sitio se renderiza con React, así que necesita JavaScript para mostrarse.
+## Hero y el zorro
+
+El hero usa tres voces tipográficas: una línea de datos en Space Mono, el titular “Webs con colmillo.” en Space Grotesk y el aparte “astutas para vender” en Caveat Brush. El protagonista es un zorro dibujado en SVG (`src/components/FoxCharacter.jsx`). Cada trazo es una forma rellena de grosor variable, el sombreado es un granulado SVG (`feTurbulence`) y una distorsión leve le da el temblor de la tinta.
+
+- Entrada: el zorro asoma detrás de una ola naranja (`src/components/FoxWave.jsx`), primero las orejas y después la cabeza, en 1,1 s y solo con CSS. El titular se ve desde el primer render.
+- Con movimiento reducido el zorro queda quieto y visible, sin animación de entrada.
 
 ## Sección Casos
 

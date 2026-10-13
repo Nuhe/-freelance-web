@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import FoxCharacter from './components/FoxCharacter'
 import FoxMark from './components/FoxMark'
-import FoxNetwork from './components/FoxNetwork'
+import FoxWave from './components/FoxWave'
 import useInView from './hooks/useInView'
 
 const email = 'contacto@foxops.digital'
@@ -97,18 +98,21 @@ function Header() {
 
 function Hero() {
   return <section id="inicio" className="hero">
-    <div className="hero-glow" aria-hidden="true" />
     <div className="container hero-layout">
       <div className="hero-copy">
-        <div className="eyebrow"><span className="eyebrow-line" /> DISEÑO · DESARROLLO · OPERACIÓN</div>
-        <h1>Soluciones<br /><span>digitales</span><br />para avanzar<span className="orange-dot">.</span></h1>
-        <p>Creamos landing pages, tiendas online y automatizaciones que ayudan a vender, conectar y trabajar mejor.</p>
+        <p className="hero-facts">Landing · E-commerce · Automatización</p>
+        <h1 className="hero-title"><span className="hero-line"><span>Webs con</span></span><span className="hero-line" style={{ '--i': 1 }}><span>colmillo<span className="orange-dot">.</span></span></span></h1>
+        <p className="hero-script"><span>astutas para vender</span></p>
+        <p className="hero-lede">Landing pages, tiendas online y automatizaciones para negocios que quieren vender más y perseguir menos.</p>
         <div className="hero-actions"><a className="button button-primary" href="#contacto">Hablemos de tu proyecto <ArrowIcon diagonal /></a><a className="text-link" href="#soluciones">Explorar soluciones <ArrowIcon /></a></div>
-        <div className="hero-caption"><span className="caption-cross">✳</span> Estrategia para pensar mejor. Tecnología para hacer que pase.</div>
       </div>
-      <div className="hero-art"><div className="art-orbit art-orbit-one" aria-hidden="true" /><div className="art-orbit art-orbit-two" aria-hidden="true" /><div className="art-label art-label-top">FOX / 01 <span>DISEÑO DIGITAL</span></div><FoxNetwork /><div className="art-label art-label-bottom"><span>ESTRATEGIA</span><span className="art-label-line" /><span>EJECUCIÓN</span></div></div>
+      <div className="fox-stage">
+        <div className="fox-frame">
+          <span className="fox-rise"><FoxCharacter /></span>
+          <FoxWave />
+        </div>
+      </div>
     </div>
-    <div className="container hero-bottom"><span>FOXOPS / OPERACIONES DIGITALES</span><span>DESLIZÁ PARA EXPLORAR <span aria-hidden="true">↓</span></span></div>
   </section>
 }
 
