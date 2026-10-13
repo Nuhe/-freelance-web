@@ -197,6 +197,50 @@ h2 em { font-style: normal; color: #ef7a37; }
   100% { transform: none; }
 }
 
+/* Fox life: idle loop, pointer gaze, perk on CTA/fox hover or focus, hop on click.
+   Perk transforms sit on outer groups; idle loops animate inner groups, so both compose. */
+.fox-hop { display: block; transform-origin: 50% 100%; }
+.fox-button { display: block; width: 100%; margin: 0; padding: 0; border: 0; border-radius: 32px 32px 0 0; background: none; color: inherit; cursor: pointer; }
+.fox-button:focus-visible { outline: 2px solid #ffa468; outline-offset: -2px; }
+.fox-bubble { position: absolute; z-index: 3; top: 15%; left: -7%; width: clamp(150px, 14vw, 206px); margin: 0; pointer-events: none; opacity: 0; transform: scale(.6) rotate(-10deg); transform-origin: 26% 95%; }
+.fox-bubble svg { display: block; width: 100%; height: auto; }
+.fox-bubble span { position: absolute; inset: 0 0 24% 0; display: grid; place-items: center; color: #140a06; font: 400 clamp(23px, 2.1vw, 30px)/1 'Caveat Brush', cursive; transform: rotate(-4deg); }
+.fox-stage.is-excited .fox-bubble { opacity: 1; transform: none; }
+.fox-eye-near { --blink: 64px; }
+.fox-eye-far { --blink: 46px; }
+.fox-stage.is-excited .fox-ear-left { transform: translateY(-6px) rotate(5deg); }
+.fox-stage.is-excited .fox-ear-right { transform: translateY(-8px) rotate(-5deg); }
+.fox-stage.is-excited .fox-lid { transform: translateY(-14px); }
+.fox-stage.is-excited .fox-brows { transform: translateY(-7px); }
+.fox-stage.is-excited .fox-head { transform: rotate(-2.5deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .fox-pupil { transition: transform .22s cubic-bezier(.2,.7,.2,1); }
+  .fox-ear, .fox-lid, .fox-brows, .fox-head { transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
+  .fox-bubble { transition: opacity .18s ease-out, transform .45s cubic-bezier(.34,1.56,.64,1); }
+  /* Blink with an irregular rhythm (single, then a double blink), ear flicks on co-prime periods. */
+  .fox-lid-blink { animation: fox-blink 7.4s 2.4s infinite; }
+  .fox-ear-right .fox-ear-flick { animation: fox-ear-flick 9.3s 3.2s infinite, fox-ear-twitch .34s .36s; }
+  .fox-ear-left .fox-ear-flick { animation: fox-ear-flick-left 12.6s 6.1s infinite, fox-ear-twitch-left .34s .42s; }
+  .fox-stage .fox-tail { animation: fox-tail-sway 5.6s ease-in-out infinite alternate; }
+  .fox-stage.is-hopping .fox-hop { animation: fox-hop .62s cubic-bezier(.3,.7,.4,1); }
+  .fox-stage[data-offscreen] * { animation-play-state: paused; }
+}
+@keyframes fox-blink {
+  0%, 36%, 40%, 86%, 88.8%, 91.6%, 100% { transform: none; }
+  38%, 87.4%, 90.2% { transform: translateY(var(--blink)); }
+}
+@keyframes fox-ear-flick { 0%, 84%, 92%, 100% { transform: none; } 86% { transform: rotate(-10deg); } 88% { transform: rotate(5deg); } 90% { transform: rotate(-3deg); } }
+@keyframes fox-ear-flick-left { 0%, 90%, 96%, 100% { transform: none; } 92% { transform: rotate(8deg); } 94% { transform: rotate(-3deg); } }
+@keyframes fox-ear-twitch { 50% { transform: rotate(-9deg); } }
+@keyframes fox-ear-twitch-left { 50% { transform: rotate(7deg); } }
+@keyframes fox-tail-sway { from { transform: rotate(-2.5deg); } to { transform: rotate(3deg); } }
+@keyframes fox-hop {
+  0%, 100% { transform: none; }
+  14% { transform: scale(1.06, .9); }
+  40% { transform: translateY(-11%) scale(.95, 1.06); }
+  64% { transform: translateY(0) scale(1.06, .92); }
+  82% { transform: scale(.98, 1.02); }
+}
 
 
 .contact { background: #0b0a09; padding-top: 45px; padding-bottom: 90px; }
@@ -268,6 +312,7 @@ h2 em { font-style: normal; color: #ef7a37; }
   .hero-layout { min-height: auto; display: flex; flex-direction: column; align-items: stretch; gap: 0; padding-top: 72px; }
   .fox-stage { order: -1; align-self: center; width: min(74%, 340px); margin-top: 18px; }
   .fox-wave { left: calc(50% - 50vw); width: 100vw; }
+  .fox-bubble { top: 6%; left: -18%; width: 132px; }
   .hero-copy { padding: 34px 0 64px; }
   .hero-title { font-size: clamp(54px, 14vw, 96px); }
   .hero-script { margin-left: 24%; font-size: clamp(32px, 8.6vw, 52px); }
