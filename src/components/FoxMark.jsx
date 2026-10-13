@@ -1,45 +1,14 @@
-import { useId } from 'react'
-
-// Logo mark: a simplified head of the FoxCharacter mascot, 3/4 view facing left,
-// with the avatar's sly half-lid eyes. Flat fills only so it stays legible at 30-36px.
-const C = { orange: '#f3732d', cream: '#f5f0eb', ink: '#140a06', dark: '#2a120a' }
-const EYE_NEAR = { cx: 38.4, cy: 31.4, rx: 7, ry: 6.4 }
-const EYE_FAR = { cx: 23.8, cy: 34.2, rx: 3.6, ry: 4.6 }
-const RUFF = 'L62 35L58 38L62 42L57 43L59 47.5L53.5 47.5C50 52 43 54 36 53C28 52 20 48 14 46'
+// Logo mark: a kitsune mask in a vermilion hanko seal. Cream face, sumi ears and eye slits,
+// one orange flame mark. Flat shapes with a hand-cut seal edge so it stays legible at 16-36px.
+const C = { seal: '#c8401e', cream: '#f5f0eb', ink: '#140d0a', orange: '#f3732d' }
 
 export default function FoxMark({ className = '' }) {
-  const uid = useId().replace(/[^\w-]/g, '')
-  const near = `foxmark${uid}-near`
-  const far = `foxmark${uid}-far`
-  return <svg className={className} viewBox="0 -8 64 64" fill="none" aria-hidden="true" focusable="false">
-    <defs>
-      <clipPath id={near}><ellipse {...EYE_NEAR} /></clipPath>
-      <clipPath id={far}><ellipse {...EYE_FAR} /></clipPath>
-    </defs>
-    <path d="M22 25C18 16 15 6 15-5C22 0 28 8 31 16Z" fill={C.orange} />
-    <path d="M23.5 21C20.5 14 18.5 6 18.5 0C23.5 4 27 9 29 15Z" fill={C.dark} />
-    <path d="M36 15C40 6 46-2 54-7C56 3 55 14 51 24Z" fill={C.orange} />
-    <path d="M39.5 14.5C43 7 48 1 52-3C53.5 5 52.5 13 49.5 20C46.5 17 43 15 39.5 14.5Z" fill={C.dark} />
-    <path d={`M5 36C10 32 15 29 19 26C24 19 31 15 38 14C46 13 53 16 56 22C58 26 58 30 58 33${RUFF}C10 44.5 6 42 5 40Z`} fill={C.orange} />
-    <path d={`M7 41C14 40.4 20 40 26 40.2C33 40.4 39.5 39 44.5 35.5C48.5 32.8 52 31.6 58 32.4${RUFF}C10 44.5 7 43 7 41Z`} fill={C.cream} />
-    <ellipse {...EYE_NEAR} fill={C.cream} />
-    <g clipPath={`url(#${near})`}>
-      <circle cx="40.8" cy="34" r="3.3" fill={C.ink} />
-      <path d="M30 22H48V31.4C43 30.2 36 30.2 30 31.8Z" fill={C.orange} />
-    </g>
-    <path d="M30.8 32.6C35 30.2 42 29.8 46 31.8L45.8 29C41 27.2 34.6 28 30.8 32.6Z" fill={C.ink} />
-    <ellipse {...EYE_NEAR} stroke={C.ink} strokeWidth="1.7" />
-    <ellipse {...EYE_FAR} fill={C.cream} />
-    <g clipPath={`url(#${far})`}>
-      <circle cx="25" cy="36.4" r="2.2" fill={C.ink} />
-      <path d="M19 28H30V34.2C27 33.4 23.5 33.4 19 34.6Z" fill={C.orange} />
-    </g>
-    <path d="M20 35.2C22.2 33.6 25.6 33.4 27.8 34.4L27.6 32.6C25.2 31.8 22.2 32.4 20 35.2Z" fill={C.ink} />
-    <ellipse {...EYE_FAR} stroke={C.ink} strokeWidth="1.4" />
-    <path d="M30 23.6C34.4 19.6 41.6 19 47.4 22.6L46.2 25C41 22.6 35.6 22.8 31.4 25.4Z" fill={C.ink} />
-    <path d="M2.8 37.8C2.8 35.2 5.8 34.2 8.4 34.8C10.6 35.4 10.8 38.6 9.1 40.1C7.1 41.6 2.8 40.9 2.8 37.8Z" fill={C.ink} />
-    <path d="M4.8 36.8C5.6 36 7 35.8 7.8 36.2C7 36.9 5.8 37.2 4.8 36.8Z" fill={C.cream} />
-    <path d="M9 41.2C14 43.4 20 44.6 25.4 44C27.8 43.6 29 42.2 29.4 40.6L28 40.4C27 41.8 25.9 42.4 24.6 42.5C19.5 43 14 42.2 9 41.2Z" fill={C.ink} />
-    <path d="M18.2 43.6L20 48.2L22.4 43.7Z" fill={C.cream} />
+  return <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
+    <path d="M4 3.8L8.7 3.0L13.4 3.6L18.1 3.2L22.8 3.0L27.5 3.6L32.2 3.9L37 3.5L41.7 2.7L46.4 3.5L51.1 3.0L55.8 4.5L61 4.0L60.2 8.7L60 13.4L60.6 18.1L60.5 22.8L60.1 27.5L59.9 32.2L59.9 37.0L60.1 41.7L61.1 46.4L60 51.1L60.2 55.8L60 59.8L55.3 60.8L50.6 60.6L45.9 60.2L41.2 60.1L36.5 60.6L31.7 61.0L27 60.5L22.3 59.8L17.6 62.0L12.9 59.3L8.2 60.3L3 60.0L2.1 55.3L3.9 50.6L3.1 45.9L3.7 41.2L3.7 36.5L3.7 31.7L4.4 27.0L3.3 22.3L3.6 17.6L3.4 12.9L2.3 8.2Z" fill={C.seal} />
+    <path d="M13 7.5C17 11 21.5 15.5 25 19.2Q32 16.6 39 19.2C42.5 15.5 47 11 51 7.5C53.6 13.5 54.6 20.5 53.8 27.5C53.4 31.5 52.2 35 50 38.6C45.6 45.6 39.4 51.6 32 57C24.6 51.6 18.4 45.6 14 38.6C11.8 35 10.6 31.5 10.2 27.5C9.4 20.5 10.4 13.5 13 7.5Z" fill={C.cream} />
+    <path d="M15.4 12.6C18.4 15.4 21 18 22.8 20.4C20.2 21.6 18.2 23.4 16.8 25.6C15.2 21.4 14.8 16.8 15.4 12.6ZM48.6 12.6C45.6 15.4 43 18 41.2 20.4C43.8 21.6 45.8 23.4 47.2 25.6C48.8 21.4 49.2 16.8 48.6 12.6Z" fill={C.ink} />
+    <path d="M29.2 33.8C25.2 33.6 20.6 31.6 16.8 27.2C21.6 28.4 26 30.4 29.2 33.8ZM34.8 33.8C38.8 33.6 43.4 31.6 47.2 27.2C42.4 28.4 38 30.4 34.8 33.8Z" fill={C.ink} />
+    <path d="M32 20.6C34.4 23.6 35 27 32 31.4C29 27 29.6 23.6 32 20.6Z" fill={C.orange} />
+    <path d="M28.6 50.4Q32 48.6 35.4 50.4Q33.8 53.6 32 54.6Q30.2 53.6 28.6 50.4Z" fill={C.ink} />
   </svg>
 }

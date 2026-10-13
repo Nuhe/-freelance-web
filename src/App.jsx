@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
-import FoxCharacter from './components/FoxCharacter'
 import FoxInk from './components/FoxInk'
+import FoxInkHead from './components/FoxInkHead'
 import FoxMark from './components/FoxMark'
-import FoxSleeping from './components/FoxSleeping'
+import FoxResting from './components/FoxResting'
 import useFoxLife from './hooks/useFoxLife'
 import useInView from './hooks/useInView'
 
@@ -179,7 +179,7 @@ function Cases() {
   const gridRef = useInView({ threshold: 0.08 })
   return <section id="casos" className="cases section-pad"><div className="container">
     <div className="section-head cases-head" ref={headRef}>
-      <div className="fox-peek" aria-hidden="true"><FoxCharacter part="head" /></div>
+      <FoxInkHead className="fox-vignette reveal-item" />
       <div><div className="section-kicker reveal-item"><span>03 / CASOS</span></div><h2><span className="reveal-mask"><span>Proyectos que ya</span></span><span className="reveal-mask" style={{ '--i': 1 }}><span><em>están trabajando.</em></span></span></h2></div>
       <p className="reveal-item" style={{ '--i': 2 }}>Algunos sitios que diseñamos y desarrollamos: una landing para un servicio profesional, una tienda online y un concepto editorial.</p>
     </div>
@@ -265,7 +265,7 @@ function Contact() {
 
 function Footer() {
   return <footer className="footer"><div className="container footer-inner">
-    <div className="footer-sleeper" aria-hidden="true"><FoxSleeping /><span className="fox-z">z</span><span className="fox-z">z</span></div>
+    <FoxResting className="footer-rest" />
     <a className="brand" href="#inicio" aria-label="FoxOps, ir al inicio"><FoxMark /><span>FOX<span>OPS</span></span></a><p>Landing pages · E-commerce · Automatizaciones</p><span>© {new Date().getFullYear()} FoxOps</span></div></footer>
 }
 

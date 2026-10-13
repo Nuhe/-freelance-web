@@ -201,38 +201,17 @@ h2 em { font-style: normal; color: #ef7a37; }
 @keyframes ink-tail { from { transform: rotate(-1deg); } to { transform: rotate(1.2deg); } }
 @keyframes ink-ember { 0% { opacity: 0; transform: translate(0, 0); } 12% { opacity: .8; } 80% { opacity: .5; } 100% { opacity: 0; transform: translate(-40px, -180px); } }
 
-/* Casos peek and footer sleeper (cartoon cameos, replaced by ink cameos next). */
-/* SVG parts rotate around their own anatomy: ear bases, tail root, neck. */
-.fox-ear, .fox-ear-flick, .fox-tail, .fox-head, .fox-lid, .fox-brows { transform-box: fill-box; }
-.fox-ear-left, .fox-ear-left .fox-ear-flick { transform-origin: 80% 96%; }
-.fox-ear-right, .fox-ear-right .fox-ear-flick { transform-origin: 14% 96%; }
-.fox-tail { transform-origin: 24% 100%; }
-.fox-head { transform-origin: 55% 96%; }
-/* Resting gaze looks toward the copy; useFoxLife overrides --look-x/--look-y with the pointer. */
-.fox-pupil-near { transform: translate(calc(var(--look-x, -.6) * 20px), calc(var(--look-y, .12) * 22px)); }
-.fox-pupil-far { transform: translate(calc(var(--look-x, -.6) * 8px), calc(var(--look-y, .12) * 15px)); }
-.fox-character { display: block; width: 100%; height: auto; overflow: visible; }
-.fox-ear, .fox-ear-flick, .fox-tail, .fox-head, .fox-lid, .fox-brows { transform-box: fill-box; }
+/* Recurring fox: an ink head in a sun seal by the Casos heading, a resting fox on the footer edge. */
 .cases-head { position: relative; }
-.fox-peek { --look-x: -.7; --look-y: .55; position: absolute; right: 2%; bottom: calc(100% + 16px); width: clamp(110px, 10vw, 146px); aspect-ratio: 400 / 290; overflow: hidden; pointer-events: none; }
-.fox-peek::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; border-radius: 4px; background: #f3732d; }
-.fox-peek .fox-character { transform: translateY(8%); }
+.fox-vignette { position: absolute; right: 2%; bottom: calc(100% + 18px); width: clamp(96px, 9vw, 128px); pointer-events: none; }
+.fox-vignette svg { display: block; width: 100%; height: auto; }
 .footer { position: relative; }
-.footer-sleeper { position: absolute; right: max(16px, 7%); bottom: calc(100% - 4px); width: clamp(104px, 10vw, 140px); pointer-events: none; }
-.fox-sleeping { display: block; width: 100%; height: auto; overflow: visible; }
-.fox-sleeping-breath { transform-box: fill-box; transform-origin: 50% 100%; }
-.fox-z { position: absolute; top: 4px; left: 6%; color: #e8b08c; font: 400 20px/1 'Caveat Brush', cursive; }
-.fox-z + .fox-z { top: -10px; left: 0; font-size: 15px; }
+.footer-rest { position: absolute; right: max(16px, 7%); bottom: calc(100% - 12px); width: clamp(130px, 12vw, 176px); pointer-events: none; }
+.footer-rest svg { display: block; width: 100%; height: auto; overflow: visible; }
 @media (prefers-reduced-motion: no-preference) {
-  .reveal-ready .fox-peek .fox-character { transform: translateY(100%); transition: transform .8s cubic-bezier(.34,1.56,.64,1) .35s; }
-  .reveal-ready.is-inview .fox-peek .fox-character { transform: translateY(8%); }
-  .fox-peek .fox-lid-blink { animation-delay: 4.1s; }
-  .fox-sleeping-breath { animation: fox-breathe 3.8s ease-in-out infinite alternate; }
-  .fox-z { animation: fox-z 3.8s ease-out infinite both; }
-  .fox-z + .fox-z { animation-delay: 1.9s; }
+  .fox-rest-breath { transform-box: fill-box; transform-origin: 50% 100%; animation: fox-breathe 4.6s ease-in-out infinite alternate; }
 }
-@keyframes fox-breathe { to { transform: scale(1.02, 1.06); } }
-@keyframes fox-z { 0% { opacity: 0; transform: translate(0, 6px) rotate(-8deg); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(-10px, -16px) rotate(-18deg); } }
+@keyframes fox-breathe { to { transform: scale(1.012, 1.03); } }
 
 .contact { background: #0b0a09; padding-top: 45px; padding-bottom: 90px; }
 .contact-box { position: relative; overflow: hidden; min-height: 515px; padding: 76px 76px 30px; background: radial-gradient(ellipse 70% 95% at 90% 25%, #ff9a50 0%, #df541a 54%, transparent 98%), linear-gradient(120deg, #f58136, #d94b18); color: #1a0d07; }
