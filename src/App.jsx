@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import FoxCharacter from './components/FoxCharacter'
+import FoxInk from './components/FoxInk'
 import FoxMark from './components/FoxMark'
 import FoxSleeping from './components/FoxSleeping'
-import FoxWave from './components/FoxWave'
 import useFoxLife from './hooks/useFoxLife'
 import useInView from './hooks/useInView'
 
@@ -98,51 +98,28 @@ function Header() {
   </div></header>
 }
 
-function SpeechBubble() {
-  return <p className="fox-bubble" aria-hidden="true">
-    <svg viewBox="0 0 220 112" fill="none" focusable="false"><path d="M22 14C64 2 150 0 192 14C216 22 220 52 202 66C182 80 124 84 84 80L56 106L62 78C32 74 8 64 6 44C4 28 10 18 22 14Z" fill="#f5f0eb" stroke="#140a06" strokeWidth="3.5" strokeLinejoin="round" /><path d="M30 24C70 14 138 12 176 22" stroke="#d8c6b5" strokeWidth="3" strokeLinecap="round" /></svg>
-    <span>¿Hablamos?</span>
-  </p>
+// A vermilion dry-brush stroke laid under the headline, painted left to right on load.
+function BrushUnderline() {
+  return <svg className="hero-brush" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M7 30q1 0 5 0q4 0 9 1q4 0 8 1q4 1 8 1q4-1 8-1q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8-1q4 0 8 0q4 0 8-1q4-1 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q5 0 9-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q4-1 8 0q4 0 8 0q4-1 8-1q5 0 9 0q4 0 8 0q4-1 8 0q4 0 8 0q4 0 8 0q4-1 8 0q4 0 4-8q0-7-4-8q-4 0-8 0q-4 1-8 1q-4 0-8-1q-4 0-8 0q-4 1-9 1q-4 0-8 0q-4 0-8 0q-4-1-8-1q-4 1-8 0q-4 0-8 1q-4 0-8 0q-5-1-9-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-5 0-9-1q-4 0-8 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 1-8 1q-5 0-9 1q-4 0-8 0q-4 0-8 1q-4 0-8 1q-4 0-8 1q-4 1-8 1q-4 1-8 1q-4 0-5 0q-1 1-2 2q-1 0-1 2q-1 1-1 2q0 1 0 3q0 1 1 2q1 1 1 2q1 0 2 0zM252 10q0 2 4 2q4 0 8-1q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 1q4 0 8 0q4 0 8 0q5 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 1 8 1q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 1q4 0 8 0q4 0 8 0q4-1 8-1q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 4 0q0 0-4 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 1-8 1q-4-1-8 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8-1q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-9 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-4 1zM252 13q0 1 4 1q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 1 9 1q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q5 0 9 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 9 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 4 0q0 0-4 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 1q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-9-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-5 0-9 0q-4 1-8 1q-4 0-4 1zM252 16q0 1 4 1q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 1 8 0q4 0 8 0q4 0 8 1q4 0 9 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q5-1 9-1q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q4 0 4 0q0 0-4 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 1-9 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8-1q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4-1-8-1q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-4 2zM252 18q0 2 4 2q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q5 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4-1 9-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4-1 8-1q4 0 9 0q4 0 8-1q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q5-1 9-1q4 0 8-1q4 0 8 0q4 0 8-1q4 0 4 0q0 0-4 0q-4 1-8 1q-4 0-8 0q-4 1-8 1q-5 0-9 0q-4 1-8 1q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-9 0q-4 0-8 0q-4 1-8 1q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 1-9 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4-1-8 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-4 1zM252 21q0 1 4 1q4 0 8 0q4 1 9 1q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q5-1 9 0q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4 0 4 0q0 0-4 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-9 0q-4-1-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-4 1zM252 24q0 1 4 1q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8-1q4 0 8 0q4-1 8-1q4 0 8 0q4-1 8-1q4 0 9 0q4-1 4-1q0 0-5 0q-4 1-8 1q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-8 0q-4 0-8 0q-5 0-9 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4-1-8-1q-4 0-4 2z" fill="#c8401e" />
+  </svg>
 }
 
 function Hero() {
   const stageRef = useRef(null)
-  const greetTimer = useRef(0)
-  const [ctaActive, setCtaActive] = useState(false)
-  const [foxActive, setFoxActive] = useState(false)
-  const [greeting, setGreeting] = useState(false)
-  const [hopping, setHopping] = useState(false)
   useFoxLife(stageRef)
-  useEffect(() => () => clearTimeout(greetTimer.current), [])
-
-  // Pointer or keyboard focus on the primary CTA (or the fox itself) makes the fox perk up.
-  const watch = (set) => ({ onPointerEnter: () => set(true), onPointerLeave: () => set(false), onFocus: () => set(true), onBlur: () => set(false) })
-  function greet() {
-    setHopping(true)
-    setGreeting(true)
-    clearTimeout(greetTimer.current)
-    greetTimer.current = setTimeout(() => setGreeting(false), 1800)
-  }
-  const stageClass = ['fox-stage', (ctaActive || foxActive || greeting) && 'is-excited', hopping && 'is-hopping'].filter(Boolean).join(' ')
 
   return <section id="inicio" className="hero">
     <div className="container hero-layout">
       <div className="hero-copy">
         <p className="hero-facts">Landing · E-commerce · Automatización</p>
-        <h1 className="hero-title"><span className="hero-line"><span>Webs con</span></span><span className="hero-line" style={{ '--i': 1 }}><span>colmillo<span className="orange-dot">.</span></span></span></h1>
-        <p className="hero-script"><span>astutas para vender</span></p>
+        <h1 className="hero-title">Webs con<br />colmillo<span className="orange-dot">.</span></h1>
+        <BrushUnderline />
+        <p className="hero-tagline">Estrategia, diseño y automatización con oficio.</p>
         <p className="hero-lede">Landing pages, tiendas online y automatizaciones para negocios que quieren vender más y perseguir menos.</p>
-        <div className="hero-actions"><a className="button button-primary" href="#contacto" {...watch(setCtaActive)}>Hablemos de tu proyecto <ArrowIcon diagonal /></a><a className="text-link" href="#soluciones">Explorar soluciones <ArrowIcon /></a></div>
+        <div className="hero-actions"><a className="button button-primary" href="#contacto">Hablemos de tu proyecto <ArrowIcon diagonal /></a><a className="text-link" href="#soluciones">Explorar soluciones <ArrowIcon /></a></div>
       </div>
-      <div className={stageClass} ref={stageRef}>
-        <SpeechBubble />
-        <div className="fox-frame">
-          <button className="fox-button" type="button" aria-label="Saludar al zorro" onClick={greet} {...watch(setFoxActive)}>
-            <span className="fox-rise"><span className="fox-hop" onAnimationEnd={(event) => event.animationName === 'fox-hop' && setHopping(false)}><FoxCharacter /></span></span>
-          </button>
-          <FoxWave />
-        </div>
-      </div>
+      <div className="fox-stage" ref={stageRef} aria-hidden="true"><FoxInk /></div>
     </div>
   </section>
 }
