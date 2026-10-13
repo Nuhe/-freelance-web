@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import FoxMark from './components/FoxMark'
 import FoxNetwork from './components/FoxNetwork'
+import useInView from './hooks/useInView'
 
 const email = 'contacto@foxops.digital'
 const contactWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL?.trim() || '/webhook/foxops-contacto'
@@ -15,6 +16,38 @@ const steps = [
   { number: '01', title: 'Observamos', description: 'Entendemos el negocio, el desafío y qué resultado vale la pena perseguir.' },
   { number: '02', title: 'Trazamos', description: 'Definimos una solución concreta, con un alcance claro y sin complejidad de más.' },
   { number: '03', title: 'Ejecutamos', description: 'Diseñamos, desarrollamos y ponemos la solución a trabajar.' },
+]
+
+const cases = [
+  {
+    slug: 'plan-paracaidas',
+    title: 'Plan Paracaídas',
+    description: 'Landing personal para una asesora financiera, con reserva de reuniones y contacto directo por WhatsApp.',
+    tags: ['Landing page', 'Servicios profesionales'],
+    url: 'https://www.majo-planparacaidas.com/',
+    image: '/cases/plan-paracaidas.webp',
+    alt: 'Portada de Plan Paracaídas: el titular “¿Qué pasaría si mañana algo cambia?” junto a la foto de la asesora María José Berdaguer.',
+  },
+  {
+    slug: 'rossi-almacen',
+    title: 'Rossi Almacén',
+    description: 'Tienda online para un almacén de barrio, con catálogo de picadas y carrito de pedidos.',
+    tags: ['E-commerce', 'Demo'],
+    url: 'https://almacen-rossi.vercel.app/',
+    image: '/cases/rossi-almacen.webp',
+    alt: 'Portada de Rossi Almacén: el titular “Las cosas ricas se comparten” junto a una tabla de picada con quesos, fiambres y aceitunas.',
+  },
+  {
+    slug: 'infolaplata',
+    title: 'INFOLAPLATA',
+    description: 'Propuesta de rediseño para un medio local, con portada editorial, buscador y newsletter.',
+    tags: ['Sitio de noticias', 'Concepto'],
+    url: 'https://nuhe.github.io/laplata-noticias/',
+    image: '/cases/infolaplata.webp',
+    alt: 'Portada de la propuesta de rediseño de INFOLAPLATA, con noticias destacadas de La Plata y una agenda lateral.',
+    badge: 'Propuesta de rediseño',
+    note: 'Concepto de diseño. No es el sitio oficial del medio.',
+  },
 ]
 
 function ArrowIcon({ diagonal = false }) {
@@ -36,7 +69,7 @@ function Header() {
     <a className="brand" href="#inicio" aria-label="FoxOps, ir al inicio" onClick={closeMenu}><FoxMark /><span>FOX<span>OPS</span></span></a>
     <button className="menu-toggle" type="button" aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menuOpen} aria-controls="site-nav" onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
     <nav id="site-nav" className={`site-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Navegación principal">
-      <a href="#soluciones" onClick={closeMenu}>Soluciones</a><a href="#enfoque" onClick={closeMenu}>Enfoque</a><a href="#contacto" onClick={closeMenu}>Contacto</a>
+      <a href="#soluciones" onClick={closeMenu}>Soluciones</a><a href="#enfoque" onClick={closeMenu}>Enfoque</a><a href="#casos" onClick={closeMenu}>Casos</a><a href="#contacto" onClick={closeMenu}>Contacto</a>
       <a className="nav-cta" href="#contacto" onClick={closeMenu}>Hablemos <ArrowIcon diagonal /></a>
     </nav>
   </div></header>
@@ -74,6 +107,32 @@ function Approach() {
   return <section id="enfoque" className="approach section-pad"><div className="container approach-layout">
     <div className="approach-intro"><div className="section-kicker"><span>02 / NUESTRO ENFOQUE</span></div><h2>Un proceso claro.<br /><em>Una solución útil.</em></h2><p>Definimos qué necesita tu negocio antes de elegir tecnología. Así cada decisión tiene un objetivo y cada entrega, un resultado concreto.</p></div>
     <div className="steps">{steps.map((step) => <div className="step" key={step.number}><span className="step-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.description}</p></div><span className="step-plus" aria-hidden="true">+</span></div>)}</div>
+  </div></section>
+}
+
+function Cases() {
+  const headRef = useInView()
+  const gridRef = useInView({ threshold: 0.08 })
+  return <section id="casos" className="cases section-pad"><div className="container">
+    <div className="section-head" ref={headRef}>
+      <div><div className="section-kicker reveal-item"><span>03 / CASOS</span></div><h2><span className="reveal-mask"><span>Proyectos que ya</span></span><span className="reveal-mask" style={{ '--i': 1 }}><span><em>están trabajando.</em></span></span></h2></div>
+      <p className="reveal-item" style={{ '--i': 2 }}>Algunos sitios que diseñamos y desarrollamos: una landing para un servicio profesional, una tienda online y un concepto editorial.</p>
+    </div>
+    <ul className="case-grid" ref={gridRef}>{cases.map((item, index) => <li className="reveal-item" style={{ '--i': index }} key={item.slug}>
+      <article className="case-card">
+        <div className="case-media">
+          <img src={item.image} alt={item.alt} width="1200" height="750" loading="lazy" decoding="async" />
+          {item.badge && <span className="case-badge">{item.badge}</span>}
+        </div>
+        <div className="case-body">
+          <div className="case-card-top"><span>{String(index + 1).padStart(2, '0')} / {String(cases.length).padStart(2, '0')}</span><ul className="case-tags" aria-label="Categorías">{item.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul></div>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+          {item.note && <p className="case-note">{item.note}</p>}
+          <a className="case-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Ver sitio de ${item.title} (se abre en una pestaña nueva)`}>Ver sitio <ArrowIcon diagonal /></a>
+        </div>
+      </article>
+    </li>)}</ul>
   </div></section>
 }
 
@@ -117,7 +176,7 @@ function Contact() {
 
   return <section id="contacto" className="contact section-pad"><div className="container contact-box">
     <div className="contact-layout">
-      <div className="contact-content"><div className="section-kicker light"><span>03 / EL PRÓXIMO MOVIMIENTO</span></div><h2>Tu próximo paso<br />empieza acá<span>.</span></h2><p>Contanos qué querés construir o qué proceso necesitás mejorar. Pensemos juntos la forma más inteligente de hacerlo.</p></div>
+      <div className="contact-content"><div className="section-kicker light"><span>04 / EL PRÓXIMO MOVIMIENTO</span></div><h2>Tu próximo paso<br />empieza acá<span>.</span></h2><p>Contanos qué querés construir o qué proceso necesitás mejorar. Pensemos juntos la forma más inteligente de hacerlo.</p></div>
       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="contact-form-heading"><span>CONTANOS TU IDEA</span><span>01 / 01</span></div>
         <div className="contact-fields">
@@ -142,5 +201,5 @@ function Footer() {
 }
 
 export default function App() {
-  return <><Header /><main><Hero /><Solutions /><Approach /><Contact /></main><Footer /></>
+  return <><Header /><main><Hero /><Solutions /><Approach /><Cases /><Contact /></main><Footer /></>
 }
