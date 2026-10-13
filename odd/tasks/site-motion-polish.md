@@ -52,3 +52,9 @@ The parent reviews and pushes (push: pending parent).
 
 ## Follow-up
 - [x] F1 — Opening one case detail stretched sibling cards in the same grid row. Fixed with `align-items: start` on `.case-grid` (route: inline, one mechanical CSS line). Lint passes, build passes, headless check 52/52, and the 1440 details-open screenshot shows each card keeping its own height.
+- Native review (lineage review-3932e26c9bde9d64, base 51f406a..77d9236, committed-only, untracked excluded): risk medium, consent granted by the user, one reliability lens. Outcome **approved** and acknowledged. Reviewed boundary advances to 77d9236.
+- Advisory findings (non-blocking, follow-up work):
+  - R3-reveal-flash (WARNING, src/hooks/useInView.js:12): `reveal-ready` is added after first paint, so elements already in the viewport may flicker.
+  - R3-detail-required (src/App.jsx:153-160): unguarded `detail.stack`.
+  - R3-readme-nojs-claim (README.md:16): the no-JS claim is inaccurate.
+  - R3-no-automated-coverage: no committed tests for useInView.
