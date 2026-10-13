@@ -13,7 +13,7 @@ Sitio comercial de FoxOps para presentar sus servicios de landing pages, e-comme
 
 El zorro del hero tiene una franja de escaneo SVG con puntos y luz, y nodos que se mueven suavemente. Estas animaciones respetan la preferencia de movimiento reducido.
 
-Soluciones, Enfoque, Casos y Contacto usan la misma animación de entrada al hacer scroll (`src/hooks/useInView.js` más las clases `reveal-item` y `reveal-mask`, sin dependencias). El hero no se anima para que el primer render sea inmediato. Sin JavaScript o con movimiento reducido, el contenido se muestra sin animación.
+Soluciones, Enfoque, Casos y Contacto usan la misma animación de entrada al hacer scroll (`src/hooks/useInView.js` más las clases `reveal-item` y `reveal-mask`, sin dependencias). El hero no se anima para que el primer render sea inmediato. Con movimiento reducido, o si el navegador no soporta `IntersectionObserver`, el contenido se muestra sin animación. El sitio se renderiza con React, así que necesita JavaScript para mostrarse.
 
 ## Sección Casos
 
@@ -23,7 +23,7 @@ Para sumar un caso:
 
 1. Guardá una captura de la portada en `public/cases/<slug>.webp` (1200×750, idealmente menos de 150 KB).
 2. Agregá un objeto al arreglo `cases` en `src/App.jsx` con `slug`, `title`, `description`, `tags`, `url`, `image` y `alt`. Usá `badge` y `note` para aclarar cuando el proyecto es un concepto y no el sitio oficial.
-3. Completá `detail` con `challenge` (Desafío), `solution` (Solución), `result` (Resultado) y `stack` (arreglo de tecnologías). Se muestra en un `<details>` nativo “Ver detalle” que funciona con teclado y sin JavaScript. Escribí solo lo que se ve en el sitio: sin métricas, testimonios ni resultados inventados.
+3. Completá `detail` con `challenge` (Desafío), `solution` (Solución), `result` (Resultado) y `stack` (arreglo de tecnologías). Es opcional: si falta, la tarjeta se muestra sin “Ver detalle”. Se muestra en un `<details>` nativo que funciona con teclado. Escribí solo lo que se ve en el sitio: sin métricas, testimonios ni resultados inventados.
 
 ## Franja de herramientas
 

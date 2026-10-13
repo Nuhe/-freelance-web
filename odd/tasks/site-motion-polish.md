@@ -58,3 +58,4 @@ The parent reviews and pushes (push: pending parent).
   - R3-detail-required (src/App.jsx:153-160): unguarded `detail.stack`.
   - R3-readme-nojs-claim (README.md:16): the no-JS claim is inaccurate.
   - R3-no-automated-coverage: no committed tests for useInView.
+- [x] F2 — Review advisories fixed (route: inline, three small edits). R3-reveal-flash: `useInView` now uses `useLayoutEffect`. R3-detail-required: `detail` is optional and `stack` defaults to `[]`. R3-readme-nojs-claim: README corrected. Lint passes, build passes, headless check 52/52. R3-no-automated-coverage is left as follow-up because the repo has no test runner.

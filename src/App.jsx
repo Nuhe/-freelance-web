@@ -157,7 +157,7 @@ function CaseDetail({ detail }) {
       <div><dt>Desafío</dt><dd>{detail.challenge}</dd></div>
       <div><dt>Solución</dt><dd>{detail.solution}</dd></div>
       <div><dt>Resultado</dt><dd>{detail.result}</dd></div>
-      <div><dt>Stack</dt><dd><ul className="case-stack">{detail.stack.map((tool) => <li key={tool}>{tool}</li>)}</ul></dd></div>
+      <div><dt>Stack</dt><dd><ul className="case-stack">{(detail.stack ?? []).map((tool) => <li key={tool}>{tool}</li>)}</ul></dd></div>
     </dl>
   </details>
 }
@@ -181,7 +181,7 @@ function Cases() {
           <h3>{item.title}</h3>
           <p>{item.description}</p>
           {item.note && <p className="case-note">{item.note}</p>}
-          <CaseDetail detail={item.detail} />
+          {item.detail && <CaseDetail detail={item.detail} />}
           <a className="case-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Ver sitio de ${item.title} (se abre en una pestaña nueva)`}>Ver sitio <ArrowIcon diagonal /></a>
         </div>
       </article>
