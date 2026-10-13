@@ -95,3 +95,13 @@ The user chose the b-egg brand-personality direction and asked that the fox be d
 
 ## Next step
 Parent: visual review of the screenshots, native review of 48f2154..d9055ce, then push to main (T5).
+
+## Parent review and delivery
+- Parent spot check: lint passes and build passes; hero screenshots at 1440 and 375 inspected. Weaknesses accepted by the user: the eyes read startled rather than sly, and the header logo is still the old low-poly FoxMark. The user chose to publish as is.
+- RDD assess (base 77d9236, committed-only, untracked excluded): medium, 942 changed lines, `review_due: true` (slice_budget_reached).
+- Native review lineage review-10430111b3abc9e0: consent granted by the user, one reliability lens, **approved** and acknowledged. The reviewed boundary advances to 4aa8d2c.
+- Advisory findings (non-blocking follow-ups):
+  - R3-tracking-media-static (WARNING): useFoxLife never subscribes to changes in the reduced-motion and pointer media queries.
+  - R3-hop-stuck-reduced-motion: `is-hopping` never clears under reduced motion.
+  - R3-peek-loops-unscoped: the Casos cameo idle loops never pause off screen.
+- [x] T5 — parent review complete; pushed to main.
