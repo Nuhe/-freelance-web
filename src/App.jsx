@@ -123,8 +123,8 @@ function Hero() {
     <div className="fox-stage" aria-hidden="true"><FoxInk /></div>
     <InkTrail heroRef={stageRef} onFirstStroke={setHasDrawn} />
     <div className="hero-copy">
-      <h1 className="hero-title">Las reglas nunca<br />fueron para <em>nosotros.</em></h1>
-      <p className="hero-lede">Diseño y desarrollo web hecho a mano.<br />Sin plantillas, sin fábrica.</p>
+      <h1 className="hero-title">Soluciones tecnológicas,<br />desarrollo web y <em>automatizaciones</em></h1>
+      <p className="hero-lede">Aumentamos la presencia y eficiencia de tu negocio</p>
       <a className="hero-cta" href="#contacto">Hablemos <ArrowIcon diagonal /></a>
     </div>
     <p className={`hero-hint ${hasDrawn ? 'is-drawn' : ''}`} aria-hidden="true">Mové el cursor. Escribí tu destino.</p>
