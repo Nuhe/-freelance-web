@@ -38,9 +38,9 @@ User feedback (2026-10-13), paraphrased:
 - `prefers-reduced-motion` is respected.
 
 ## Tasks
-- [ ] T1 — Slender full-stage fox artwork whose lines frame the text (route: delegated writer; implementation and self-verification complete, parent commit pending).
-- [ ] T2 — Hero rebuild: washi paper surface, integrated typography and copy, transition to the dark site (route: delegated, same writer; implementation and self-verification complete, parent commit pending).
-- [ ] T3 — Ink brush trail canvas following the mouse (route: delegated, same writer).
+- [x] T1 — Slender full-stage fox artwork whose lines frame the text (route: delegated writer; implemented and committed in 6cf2899; native review acknowledged).
+- [x] T2 — Hero rebuild: washi paper surface, integrated typography and copy, transition to the dark site (route: delegated, same writer; implemented and committed in 6cf2899; native review acknowledged).
+- [ ] T3 — Ink brush trail canvas following the mouse (route: delegated, same writer; implementation and self-verification complete, parent candidate commit/review pending).
 - [ ] T4 — Verify; parent visual review; native review if due; push to main (route: parent).
 
 ## Acceptance criteria
@@ -67,12 +67,12 @@ User feedback (2026-10-13), paraphrased:
 - Test-first exception: package scripts expose lint/build only, with no deterministic test runner. No RED/GREEN claim; use lint, build and native Chromium screenshot inspection.
 - Reference inspection: all three supplied JPGs inspected; anatomy, spiral curls, broad dry contours, crimson/orange/gold plumes inform an original fox, not a traced game character.
 - Rollback boundary: hero/header changes in App/CSS, FoxInk + scrollArt and their README description; legacy cameo/logo/footer remain untouched.
-- Pending: four art rounds, responsive/reduced-motion/paint-in/header checks; T3 trail proof; parent review and commit identity.
+- T1/T2 proof and parent visual readback completed; commit `6cf2899` is the reviewed boundary. T3 trail implementation/proof and T4 delivery remain pending.
 
 ## T1/T2 candidate evidence
 - Implemented: original airborne fox, pointed ears/slit eye, tapered brush contours from Bezier normals, crimson curls and markings, warm plumes, flowing ribbons, sun, kumo clouds and 狐 seal. Light fibrous paper, integrated serif Spanish headline/copy, single CTA, deckle exit, fixed paper/dark header and mobile menu.
 - Preserved: `inkArt.js`, shared toolkit/palette, logo, favicon, Cases cameo, resting footer and all lower sections. Removed dead split-hero underline, entrance, old layer and button-specific CSS. No dependencies added.
-- Candidate files: `src/App.jsx`, `src/index.css`, `src/components/FoxInk.jsx`, `src/components/scrollArt.js`, `README.md`, this document. No commit yet; parent owns the commit/review boundary. Checkboxes remain open until that boundary is recorded.
+- Candidate files: `src/App.jsx`, `src/index.css`, `src/components/FoxInk.jsx`, `src/components/scrollArt.js`, `README.md`, this document. Committed by parent as `6cf2899`; native medium `review-reliability` returned `findings=[]`, exact acknowledgement succeeded and burned authority for lineage `review-af1e883721255f60`. Reviewed boundary is now `6cf2899`.
 - Actual authored source/docs delta before this task-document update: approximately 460 lines (additions + deletions; includes the 121-line new artwork module, excludes unrelated untracked assets). Overall feature forecast remains 700–1000 lines, pending T3.
 
 ### Four inspected art rounds
@@ -101,6 +101,54 @@ All rounds used 1440×900, 1024×900 and 375×900 Chromium captures. Every captu
 
 ### Honest assessment and next boundary
 The result is a deliberate original scroll composition rather than an agency split template. The elongated silhouette, long neck, angular rear joints and flat tapered paws avoid round mascot anatomy. The portrait crop is intentionally strong: part of the haunch/tail lies outside the mobile viewport. It remains stylized vector ink rather than a densely modeled physical watercolor; human visual acceptance remains the parent's/client's decision.
-- Pending: T3 InkTrail and its fine-pointer hint/first-stroke fade, scripted path/drying/DPR/resize/touch proof; T4 independent/parent visual check, native review/consent if due, work-unit commit identities and authorized push.
-- The existing document title still says “Webs con colmillo” in `index.html`, outside this phase's allowed surfaces; the removed hero copy no longer does. Parent can authorize the metadata cleanup if desired.
+- Pending: parent readback and work-unit commit/review of the verified T3 candidate; T4 final checks, future candidate consent if due, and authorized push. T3 browser proof is recorded below.
+- Authorized title/description cleanup implemented in `index.html`: title and Open Graph title now say “FoxOps — Diseño y desarrollo web hecho a mano”; descriptions consistently describe handmade web design. Canonical URL, favicon and other metadata preserved.
 - No native review, commits, remote operations or push performed by this worker.
+
+## T3 execution plan
+- Reconciled actual task document with full Engram observation #372; both held the same T1/T2 candidate evidence. Applied parent's observed commit/acknowledgement, without inferring blanket future consent.
+- Route: delegated direct, same bounded writer; canvas input/render/lifecycle plus App/CSS/README/metadata require multiple non-trivial files. No artwork geometry or lower-page edits.
+- Implementation: one dependency-free InkTrail effect owns passive input, bounded retained quadratic brush segments, speed-sensitive tapered width, textured bristles, brief pooling, age-based drying/ghost, DPR/resize and visibility lifecycle.
+- Test-first exception remains: no deterministic runner. Browser baseline/behavior and cleanup are measured externally through CDP, without product test instrumentation or invented RED/GREEN.
+- Rollback boundary: InkTrail component, its hero import/hint/CSS, README paragraph and narrowly changed title/description. Parent owns new candidate review/commit and authorized push.
+
+## T3 verified candidate
+- Implemented dependency-free `InkTrail.jsx` (210 lines), hero canvas and first-stroke hint, narrow metadata cleanup and README documentation. Artwork geometry and unrelated lower-page sources are unchanged.
+- Geometry: retained quadratic midpoints rendered as tapered normal-offset polygons, seven separated bristles with speed-dependent gaps, inverse-speed width 2.8–28px, a brief modest pool after pausing, and translucent overlapping ink.
+- Lifecycle: at most 1400 retained segments; time-based exponential drying toward a faint ghost for 8s; no RAF while empty or dry; offscreen/hidden state pauses RAF and drying time; resize/DPR changes clear the sheet; DPR capped at 2; all listeners/observers/RAF cleaned on unmount.
+- During browser iteration, a short idle reset caused visible gaps under throttled native input. Fixed continuity: pauses taper the old stroke, then resume at the existing endpoint. Re-ran required proof after the fix.
+- No deterministic runner; observed baseline had zero canvas and no hint before implementation. This is a browser baseline, not a fabricated RED/GREEN cycle.
+- Final required commands: `npm run lint` PASS; `npm run build` PASS (Vite 8.3.0, 27 modules, JS 265.94kB / 83.25kB gzip); `git diff --check` PASS.
+- Approximately 240 authored source/README/metadata changed lines for T3 before task-document evidence; no new dependencies, no worker commit, no remote operations and no native review invocation.
+
+### External browser proof
+Harness `/tmp/foxops-trail-cdp.mjs` instruments browser APIs externally, not product code. Production preview uses the same Chromium command/flags and port 4184 as T1/T2. Cleanup alone uses an additional local Vite server on 4185 to import the real component and mount/unmount it independently.
+
+| Command / scenario | Observed result |
+| --- | --- |
+| `node /tmp/foxops-trail-cdp.mjs trail` | Native `Input.dispatchMouseEvent` S-curve, pause and fast flick; pooling/immediate/+3s/+8s images captured and inspected. |
+| Initial idle | Canvas alpha sum=0; requested/fired/pending RAF=0/0/0. |
+| Passive listeners | Hero pointermove/pointerleave/pointercancel each registered with `passive: true`. |
+| Drying | Immediate alpha sum 1,887,353 / max 189; +3s 555,795 / max 57; +8s 218,978 / max 8 (about 12% total alpha, faint ghost). |
+| Eventual stop | At +8s RAF requested/fired/pending=147/147/0; after another 400ms alpha sum and clear count unchanged. |
+| Hint / CTA | First-stroke hint opacity=0; CTA centre hit resolves `.hero-cta`, never canvas. |
+| `node /tmp/foxops-trail-cdp.mjs widths` | Alpha cross-sections measured slow width 24px and rapid-input width 4px. Slow path used native input; rapid width probe dispatched same mouse PointerEvents in one browser task to avoid CDP transport pacing. |
+| `node /tmp/foxops-trail-cdp.mjs lifecycle` | Touch, pen, pause/resume, resize/DPR and reduced-motion proof passed. |
+| Touch | Pointer event accepted, `defaultPrevented=false`, alpha and RAF remained zero. Native touch swipe scrolled page to y=385 without drawing ink. |
+| Pen | Synthetic `pointerType=pen` produced visible alpha (sum 97,645); physical stylus hardware was not available. |
+| Offscreen | Alpha sum 33,047 and clear count 22 unchanged across 600ms offscreen; pending RAF=0. Returning resumed drawing/decay with pending RAF=1. |
+| Resize / DPR cap | Emulated DPR3 with CSS canvas width1009 produced backing width2018 (2×), cleared alpha and pending RAF=0. |
+| Reduced motion | No ink/RAF before user input; user-drawn ink remained allowed (alpha sum712,955). No automatic decorative strokes. |
+| `node /tmp/foxops-trail-cdp.mjs capabilities` | Fine pointer + hover: hint block. Touch emulation: coarse=true, fine=false, hover=false, hint none. |
+| `node /tmp/foxops-trail-cdp.mjs unmount` | Mounted real component externally: five own listeners, two observers, active RAF. Actual React root unmount: zero listeners, both observers disconnected, canvas removed, pending RAF0; subsequent pointer event requested no frames. |
+| `node /tmp/foxops-rebel-cdp.mjs t3 art` | Final normal-motion captures at1440/1024/375; no overflow, header readable, hint subtle. |
+| `node /tmp/foxops-rebel-cdp.mjs t3final verify` | Responsive/reduced-motion/header/menu/first-frame/paint proof repeated; scrollWidth==clientWidth at all widths. Overlay-scrollbar emulation reported1440/1440,1024/1024,375/375. Headline first frame opacity1/visible; static finished art under reduce; offscreen idle loops paused. |
+
+### Inspected captures and remaining boundary
+- Parent recommended: `/tmp/foxops-trail-immediate.png`, `/tmp/foxops-trail-3s.png`, `/tmp/foxops-trail-8s.png`, `/tmp/foxops-trail-coarse-mobile.png`.
+- Additional trail proof: `/tmp/foxops-trail-pooling.png`, `/tmp/foxops-trail-widths.png`, `/tmp/foxops-trail-pen.png`, `/tmp/foxops-trail-reduced.png`.
+- Final normal motion: `/tmp/foxops-t3-{1440,1024,375}.png`; reduced motion and header/menu: `/tmp/foxops-t3final-{1440,1024,375}.png`, `/tmp/foxops-t3final-dark-{1440,1024,375}.png`, `/tmp/foxops-t3final-menu.png`; paint stages `/tmp/foxops-t3final-paint-{early,mid,done}.png`. Every generated screenshot was opened and inspected.
+- Proof logs: `/tmp/foxops-trail-proof.log`, `/tmp/foxops-trail-widths.log`, `/tmp/foxops-trail-lifecycle.log`, `/tmp/foxops-trail-capabilities.log`, `/tmp/foxops-trail-unmount.log`.
+- Pooling is intentionally understated and the dry ghost remains static until more ink or resize. Input widths/lifecycle are measured, but no physical stylus or broad cross-browser/hardware performance claim is made. Headless CDP pacing is not real pointer hardware; the rapid-width probe isolates that limitation.
+- All local preview/dev/browser listeners stopped by actual PIDs from `ss`, with no broad process-pattern kill. Unrelated untracked assets and handoff preserved.
+- T3 checkbox stays open until parent records its work-unit commit and applicable review outcome. T4 and authorized final push remain parent-owned. Prior first-candidate consent is not reused for this new candidate.

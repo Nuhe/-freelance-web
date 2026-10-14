@@ -22,8 +22,17 @@ El dibujo original (`src/components/FoxInk.jsx` y `scrollArt.js`) usa cuerpo bla
 - La pintura entra en 1,65 s. Nubes y plumas tienen movimiento sutil, pausado fuera de pantalla mediante `useFoxLife`. Con movimiento reducido se muestra terminada y quieta.
 - En móvil el dibujo se recompone con un giro y recorte vertical; la tipografía conserva su espacio dentro de las líneas. Un borde irregular conecta el papel con las secciones oscuras.
 - La cabecera fija usa tinta oscura sobre el papel y cambia al estilo oscuro cuando el hero sale de pantalla. El menú móvil conserva el contraste en ambos estados.
-- La ilustración es decorativa (`aria-hidden`) y no intercepta clics. La interacción de tinta del cursor se implementa como una unidad posterior; esta fase solo entrega arte y composición.
+- La ilustración y el canvas de tinta son decorativos (`aria-hidden`) y no interceptan clics.
 - Se preservan la marca kitsune (`FoxMark.jsx`, `public/favicon.svg`), la cabeza en Casos (`FoxInkHead.jsx`, que conserva los datos originales de `inkArt.js`) y el zorro en el footer (`FoxResting.jsx`).
+
+### Tinta del cursor
+
+`InkTrail.jsx` convierte el movimiento del ratón o lápiz en tinta sumi. La indicación “Mové el cursor. Escribí tu destino.” aparece únicamente con puntero preciso y se desvanece tras la primera pincelada.
+
+- Entrada pasiva: sin capturar el puntero ni impedir el scroll táctil.
+- Curvas cuadráticas con ancho inverso a la velocidad, extremos afinados, cerdas interrumpidas y un pequeño depósito al pausar.
+- Secado durante 8 s hasta una huella leve. El bucle se detiene al secarse y se pausa fuera de pantalla; listeners y observadores se liberan al desmontar.
+- Canvas adaptable con DPR máximo de 2; al redimensionar el papel comienza limpio. Con movimiento reducido solo se dibuja lo que el visitante mueve, sin adornos automáticos.
 
 ## Sección Casos
 

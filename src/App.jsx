@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import FoxInk from './components/FoxInk'
+import InkTrail from './components/InkTrail'
 import FoxInkHead from './components/FoxInkHead'
 import FoxMark from './components/FoxMark'
 import FoxResting from './components/FoxResting'
@@ -113,17 +114,20 @@ function Header() {
 }
 
 function Hero() {
+  const [hasDrawn, setHasDrawn] = useState(false)
   const stageRef = useRef(null)
   useFoxLife(stageRef)
 
   return <section id="inicio" className="hero" ref={stageRef}>
     <div className="hero-paper-grain" aria-hidden="true" />
     <div className="fox-stage" aria-hidden="true"><FoxInk /></div>
+    <InkTrail heroRef={stageRef} onFirstStroke={setHasDrawn} />
     <div className="hero-copy">
       <h1 className="hero-title">Las reglas nunca<br />fueron para <em>nosotros.</em></h1>
       <p className="hero-lede">Diseño y desarrollo web hecho a mano.<br />Sin plantillas, sin fábrica.</p>
       <a className="hero-cta" href="#contacto">Hablemos <ArrowIcon diagonal /></a>
     </div>
+    <p className={`hero-hint ${hasDrawn ? 'is-drawn' : ''}`} aria-hidden="true">Mové el cursor. Escribí tu destino.</p>
     <div className="hero-deckle" aria-hidden="true" />
   </section>
 }
