@@ -49,7 +49,7 @@ Design decisions:
 - [x] T2 — Hero restyle: Hokusai wave/clouds, hanko seal, typography and copy, paint-in entrance, idle ink motion; remove cartoon interactions (route: delegated, same writer). Commit e0e8f11.
 - [x] T3 — Cameos, logo, and favicon in ink style (route: delegated, same writer). Commit 88a85d8.
 - [x] T4 — LinkedIn avatar regenerated in ink style (route: delegated, same writer). Files in `design/avatar/` (untracked, not committed).
-- [ ] T5 — Verify, parent visual review, native review if due, push main (route: parent). Status: parent: pending.
+- [x] T5 — Verify, parent visual review, native review if due, push main (route: parent).
 
 ## Acceptance criteria
 - Screenshots read as sumi-e/ukiyo-e ink art, serious and premium, with no cartoon features.
@@ -94,9 +94,15 @@ Design decisions:
   - the header logo at x1 and x4
   - a favicon sheet at 16, 32 and 64 px on dark and light tabs
 - Avatar: `design/avatar/foxops-avatar.svg`, the 1080 and 400 PNGs, and `preview-circle.png` (circle preview at 400, 96 and 48).
-- Engram mirror for this update: pending (parent).
+- Engram mirror: synced by the parent.
 - Route: delegated writer for T1–T4 (multi-file art plus site work; mapping and writer triggers fired).
 
+### Parent review and delivery
+- Parent spot check: lint and build pass. Hero captures at 1440 and 375 inspected; they read as an ukiyo-e ink print with no cartoon features.
+- RDD assessment (base 4aa8d2c, committed-only, untracked excluded): medium, 1058 changed lines, review due (slice_budget_reached).
+- Native review lineage review-a3a7bff72494a49c: consent granted by the user, one reliability lens, **approved** and acknowledged. Reviewed boundary advances to this branch head.
+- Advisory finding (non-blocking): R3-verify-script-uncommitted. The behavior checks live only in a scratchpad script, so there is no committed test runner.
+
 ## Next step
-- T5 (parent): visual review of the captures, a native review if the assessment says it is due, then delivery.
+- Follow-ups: refine the footer cameo, check the Casos seal crop on the ear tips, check paint-in smoothness on a real mobile device.
 
