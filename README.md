@@ -15,16 +15,15 @@ Soluciones, Enfoque, Casos y Contacto usan la misma animación de entrada al hac
 
 ## Hero y el zorro
 
-El hero combina una línea de datos en Space Mono, el titular “Webs con colmillo.” en Space Grotesk sobre un trazo de pincel bermellón y una bajada en Shippori Mincho (“Estrategia, diseño y automatización con oficio.”). El titular no se anima: se ve desde el primer render.
+El hero es un pergamino washi de escenario completo. El titular “Las reglas nunca fueron para nosotros.”, en Shippori Mincho, vive en el espacio negativo de un zorro en salto; aparece desde el primer render y no se anima. La bajada es “Diseño y desarrollo web hecho a mano. Sin plantillas, sin fábrica.” y hay una sola llamada: “Hablemos”.
 
-El protagonista es un zorro guardián pintado al estilo sumi-e y ukiyo-e (`src/components/FoxInk.jsx`): cuerpo crema con contornos de tinta irregulares, marcas carmesí, rizos en espiral y llamas carmesí, naranja y doradas, frente a un sol pintado a pincel, nubes kumo, una ola al estilo Hokusai y un sello 狐. Cada trazo es una forma rellena generada a partir de una línea guía, con grosor variable y vetas de pincel seco. Los filtros SVG agregan el borde seco, el halo de papel y el grano washi. Los datos de los trazos están en `src/components/inkArt.js` y los filtros compartidos en `src/components/inkKit.jsx`.
+El dibujo original (`src/components/FoxInk.jsx` y `scrollArt.js`) usa cuerpo blanco cálido, cuello largo, orejas puntiagudas, patas finas con corvejones angulares y cola que termina en cintas caligráficas. Los contornos son polígonos de ancho variable calculados sobre las normales de curvas Bézier. Las máscaras de turbulencia, el pincel seco y un leve sangrado dan textura a la tinta; rizos, marcas carmesí, llamas naranja/dorado, nubes y un sello 狐 completan el pergamino. Las referencias sumi-e y ukiyo-e inspiran el lenguaje, no reproducen personajes ni marcas de un videojuego.
 
-- Entrada (≤1,6 s, solo CSS): el sol y el mar aparecen, el zorro se pinta siguiendo la dirección de los trazos (máscaras con `stroke-dashoffset`) y después suben las llamas.
-- Reposo: las llamas y la cola se mecen con el viento, las nubes derivan y suben algunas brasas. Cada capa es un SVG propio, así que el movimiento no vuelve a calcular los filtros. Las animaciones se pausan cuando el dibujo sale de pantalla (`src/hooks/useFoxLife.js`).
-- El zorro es decorativo (`aria-hidden`): no reacciona al puntero ni es un botón.
-- Cameos: la cabeza del zorro en un sello redondo junto al título de Casos (`FoxInkHead.jsx`, reutiliza los trazos del hero) y el zorro descansando en pocos trazos sobre el borde del footer (`FoxResting.jsx`).
-- Marca: una máscara kitsune en un sello hanko bermellón (`FoxMark.jsx` y `public/favicon.svg`), legible desde 16 px.
-- Con movimiento reducido el zorro se muestra ya pintado y quieto, sin entrada ni bucles.
+- La pintura entra en 1,65 s. Nubes y plumas tienen movimiento sutil, pausado fuera de pantalla mediante `useFoxLife`. Con movimiento reducido se muestra terminada y quieta.
+- En móvil el dibujo se recompone con un giro y recorte vertical; la tipografía conserva su espacio dentro de las líneas. Un borde irregular conecta el papel con las secciones oscuras.
+- La cabecera fija usa tinta oscura sobre el papel y cambia al estilo oscuro cuando el hero sale de pantalla. El menú móvil conserva el contraste en ambos estados.
+- La ilustración es decorativa (`aria-hidden`) y no intercepta clics. La interacción de tinta del cursor se implementa como una unidad posterior; esta fase solo entrega arte y composición.
+- Se preservan la marca kitsune (`FoxMark.jsx`, `public/favicon.svg`), la cabeza en Casos (`FoxInkHead.jsx`, que conserva los datos originales de `inkArt.js`) y el zorro en el footer (`FoxResting.jsx`).
 
 ## Sección Casos
 

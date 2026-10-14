@@ -1,119 +1,59 @@
 import { useId } from 'react'
-import { FOX, TAIL, PLUMES, SKY } from './inkArt'
-import { InkFilters, InkBody } from './inkKit'
-import { INK } from './inkPalette'
+import { BODY, TAIL, LEGS, CONTOURS, MARKS, FUR, CURLS, SPIRAL, PLUMES, CLOUD, RIBBONS, FLAME_LINES, FLAME_LIGHT } from './scrollArt'
 
-// Hero artwork: a seated guardian fox in sumi-e ink under a brushed sun, kumo clouds and a
-// Hokusai crest. Each layer is its own SVG so idle motion (cloud drift, tail and plume flow)
-// moves composited layers instead of re-running the paint filters.
-const VIEW = '330 20 880 880'
-const BOX = { x: 330, y: 20, width: 880, height: 880 }
+const colors = { ink: '#16110d', red: '#c8202a', orange: '#d96325', gold: '#be8b38', shadow: '#8e7d61' }
 
-// Paint-in: wide soft brush sweeps that follow the strokes' direction (head, back, chest, haunch, tail).
-const BODY_WIPES = [
-  { d: 'M400 240C470 170 560 110 700 110', w: 300, t: 560, at: 0 },
-  { d: 'M640 200C720 330 820 470 850 720', w: 250, t: 700, at: 180 },
-  { d: 'M560 300C556 480 570 640 590 840', w: 200, t: 640, at: 300 },
-  { d: 'M720 520C780 640 770 760 620 820', w: 220, t: 560, at: 520 },
-]
-const TAIL_WIPES = [{ d: 'M800 760C930 820 1060 720 1020 600C990 500 1060 420 1180 360', w: 190, t: 760, at: 620 }]
-
-function Wipes({ id, wipes }) {
-  return <>
-    <filter id={`${id}-soft`} x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9" /></filter>
-    <mask id={id} maskUnits="userSpaceOnUse" {...BOX}>
-      <g filter={`url(#${id}-soft)`}>
-        {wipes.map(({ d, w, t, at }) => <path key={d} className="ink-wipe" d={d} pathLength="1" fill="none" stroke="#fff" strokeWidth={w} style={{ '--t': `${t}ms`, '--d': `${at}ms` }} />)}
-      </g>
-      <rect className="ink-wipe-settle" {...BOX} fill="#fff" />
-    </mask>
-  </>
-}
-
-function Sky({ id }) {
-  const s = SKY.seal
-  return <svg className="ink-layer ink-sky" viewBox={VIEW} aria-hidden="true" focusable="false">
-    <defs>
-      {/* Washi: fine fibres modulated by a slow cloudiness, faded out toward the edges. */}
-      <filter id={`${id}-washi`} x="0" y="0" width="100%" height="100%">
-        <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" seed="21" result="f" />
-        <feTurbulence type="fractalNoise" baseFrequency=".012" numOctaves="2" seed="22" result="c" />
-        <feComposite in="f" in2="c" operator="arithmetic" k2=".7" k3=".5" k4="-.3" />
-        <feColorMatrix type="matrix" values="0 0 0 0 .96  0 0 0 0 .93  0 0 0 0 .89  0 0 0 .22 -.06" />
-      </filter>
-      <radialGradient id={`${id}-fade`}><stop offset=".55" stopColor="#fff" /><stop offset="1" stopColor="#fff" stopOpacity="0" /></radialGradient>
-      <mask id={`${id}-edge`} maskUnits="userSpaceOnUse" {...BOX}><rect {...BOX} fill={`url(#${id}-fade)`} /></mask>
-      {/* Sun: a disc laid in with a broad brush; streaks open up toward the rim. */}
-      <radialGradient id={`${id}-sunfade`}><stop offset=".72" /><stop offset="1" stopOpacity=".62" /></radialGradient>
-      <filter id={`${id}-sun`} x="-10%" y="-10%" width="120%" height="120%" colorInterpolationFilters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency=".012 .03" numOctaves="3" seed="8" result="n" />
-        <feDisplacementMap in="SourceAlpha" in2="n" scale="16" xChannelSelector="R" yChannelSelector="G" result="d" />
-        <feTurbulence type="fractalNoise" baseFrequency=".006 .16" numOctaves="3" seed="4" result="s" />
-        <feColorMatrix in="s" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0" result="sa" />
-        <feComposite in="d" in2="sa" operator="arithmetic" k2="1.3" k3="-.9" k4=".08" result="m" />
-        <feComponentTransfer in="m" result="mt"><feFuncA type="discrete" tableValues="0 1" /></feComponentTransfer>
-        <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="3" seed="9" result="mo" />
-        <feColorMatrix in="mo" type="matrix" values="0 0 0 0 .62  0 0 0 0 .1  0 0 0 0 .12  0 0 0 0 1" result="base" />
-        <feColorMatrix in="mo" type="matrix" values="0 0 0 0 .78  0 0 0 0 .16  0 0 0 0 .14  1.4 0 0 0 -.5" result="hi" />
-        <feMerge result="col"><feMergeNode in="base" /><feMergeNode in="hi" /></feMerge>
-        <feComposite in="col" in2="mt" operator="in" />
-      </filter>
-      <filter id={`${id}-seal`} x="-10%" y="-10%" width="120%" height="120%">
-        <feTurbulence type="fractalNoise" baseFrequency=".09" numOctaves="2" seed="5" result="n" />
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d" />
-        <feTurbulence type="fractalNoise" baseFrequency=".5" numOctaves="1" seed="6" result="s" />
-        <feColorMatrix in="s" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 -4 0 3.1" result="sa" />
-        <feComposite in="d" in2="sa" operator="in" />
-      </filter>
-      <mask id={`${id}-cut`} maskUnits="userSpaceOnUse" x={s.x - 6} y={s.y - 6} width={s.size + 12} height={s.size + 12}>
-        <rect x={s.x - 6} y={s.y - 6} width={s.size + 12} height={s.size + 12} fill="#fff" />
-        <path d={s.glyph} transform={s.transform} fill="#000" />
-      </mask>
-      <InkFilters id={id} />
-    </defs>
-    <rect {...BOX} filter={`url(#${id}-washi)`} mask={`url(#${id}-edge)`} />
-    <circle className="ink-sun" cx="560" cy="250" r="196" fill={`url(#${id}-sunfade)`} filter={`url(#${id}-sun)`} />
-    <g className="ink-sea">
-      <g opacity=".3" fill="none" stroke={INK.cream} strokeWidth="1.6"><path d={SKY.scales} /></g>
-      <path opacity=".7" fill={INK.cream} d={SKY.waveLines} />
-      <path opacity=".8" fill={INK.cream} d={SKY.waveFoam} />
-      <path opacity=".85" fill={INK.cream} filter={`url(#${id}-dry)`} d={SKY.ground} />
-    </g>
-    <g transform={`rotate(-2 ${s.x + s.size / 2} ${s.y + s.size / 2})`} filter={`url(#${id}-seal)`}>
-      <rect x={s.x} y={s.y} width={s.size} height={s.size} rx="4" fill={INK.verm} mask={`url(#${id}-cut)`} />
-    </g>
-  </svg>
+function Strokes({ paths }) {
+  return paths.map(({ d, color }, index) => <path key={index} d={d} fill={colors[color]} />)
 }
 
 export default function FoxInk() {
-  const id = `ink${useId().replace(/[^\w-]/g, '')}`
-  return <div className="ink-stage">
-    <Sky id={`${id}s`} />
-    <svg className="ink-layer ink-clouds" viewBox={VIEW} aria-hidden="true" focusable="false">
-      {SKY.clouds.map((c, i) => <g key={c.fill.slice(0, 24)} className="ink-cloud" style={{ '--i': i }}>
-        <path fill="#1a1411" d={c.fill} />
-        <path fill={INK.cream} opacity={[0.62, 0.55, 0.5][i]} d={c.lines} />
-      </g>)}
-    </svg>
-    <svg className="ink-layer ink-plumes" viewBox={VIEW} aria-hidden="true" focusable="false">
-      {PLUMES.map(([r, o, g], i) => <g key={r.slice(0, 24)} className="ink-plume" style={{ '--i': i }}>
-        <g className="ink-plume-flow">
-          <path fill={INK.crimson} d={r} /><path fill={INK.orange} d={o} /><path fill={INK.gold} d={g} />
-        </g>
-      </g>)}
-    </svg>
-    <svg className="ink-layer ink-tail" viewBox={VIEW} aria-hidden="true" focusable="false">
-      <defs><InkFilters id={`${id}t`} /><Wipes id={`${id}tw`} wipes={TAIL_WIPES} /></defs>
-      <InkBody id={`${id}t`} part={TAIL} box={BOX} mask={`${id}tw`} />
-    </svg>
-    <svg className="ink-layer ink-body" viewBox={VIEW} aria-hidden="true" focusable="false">
-      <defs><InkFilters id={`${id}b`} /><Wipes id={`${id}bw`} wipes={BODY_WIPES} /></defs>
-      <InkBody id={`${id}b`} part={FOX} box={BOX} mask={`${id}bw`} />
-    </svg>
-    {/* Drifting embers: a few specks of vermilion and gold rising past the fox. */}
-    <span className="ink-ember" style={{ '--x': '22%', '--y': '58%', '--d': '0s', '--s': '17s' }} />
-    <span className="ink-ember is-gold" style={{ '--x': '78%', '--y': '40%', '--d': '-6s', '--s': '21s' }} />
-    <span className="ink-ember" style={{ '--x': '64%', '--y': '70%', '--d': '-11s', '--s': '19s' }} />
-    <span className="ink-ember is-gold" style={{ '--x': '36%', '--y': '30%', '--d': '-3s', '--s': '23s' }} />
-  </div>
+  const id = `scroll-${useId().replace(/[^\w-]/g, '')}`
+  return <svg className="scroll-art" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id={`${id}-dry`} x="-2%" y="-3%" width="104%" height="106%" colorInterpolationFilters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".045 .32" numOctaves="3" seed="13" result="grain" />
+        <feDisplacementMap in="SourceGraphic" in2="grain" scale="1.6" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id={`${id}-mask-grain`}>
+        <feTurbulence type="fractalNoise" baseFrequency=".12 .7" numOctaves="2" seed="17" />
+        <feColorMatrix type="luminanceToAlpha" />
+        <feComponentTransfer><feFuncA type="table" tableValues=".2 .85 1 1" /></feComponentTransfer>
+      </filter>
+      <mask id={`${id}-bristles`} style={{ maskType: 'alpha' }}><rect width="1440" height="900" fill="white" filter={`url(#${id}-mask-grain)`} /></mask>
+      <filter id={`${id}-bleed`} x="-4%" y="-5%" width="108%" height="110%"><feGaussianBlur stdDeviation="1.15" /></filter>
+      <radialGradient id={`${id}-sun`}><stop stopColor="#bc222b" /><stop offset=".85" stopColor="#c8202a" /><stop offset="1" stopColor="#c8202a" stopOpacity=".75" /></radialGradient>
+    </defs>
+    <g className="scroll-sky" fill="none">
+      <path d="M1092 119C1176 118 1245 184 1237 270C1242 352 1172 414 1090 413C1003 420 938 344 943 267C938 182 1006 113 1092 119Z" fill={`url(#${id}-sun)`} opacity=".88" mask={`url(#${id}-bristles)`} filter={`url(#${id}-dry)`} />
+      <circle cx="1090" cy="266" r="153" stroke="#c8202a" strokeWidth="1" opacity=".25" strokeDasharray="260 40 80 50" />
+      <g className="scroll-clouds" fill="#827559" opacity=".36">
+        <path d={CLOUD} transform="translate(82 143) scale(1.25)" />
+        <path d={CLOUD} transform="translate(1000 589) scale(1.4)" />
+        <path d={CLOUD} transform="translate(380 812) scale(.8)" />
+      </g>
+      <g stroke="#85765a" opacity=".12" strokeWidth="1"><path d="M0 226H270M1144 176H1440M0 640H170M1200 659H1440M0 804H310" /><path d="M0 231H240M1180 181H1440M0 645H120M1230 665H1440" /></g>
+    </g>
+    <g className="scroll-creature" filter={`url(#${id}-dry)`}>
+      <g className="scroll-plumes" mask={`url(#${id}-bristles)`}>
+        {PLUMES.map(({ d, color }) => <path key={d} d={d} fill={colors[color]} />)}
+        <Strokes paths={FLAME_LIGHT} /><Strokes paths={FLAME_LINES} />
+      </g>
+      <g className="scroll-tail"><path d={TAIL} fill="#f6efdf" /></g>
+      <g fill="#e9dfcb">{LEGS.slice(0, 2).map(d => <path key={d} d={d} />)}</g>
+      <path d={BODY} fill="#f6efdf" />
+      <g fill="#f6efdf">{LEGS.slice(2).map(d => <path key={d} d={d} />)}</g>
+      <g opacity=".16" filter={`url(#${id}-bleed)`}><Strokes paths={CONTOURS} /></g>
+      <g className="scroll-contours" mask={`url(#${id}-bristles)`}>
+        <Strokes paths={CONTOURS} /><Strokes paths={FUR} /><Strokes paths={MARKS} />
+        {CURLS.map(({ x, y, scale, rotate }) => <path key={x} d={SPIRAL} fill={colors.ink} transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scale})`} />)}
+      </g>
+      <g fill="#16110d" opacity=".65"><path d="m469 320 15-10-5 15 16-8-6 16 14-5-9 13Z" /><path d="m1001 275 11-6-7 12 13-6-8 12 12-3-15 10Z" /></g>
+    </g>
+    <g className="scroll-ribbons" filter={`url(#${id}-dry)`} mask={`url(#${id}-bristles)`}>{RIBBONS.map(({ d, color }, index) => <path key={index} className={`scroll-ribbon scroll-ribbon-${index}`} d={d} fill={colors[color]} />)}</g>
+    <g className="scroll-seal" transform="translate(1263 604) rotate(-5)" fill="#c8202a">
+      <path d="M0 0 52 2 50 56 2 54Z" fill="none" stroke="currentColor" strokeWidth="3" />
+      <text x="26" y="40" textAnchor="middle" fontSize="35" fontFamily="'Shippori Mincho', serif">狐</text>
+    </g>
+  </svg>
 }

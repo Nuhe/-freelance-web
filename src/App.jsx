@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import FoxInk from './components/FoxInk'
 import FoxInkHead from './components/FoxInkHead'
 import FoxMark from './components/FoxMark'
@@ -87,8 +87,22 @@ function SolutionIcon({ type }) {
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [onPaper, setOnPaper] = useState(true)
   const closeMenu = () => setMenuOpen(false)
-  return <header className="site-header"><div className="container header-inner">
+  useEffect(() => {
+    const hero = document.getElementById('inicio')
+    if (!hero || typeof IntersectionObserver === 'undefined') return undefined
+    const observer = new IntersectionObserver(([entry]) => setOnPaper(entry.isIntersecting), { rootMargin: '-86px 0px 0px 0px' })
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    const onKey = (event) => { if (event.key === 'Escape') setMenuOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
+  return <header className={`site-header ${onPaper ? 'on-paper' : 'on-dark'}`}><div className="container header-inner">
     <a className="brand" href="#inicio" aria-label="FoxOps, ir al inicio" onClick={closeMenu}><FoxMark /><span>FOX<span>OPS</span></span></a>
     <button className="menu-toggle" type="button" aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menuOpen} aria-controls="site-nav" onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
     <nav id="site-nav" className={`site-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Navegación principal">
@@ -98,29 +112,19 @@ function Header() {
   </div></header>
 }
 
-// A vermilion dry-brush stroke laid under the headline, painted left to right on load.
-function BrushUnderline() {
-  return <svg className="hero-brush" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <path d="M7 30q1 0 5 0q4 0 9 1q4 0 8 1q4 1 8 1q4-1 8-1q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8-1q4 0 8 0q4 0 8-1q4-1 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q5 0 9-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q4-1 8 0q4 0 8 0q4-1 8-1q5 0 9 0q4 0 8 0q4-1 8 0q4 0 8 0q4 0 8 0q4-1 8 0q4 0 4-8q0-7-4-8q-4 0-8 0q-4 1-8 1q-4 0-8-1q-4 0-8 0q-4 1-9 1q-4 0-8 0q-4 0-8 0q-4-1-8-1q-4 1-8 0q-4 0-8 1q-4 0-8 0q-5-1-9-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-5 0-9-1q-4 0-8 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 1-8 1q-5 0-9 1q-4 0-8 0q-4 0-8 1q-4 0-8 1q-4 0-8 1q-4 1-8 1q-4 1-8 1q-4 0-5 0q-1 1-2 2q-1 0-1 2q-1 1-1 2q0 1 0 3q0 1 1 2q1 1 1 2q1 0 2 0zM252 10q0 2 4 2q4 0 8-1q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 1q4 0 8 0q4 0 8 0q5 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 1 8 1q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 1q4 0 8 0q4 0 8 0q4-1 8-1q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 4 0q0 0-4 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 1-8 1q-4-1-8 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8-1q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-9 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-4 1zM252 13q0 1 4 1q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 1 9 1q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q5 0 9 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 9 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 4 0q0 0-4 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 1q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-9-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-5 0-9 0q-4 1-8 1q-4 0-4 1zM252 16q0 1 4 1q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 1 8 0q4 0 8 0q4 0 8 1q4 0 9 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4-1 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q4 0 8 0q5-1 9-1q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q4 0 4 0q0 0-4 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 1-9 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8-1q-5 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4-1-8-1q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-4 2zM252 18q0 2 4 2q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q5 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4-1 9-1q4 0 8 0q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4-1 8-1q4 0 9 0q4 0 8-1q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4-1 8-1q4 0 8 0q5-1 9-1q4 0 8-1q4 0 8 0q4 0 8-1q4 0 4 0q0 0-4 0q-4 1-8 1q-4 0-8 0q-4 1-8 1q-5 0-9 0q-4 1-8 1q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-9 0q-4 0-8 0q-4 1-8 1q-4 0-8 0q-4 0-8 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 1-9 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4-1-8 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-4 1zM252 21q0 1 4 1q4 0 8 0q4 1 9 1q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q5-1 9 0q4 0 8 0q4 0 8-1q4 0 8 0q4 0 8 0q4 0 8 0q4 0 4 0q0 0-4 0q-4 0-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-9 0q-4-1-8-1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4 0-8 0q-4 0-4 1zM252 24q0 1 4 1q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 8 0q4 0 9 0q4 0 8-1q4 0 8 0q4-1 8-1q4 0 8 0q4-1 8-1q4 0 9 0q4-1 4-1q0 0-5 0q-4 1-8 1q-4 0-8 0q-4 0-8 0q-4 1-8 1q-4 0-8 0q-4 0-8 0q-5 0-9 1q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8-1q-4 0-8 0q-4 0-9 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-4 0-8 0q-5 0-9 0q-4-1-8-1q-4 0-4 2z" fill="#c8401e" />
-  </svg>
-}
-
 function Hero() {
   const stageRef = useRef(null)
   useFoxLife(stageRef)
 
-  return <section id="inicio" className="hero">
-    <div className="container hero-layout">
-      <div className="hero-copy">
-        <p className="hero-facts">Landing · E-commerce · Automatización</p>
-        <h1 className="hero-title">Webs con<br />colmillo<span className="orange-dot">.</span></h1>
-        <BrushUnderline />
-        <p className="hero-tagline">Estrategia, diseño y automatización con oficio.</p>
-        <p className="hero-lede">Landing pages, tiendas online y automatizaciones para negocios que quieren vender más y perseguir menos.</p>
-        <div className="hero-actions"><a className="button button-primary" href="#contacto">Hablemos de tu proyecto <ArrowIcon diagonal /></a><a className="text-link" href="#soluciones">Explorar soluciones <ArrowIcon /></a></div>
-      </div>
-      <div className="fox-stage" ref={stageRef} aria-hidden="true"><FoxInk /></div>
+  return <section id="inicio" className="hero" ref={stageRef}>
+    <div className="hero-paper-grain" aria-hidden="true" />
+    <div className="fox-stage" aria-hidden="true"><FoxInk /></div>
+    <div className="hero-copy">
+      <h1 className="hero-title">Las reglas nunca<br />fueron para <em>nosotros.</em></h1>
+      <p className="hero-lede">Diseño y desarrollo web hecho a mano.<br />Sin plantillas, sin fábrica.</p>
+      <a className="hero-cta" href="#contacto">Hablemos <ArrowIcon diagonal /></a>
     </div>
+    <div className="hero-deckle" aria-hidden="true" />
   </section>
 }
 
