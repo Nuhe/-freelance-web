@@ -1,5 +1,7 @@
 # Feature: rebel-scroll-hero
 
+**Status:** implementation and independent verification complete; source pushed to `main` through `d8b40b3`. Jenkins/live-site deployment is not verified. This passive closure document awaits the parent's separate commit/push.
+
 ## Objective
 Rebuild the hero as a full-stage sumi-e scroll in which a slender, majestic fox fills the space and its lines carry the text. Moving the mouse paints a black ink brush stroke that leaves a trail, so the visitor feels they are writing their destiny on the page.
 
@@ -40,8 +42,8 @@ User feedback (2026-10-13), paraphrased:
 ## Tasks
 - [x] T1 — Slender full-stage fox artwork whose lines frame the text (route: delegated writer; implemented and committed in 6cf2899; native review acknowledged).
 - [x] T2 — Hero rebuild: washi paper surface, integrated typography and copy, transition to the dark site (route: delegated, same writer; implemented and committed in 6cf2899; native review acknowledged).
-- [ ] T3 — Ink brush trail canvas following the mouse (route: delegated, same writer; implementation and self-verification complete, parent candidate commit/review pending).
-- [ ] T4 — Verify; parent visual review; native review if due; push to main (route: parent).
+- [x] T3 — Ink brush trail canvas following the mouse (route: delegated writer; committed as `d8b40b3`; medium assessment `review_due=false`, `under_budget`).
+- [x] T4 — Independent verification and parent visual readback passed; applicable native assessment recorded; source push to `main` succeeded (route: parent).
 
 ## Acceptance criteria
 - No split layout. The fox spans the stage and the text lives inside its lines.
@@ -53,12 +55,12 @@ User feedback (2026-10-13), paraphrased:
 - Test-first exception: there is no test runner. Checks are lint, build and headless Chromium captures, including a scripted mouse path for the trail.
 
 ## Delivery
-- Push directly to main after verification (user preference). The native review runs if the assessment says it is due.
+- Source pushed directly to `main` after verification, using the explicit `exception-ok` delivery strategy. The final passive document is a separate parent-owned commit/push; deployment is not inferred from Git push.
 
 ## Progress / Evidence
 - Branch `feat/rebel-scroll-hero` created from main at 3c98578.
 
-## Execution plan (T1/T2 candidate)
+## Execution plan (historical T1/T2 candidate)
 - Route: delegated direct; one bounded writer owns `src/App.jsx`, `src/index.css`, `src/components/FoxInk.jsx`, new `src/components/scrollArt.js`, README and this document. Preparation and multiple non-trivial files trigger delegation.
 - Exploration: the existing hero is a two-column grid; the header is absolute and dark. `FoxInkHead.jsx` imports `FOX` and `ENSO` with a fixed crop from `inkArt.js`; preserve those data and the shared ink filters/palette.
 - T1/T2 are a coupled artwork/composition work unit; original full-stage fox and editorial negative space must be judged together. T3 remains a separate pointer-trail work unit.
@@ -67,13 +69,13 @@ User feedback (2026-10-13), paraphrased:
 - Test-first exception: package scripts expose lint/build only, with no deterministic test runner. No RED/GREEN claim; use lint, build and native Chromium screenshot inspection.
 - Reference inspection: all three supplied JPGs inspected; anatomy, spiral curls, broad dry contours, crimson/orange/gold plumes inform an original fox, not a traced game character.
 - Rollback boundary: hero/header changes in App/CSS, FoxInk + scrollArt and their README description; legacy cameo/logo/footer remain untouched.
-- T1/T2 proof and parent visual readback completed; commit `6cf2899` is the reviewed boundary. T3 trail implementation/proof and T4 delivery remain pending.
+- T1/T2 proof and parent visual readback completed. The last acknowledged native review boundary remains `6cf2899`; T3/T4 completion is recorded in Final closure below.
 
 ## T1/T2 candidate evidence
 - Implemented: original airborne fox, pointed ears/slit eye, tapered brush contours from Bezier normals, crimson curls and markings, warm plumes, flowing ribbons, sun, kumo clouds and 狐 seal. Light fibrous paper, integrated serif Spanish headline/copy, single CTA, deckle exit, fixed paper/dark header and mobile menu.
 - Preserved: `inkArt.js`, shared toolkit/palette, logo, favicon, Cases cameo, resting footer and all lower sections. Removed dead split-hero underline, entrance, old layer and button-specific CSS. No dependencies added.
 - Candidate files: `src/App.jsx`, `src/index.css`, `src/components/FoxInk.jsx`, `src/components/scrollArt.js`, `README.md`, this document. Committed by parent as `6cf2899`; native medium `review-reliability` returned `findings=[]`, exact acknowledgement succeeded and burned authority for lineage `review-af1e883721255f60`. Reviewed boundary is now `6cf2899`.
-- Actual authored source/docs delta before this task-document update: approximately 460 lines (additions + deletions; includes the 121-line new artwork module, excludes unrelated untracked assets). Overall feature forecast remains 700–1000 lines, pending T3.
+- Actual authored source/docs delta before this task-document update: approximately 460 lines (additions + deletions; includes the 121-line new artwork module, excludes unrelated untracked assets). The original 700–1000-line forecast was confirmed by the observed 876-line running count; see Final closure.
 
 ### Four inspected art rounds
 All rounds used 1440×900, 1024×900 and 375×900 Chromium captures. Every capture was opened and visually inspected.
@@ -101,16 +103,16 @@ All rounds used 1440×900, 1024×900 and 375×900 Chromium captures. Every captu
 
 ### Honest assessment and next boundary
 The result is a deliberate original scroll composition rather than an agency split template. The elongated silhouette, long neck, angular rear joints and flat tapered paws avoid round mascot anatomy. The portrait crop is intentionally strong: part of the haunch/tail lies outside the mobile viewport. It remains stylized vector ink rather than a densely modeled physical watercolor; human visual acceptance remains the parent's/client's decision.
-- Pending: parent readback and work-unit commit/review of the verified T3 candidate; T4 final checks, future candidate consent if due, and authorized push. T3 browser proof is recorded below.
+- Parent visual readback, T3 commit/assessment, independent verification and source push are complete; details are recorded in Final closure below.
 - Authorized title/description cleanup implemented in `index.html`: title and Open Graph title now say “FoxOps — Diseño y desarrollo web hecho a mano”; descriptions consistently describe handmade web design. Canonical URL, favicon and other metadata preserved.
 - No native review, commits, remote operations or push performed by this worker.
 
-## T3 execution plan
+## T3 execution plan (historical)
 - Reconciled actual task document with full Engram observation #372; both held the same T1/T2 candidate evidence. Applied parent's observed commit/acknowledgement, without inferring blanket future consent.
 - Route: delegated direct, same bounded writer; canvas input/render/lifecycle plus App/CSS/README/metadata require multiple non-trivial files. No artwork geometry or lower-page edits.
 - Implementation: one dependency-free InkTrail effect owns passive input, bounded retained quadratic brush segments, speed-sensitive tapered width, textured bristles, brief pooling, age-based drying/ghost, DPR/resize and visibility lifecycle.
 - Test-first exception remains: no deterministic runner. Browser baseline/behavior and cleanup are measured externally through CDP, without product test instrumentation or invented RED/GREEN.
-- Rollback boundary: InkTrail component, its hero import/hint/CSS, README paragraph and narrowly changed title/description. Parent owns new candidate review/commit and authorized push.
+- Rollback boundary: InkTrail component, its hero import/hint/CSS, README paragraph and narrowly changed title/description. Parent completed the candidate commit/assessment and authorized source push.
 
 ## T3 verified candidate
 - Implemented dependency-free `InkTrail.jsx` (210 lines), hero canvas and first-stroke hint, narrow metadata cleanup and README documentation. Artwork geometry and unrelated lower-page sources are unchanged.
@@ -144,11 +146,25 @@ Harness `/tmp/foxops-trail-cdp.mjs` instruments browser APIs externally, not pro
 | `node /tmp/foxops-rebel-cdp.mjs t3 art` | Final normal-motion captures at1440/1024/375; no overflow, header readable, hint subtle. |
 | `node /tmp/foxops-rebel-cdp.mjs t3final verify` | Responsive/reduced-motion/header/menu/first-frame/paint proof repeated; scrollWidth==clientWidth at all widths. Overlay-scrollbar emulation reported1440/1440,1024/1024,375/375. Headline first frame opacity1/visible; static finished art under reduce; offscreen idle loops paused. |
 
-### Inspected captures and remaining boundary
+### Inspected captures and verification limits
 - Parent recommended: `/tmp/foxops-trail-immediate.png`, `/tmp/foxops-trail-3s.png`, `/tmp/foxops-trail-8s.png`, `/tmp/foxops-trail-coarse-mobile.png`.
 - Additional trail proof: `/tmp/foxops-trail-pooling.png`, `/tmp/foxops-trail-widths.png`, `/tmp/foxops-trail-pen.png`, `/tmp/foxops-trail-reduced.png`.
 - Final normal motion: `/tmp/foxops-t3-{1440,1024,375}.png`; reduced motion and header/menu: `/tmp/foxops-t3final-{1440,1024,375}.png`, `/tmp/foxops-t3final-dark-{1440,1024,375}.png`, `/tmp/foxops-t3final-menu.png`; paint stages `/tmp/foxops-t3final-paint-{early,mid,done}.png`. Every generated screenshot was opened and inspected.
 - Proof logs: `/tmp/foxops-trail-proof.log`, `/tmp/foxops-trail-widths.log`, `/tmp/foxops-trail-lifecycle.log`, `/tmp/foxops-trail-capabilities.log`, `/tmp/foxops-trail-unmount.log`.
 - Pooling is intentionally understated and the dry ghost remains static until more ink or resize. Input widths/lifecycle are measured, but no physical stylus or broad cross-browser/hardware performance claim is made. Headless CDP pacing is not real pointer hardware; the rapid-width probe isolates that limitation.
 - All local preview/dev/browser listeners stopped by actual PIDs from `ss`, with no broad process-pattern kill. Unrelated untracked assets and handoff preserved.
-- T3 checkbox stays open until parent records its work-unit commit and applicable review outcome. T4 and authorized final push remain parent-owned. Prior first-candidate consent is not reused for this new candidate.
+- T3/T4 are closed with the observed evidence below. First-candidate consent was not reused; T3 was assessed natively as medium/under-budget, with no review due.
+
+## Final closure
+
+| Boundary | Observed evidence |
+| --- | --- |
+| T1/T2 — `6cf2899` | Original fox/washi composition committed. Medium native `review-reliability` returned `findings=[]`; exact acknowledgement burned lineage `review-af1e883721255f60`. |
+| T3 — `d8b40b3` | Ink trail, hint and metadata committed. Native assessment against `6cf2899`: medium, 303 authored lines, `review_due=false`, reason `under_budget`; no second review or approval is claimed. |
+| T4 independent verification | `hero_final_verify` checked exact commit `d8b40b3`: `npm run lint`, `npm run build`, `git diff --check` and all responsive/trail/lifecycle/cleanup CDP checks PASS. Screenshots inspected; verifier processes stopped and source unchanged. Parent inspected immediate/+3s/+8s/coarse-mobile trail captures and repeated `git diff --check` successfully. |
+| Source delivery | Parent ran `git fetch origin && git merge-base --is-ancestor origin/main HEAD && git push origin HEAD:main`: exit0, `3c98578..d8b40b3 HEAD -> main`. This confirms source delivery, not deployment. |
+| Running authored count | 573 + 303 = **876** additions/deletions including task-document changes; source/docs approximately **708**. Strategy remains `exception-ok`, explicit direct-to-main/no-PR delivery. |
+
+Independent responsive captures: `/tmp/foxops-independent-{1440,1024,375}.png`, with corresponding menu/dark/paint captures under `/tmp/foxops-independent-`; trail captures remain at the paths listed above.
+
+**Verification limits:** physical stylus unavailable (synthetic pen only); no broad cross-browser/hardware claim; Jenkins and the live site were not checked. This final passive documentation update needs only structural readback and `git diff --check`, not another source lint/build cycle. Its separate commit/push remains parent-owned.
