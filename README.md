@@ -15,13 +15,16 @@ Soluciones, Enfoque, Casos y Contacto usan la misma animación de entrada al hac
 
 ## Hero y el zorro
 
-El hero usa tres voces tipográficas: una línea de datos en Space Mono, el titular “Webs con colmillo.” en Space Grotesk y el aparte “astutas para vender” en Caveat Brush. El protagonista es un zorro dibujado en SVG (`src/components/FoxCharacter.jsx`). Cada trazo es una forma rellena de grosor variable, el sombreado es un granulado SVG (`feTurbulence`) y una distorsión leve le da el temblor de la tinta.
+El hero combina una línea de datos en Space Mono, el titular “Webs con colmillo.” en Space Grotesk sobre un trazo de pincel bermellón y una bajada en Shippori Mincho (“Estrategia, diseño y automatización con oficio.”). El titular no se anima: se ve desde el primer render.
 
-- Entrada: el zorro asoma detrás de una ola naranja (`src/components/FoxWave.jsx`), primero las orejas y después la cabeza, en 1,1 s y solo con CSS. El titular se ve desde el primer render.
-- Reposo: el zorro parpadea, mueve una oreja y balancea la cola. Las pupilas siguen el puntero (`src/hooks/useFoxLife.js`) solo con mouse y sin movimiento reducido. Las animaciones se pausan cuando el hero sale de pantalla.
-- Reacciones: al pasar el puntero o el foco por “Hablemos de tu proyecto” o por el zorro, aparece el globo “¿Hablamos?” y el zorro levanta las orejas. El zorro es un botón (“Saludar al zorro”) y salta al hacer clic.
-- Cameos: el zorro asoma sobre el título de Casos y duerme sobre el borde del footer (`src/components/FoxSleeping.jsx`).
-- Con movimiento reducido el zorro queda quieto y visible, sin entrada, sin bucle y sin seguimiento. El globo aparece sin animación.
+El protagonista es un zorro guardián pintado al estilo sumi-e y ukiyo-e (`src/components/FoxInk.jsx`): cuerpo crema con contornos de tinta irregulares, marcas carmesí, rizos en espiral y llamas carmesí, naranja y doradas, frente a un sol pintado a pincel, nubes kumo, una ola al estilo Hokusai y un sello 狐. Cada trazo es una forma rellena generada a partir de una línea guía, con grosor variable y vetas de pincel seco. Los filtros SVG agregan el borde seco, el halo de papel y el grano washi. Los datos de los trazos están en `src/components/inkArt.js` y los filtros compartidos en `src/components/inkKit.jsx`.
+
+- Entrada (≤1,6 s, solo CSS): el sol y el mar aparecen, el zorro se pinta siguiendo la dirección de los trazos (máscaras con `stroke-dashoffset`) y después suben las llamas.
+- Reposo: las llamas y la cola se mecen con el viento, las nubes derivan y suben algunas brasas. Cada capa es un SVG propio, así que el movimiento no vuelve a calcular los filtros. Las animaciones se pausan cuando el dibujo sale de pantalla (`src/hooks/useFoxLife.js`).
+- El zorro es decorativo (`aria-hidden`): no reacciona al puntero ni es un botón.
+- Cameos: la cabeza del zorro en un sello redondo junto al título de Casos (`FoxInkHead.jsx`, reutiliza los trazos del hero) y el zorro descansando en pocos trazos sobre el borde del footer (`FoxResting.jsx`).
+- Marca: una máscara kitsune en un sello hanko bermellón (`FoxMark.jsx` y `public/favicon.svg`), legible desde 16 px.
+- Con movimiento reducido el zorro se muestra ya pintado y quieto, sin entrada ni bucles.
 
 ## Sección Casos
 
