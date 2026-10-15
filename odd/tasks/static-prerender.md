@@ -27,7 +27,9 @@ Verification observed:
 - Existing Chromium DOM inspection showed hydrated controls and stable SVG IDs/year, without logged hydration errors. No controls were clicked or submissions exercised.
 - No-JavaScript browser attempts produced no usable output. Native menu interaction, reduced-motion behavior and mocked submission branches remain unverified; structural checks passed.
 
-Receipt-driven development is on. Work-unit commit contains 215 authored lines including this document's initial version. Initial committed-range assessment requires an explicit untracked inventory; native preflight/review remains pending. No approval is claimed from that incomplete assessment.
+Receipt-driven development is on. Work-unit commit contains 215 authored lines including this document's initial version. Committed-range review was granted and approved, then acknowledged for target sha256:a0eae34bbafb254b949377604504ee7d57108154bdd9e67f426772019dbce427, lineage review-2382266d72b42179. The acknowledgement burned that review authority.
+
+Non-blocking advisory R3-001: server determinism tests do not prove browser hydration, menu clicks or mocked form submission. These remain separate follow-up verification; no correction or re-review was requested for this candidate.
 
 ## Next step
-Complete native committed-range preflight and relay candidate-specific consent if required. No publication authorized. Browser interaction checks listed above remain pending.
+No publication authorized. Browser interaction checks listed above remain pending. This outcome-only task-document update is local and outside the acknowledged source candidate.

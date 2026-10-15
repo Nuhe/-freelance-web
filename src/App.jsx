@@ -222,6 +222,18 @@ function Cases() {
   </div></section>
 }
 
+function About() {
+  return <section id="about" className="approach section-pad" aria-labelledby="about-heading"><div className="container approach-layout about-layout">
+    <img className="about-portrait" src="/camilo-rodriguez.png" alt="Camilo Rodriguez" width="112" height="112" loading="lazy" decoding="async" />
+    <div className="approach-intro">
+      <h2 id="about-heading">Quién está detrás de FoxOps</h2>
+      <p>Soy Camilo Rodriguez, desarrollador senior con experiencia en DevOps, infraestructura, soporte técnico y análisis funcional.</p>
+      <p>Mi carrera en IT comenzó en ESPN, continuó en Pampa Energía y actualmente se desarrolla en el Sanatorio Mater Dei.</p>
+      <p>Ese recorrido me permite mirar más allá del código: entender las necesidades del negocio, desarrollar soluciones y acompañar su funcionamiento en el día a día. Esa mirada integral es la que llevo a cada proyecto de FoxOps.</p>
+    </div>
+  </div></section>
+}
+
 function Contact({ enhanced }) {
   const [status, setStatus] = useState('idle')
   const layoutRef = useInView({ threshold: 0.1 })
@@ -291,5 +303,5 @@ function Footer({ year }) {
 
 export default function App({ year }) {
   const enhanced = useSyncExternalStore(subscribeToEnhancement, clientReady, serverReady)
-  return <><Header enhanced={enhanced} /><main><Hero /><Solutions /><TechStrip /><Cases /><Approach /><Contact enhanced={enhanced} /></main><Footer year={year} /></>
+  return <><Header enhanced={enhanced} /><main><Hero /><Solutions /><TechStrip /><Cases /><Approach /><About /><Contact enhanced={enhanced} /></main><Footer year={year} /></>
 }
