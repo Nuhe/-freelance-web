@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import FoxInk from './components/FoxInk'
 import InkTrail from './components/InkTrail'
 import FoxInkHead from './components/FoxInkHead'
@@ -86,7 +86,19 @@ function SolutionIcon({ type }) {
   return <svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><circle cx="17" cy="40" r="6" stroke="currentColor" strokeWidth="1.5" /><circle cx="62" cy="22" r="6" stroke="currentColor" strokeWidth="1.5" /><circle cx="62" cy="58" r="6" stroke="currentColor" strokeWidth="1.5" /><path d="M23 40h12m7-9 14-7M42 49l14 7M35 40l7-9m-7 9 7 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><circle cx="40" cy="40" r="9" fill="currentColor" fillOpacity=".2" stroke="currentColor" strokeWidth="1.5" /></svg>
 }
 
-function Header() {
+// Hydration starts with the server snapshot; only mounted clients enable JS controls.
+const subscribeToEnhancement = () => () => {}
+const clientReady = () => true
+const serverReady = () => false
+
+function NavLinks({ onClick }) {
+  return <>
+    <a href="#soluciones" onClick={onClick}>Soluciones</a><a href="#enfoque" onClick={onClick}>Enfoque</a><a href="#casos" onClick={onClick}>Casos</a><a href="#contacto" onClick={onClick}>Contacto</a>
+    <a className="nav-cta" href="#contacto" onClick={onClick}>Hablemos <ArrowIcon diagonal /></a>
+  </>
+}
+
+function Header({ enhanced }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [onPaper, setOnPaper] = useState(true)
   const closeMenu = () => setMenuOpen(false)
@@ -105,10 +117,10 @@ function Header() {
   }, [menuOpen])
   return <header className={`site-header ${onPaper ? 'on-paper' : 'on-dark'}`}><div className="container header-inner">
     <a className="brand" href="#inicio" aria-label="FoxOps, ir al inicio" onClick={closeMenu}><FoxMark /><span>FOX<span>OPS</span></span></a>
-    <button className="menu-toggle" type="button" aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menuOpen} aria-controls="site-nav" onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
+    {enhanced && <button className="menu-toggle" type="button" aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menuOpen} aria-controls="site-nav" onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>}
+    {!enhanced && <details className="nav-fallback"><summary>Menú</summary><nav className="site-nav" aria-label="Navegación móvil"><NavLinks /></nav></details>}
     <nav id="site-nav" className={`site-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Navegación principal">
-      <a href="#soluciones" onClick={closeMenu}>Soluciones</a><a href="#enfoque" onClick={closeMenu}>Enfoque</a><a href="#casos" onClick={closeMenu}>Casos</a><a href="#contacto" onClick={closeMenu}>Contacto</a>
-      <a className="nav-cta" href="#contacto" onClick={closeMenu}>Hablemos <ArrowIcon diagonal /></a>
+      <NavLinks onClick={closeMenu} />
     </nav>
   </div></header>
 }
@@ -210,7 +222,7 @@ function Cases() {
   </div></section>
 }
 
-function Contact() {
+function Contact({ enhanced }) {
   const [status, setStatus] = useState('idle')
   const layoutRef = useInView({ threshold: 0.1 })
 
@@ -252,7 +264,7 @@ function Contact() {
   return <section id="contacto" className="contact section-pad"><div className="container contact-box">
     <div className="contact-layout" ref={layoutRef}>
       <div className="contact-content"><div className="section-kicker light reveal-item"><span>04 / EL PRÓXIMO MOVIMIENTO</span></div><h2 className="reveal-item" style={{ '--i': 1 }}>Tu próximo paso<br />empieza acá<span>.</span></h2><p className="reveal-item" style={{ '--i': 2 }}>Contanos qué querés construir o qué proceso necesitás mejorar. Pensemos juntos la forma más inteligente de hacerlo.</p></div>
-      <form className="contact-form reveal-item" style={{ '--i': 3 }} onSubmit={handleSubmit}>
+      {enhanced && <form className="contact-form reveal-item" style={{ '--i': 3 }} onSubmit={handleSubmit}>
         <div className="contact-form-heading"><span>CONTANOS TU IDEA</span><span>01 / 01</span></div>
         <div className="contact-fields">
           <label><span className="field-label">Tu nombre <b>*</b></span><input name="nombre" type="text" autoComplete="name" maxLength="100" placeholder="¿Cómo te llamás?" required /></label>
@@ -264,19 +276,20 @@ function Contact() {
         <div className="contact-honeypot" aria-hidden="true"><label>Dejá este campo vacío<input name="website" type="text" tabIndex="-1" autoComplete="off" /></label></div>
         <button className="button button-dark contact-submit" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Enviando…' : 'Enviar consulta'} <ArrowIcon diagonal /></button>
         <p className="contact-feedback" role="status" aria-live="polite">{status === 'success' && '¡Gracias! Recibimos tu consulta y te responderemos pronto.'}{status === 'error' && <>No pudimos enviar tu consulta. Probá otra vez o escribinos a <a href={`mailto:${email}`}>{email}</a>.</>}{status === 'email' && 'Se abrió tu aplicación de correo con la consulta preparada. Enviá el mensaje desde allí.'}</p>
-      </form>
+      </form>}
     </div>
     <div className="contact-mark" aria-hidden="true"><FoxMark /></div>
     <div className="contact-footer"><span>UNA BUENA IDEA MERECE UNA GRAN EJECUCIÓN.</span><a href={`mailto:${email}`}>{email}</a></div>
   </div></section>
 }
 
-function Footer() {
+function Footer({ year }) {
   return <footer className="footer"><div className="container footer-inner">
     <FoxResting className="footer-rest" />
-    <a className="brand" href="#inicio" aria-label="FoxOps, ir al inicio"><FoxMark /><span>FOX<span>OPS</span></span></a><p>Landing pages · E-commerce · Automatizaciones</p><span>© {new Date().getFullYear()} FoxOps</span></div></footer>
+    <a className="brand" href="#inicio" aria-label="FoxOps, ir al inicio"><FoxMark /><span>FOX<span>OPS</span></span></a><p>Landing pages · E-commerce · Automatizaciones</p><span>© {year} FoxOps</span></div></footer>
 }
 
-export default function App() {
-  return <><Header /><main><Hero /><Solutions /><TechStrip /><Cases /><Approach /><Contact /></main><Footer /></>
+export default function App({ year }) {
+  const enhanced = useSyncExternalStore(subscribeToEnhancement, clientReady, serverReady)
+  return <><Header enhanced={enhanced} /><main><Hero /><Solutions /><TechStrip /><Cases /><Approach /><Contact enhanced={enhanced} /></main><Footer year={year} /></>
 }

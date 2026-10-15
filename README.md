@@ -11,7 +11,7 @@ Sitio comercial de FoxOps para presentar sus servicios de landing pages, e-comme
 - Vite 8
 - CSS
 
-Soluciones, Enfoque, Casos y Contacto usan la misma animación de entrada al hacer scroll (`src/hooks/useInView.js` más las clases `reveal-item` y `reveal-mask`, sin dependencias). El hero tiene su propia entrada en CSS, descrita abajo. Con movimiento reducido, o si el navegador no soporta `IntersectionObserver`, el contenido se muestra sin animación. El sitio se renderiza con React, así que necesita JavaScript para mostrarse.
+Soluciones, Enfoque, Casos y Contacto usan la misma animación de entrada al hacer scroll (`src/hooks/useInView.js` más las clases `reveal-item` y `reveal-mask`, sin dependencias). El hero tiene su propia entrada en CSS, descrita abajo. Con movimiento reducido, o si el navegador no soporta `IntersectionObserver`, el contenido se muestra sin animación. El build prerenderiza el contenido en HTML estático. React hidrata ese mismo árbol para habilitar las interacciones; el contenido, los enlaces y los detalles de los casos siguen disponibles sin JavaScript.
 
 ## Hero y el zorro
 
@@ -58,6 +58,7 @@ npm run dev
 ## Verificación
 
 ```bash
+npm test
 npm run lint
 npm run build
 ```
@@ -66,7 +67,13 @@ Vite 8 requiere Node.js 20.19+ o 22.12+. Jenkins usa Node 22.12.0 para la instal
 
 ## Publicación
 
-`Jenkinsfile` ejecuta lint y build, y publica `dist/` en el servidor que sirve foxops.digital. El sitio usa `/` como base.
+`npm run build` compila los assets del cliente con Vite, transforma `src/entry-server.jsx` con Vite SSR y usa `renderToString` para insertar el contenido en `dist/index.html`. El año del footer se calcula una vez durante el build y se incluye en el root para que `hydrateRoot` use el mismo valor, incluso después de un cambio de año. En desarrollo, el root vacío sigue usando `createRoot`.
+
+`dist-ssr/` contiene el renderizador intermedio, está ignorado por Git y no debe publicarse. No se necesita un servidor React en producción ni nuevas dependencias. `npm test` reconstruye la salida con un año fijo para verificar el HTML y los assets; ejecutá `npm run build` después para publicar con el año actual.
+
+`Jenkinsfile` ejecuta lint y build, y publica únicamente `dist/` en el servidor que sirve foxops.digital. El sitio usa `/` como base.
+
+Sin JavaScript, la navegación móvil usa un menú nativo `<details>` y el contacto se realiza desde el enlace de correo visible. El formulario no existe en el HTML inicial: React lo agrega después de la hidratación, cuando su manejador de envío ya está disponible. Así no hay un envío GET implícito con datos personales. Las secciones ya visibles no se ocultan al hidratar; las que siguen fuera de pantalla conservan su entrada al hacer scroll.
 
 La URL canónica, el sitemap y el contacto están configurados para foxops.digital.
 
