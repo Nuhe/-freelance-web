@@ -165,7 +165,7 @@ function Approach() {
   const introRef = useInView()
   const stepsRef = useInView({ threshold: 0.1 })
   return <section id="enfoque" className="approach section-pad"><div className="container approach-layout">
-    <div className="approach-intro" ref={introRef}><div className="section-kicker reveal-item"><span>02 / NUESTRO ENFOQUE</span></div><h2><span className="reveal-mask"><span>Un proceso claro.</span></span><span className="reveal-mask" style={{ '--i': 1 }}><span><em>Una solución útil.</em></span></span></h2><p className="reveal-item" style={{ '--i': 2 }}>Definimos qué necesita tu negocio antes de elegir tecnología. Así cada decisión tiene un objetivo y cada entrega, un resultado concreto.</p></div>
+    <div className="approach-intro" ref={introRef}><div className="section-kicker reveal-item"><span>03 / NUESTRO ENFOQUE</span></div><h2><span className="reveal-mask"><span>Un proceso claro.</span></span><span className="reveal-mask" style={{ '--i': 1 }}><span><em>Una solución útil.</em></span></span></h2><p className="reveal-item" style={{ '--i': 2 }}>Definimos qué necesita tu negocio antes de elegir tecnología. Así cada decisión tiene un objetivo y cada entrega, un resultado concreto.</p></div>
     <div className="steps" ref={stepsRef}>{steps.map((step, index) => <div className="step reveal-item" style={{ '--i': index }} key={step.number}><span className="step-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.description}</p></div><span className="step-plus" aria-hidden="true">+</span></div>)}</div>
   </div></section>
 }
@@ -188,7 +188,7 @@ function Cases() {
   return <section id="casos" className="cases section-pad"><div className="container">
     <div className="section-head cases-head" ref={headRef}>
       <FoxInkHead className="fox-vignette reveal-item" />
-      <div><div className="section-kicker reveal-item"><span>03 / CASOS</span></div><h2><span className="reveal-mask"><span>Proyectos que ya</span></span><span className="reveal-mask" style={{ '--i': 1 }}><span><em>están trabajando.</em></span></span></h2></div>
+      <div><div className="section-kicker reveal-item"><span>02 / CASOS</span></div><h2><span className="reveal-mask"><span>Proyectos que ya</span></span><span className="reveal-mask" style={{ '--i': 1 }}><span><em>están trabajando.</em></span></span></h2></div>
       <p className="reveal-item" style={{ '--i': 2 }}>Algunos sitios que diseñamos y desarrollamos: una landing para un servicio profesional, una tienda online y un concepto editorial.</p>
     </div>
     <ul className="case-grid" ref={gridRef}>{cases.map((item, index) => <li className="reveal-item" style={{ '--i': index }} key={item.slug}>
@@ -278,5 +278,5 @@ function Footer() {
 }
 
 export default function App() {
-  return <><Header /><main><Hero /><Solutions /><TechStrip /><Approach /><Cases /><Contact /></main><Footer /></>
+  return <><Header /><main><Hero /><Solutions /><TechStrip /><Cases /><Approach /><Contact /></main><Footer /></>
 }
